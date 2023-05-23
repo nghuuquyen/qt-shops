@@ -7,17 +7,21 @@
     <title>Homepage</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-[#F3F3F2]">
-    
-    <x-header />
+<body class="bg-[#F3F3F2] min-h-[1400px]">
+    <x-logo />
+
+    <x-navigation :categories="$categories" />
 
     <main class="max-w-screen-lg m-auto grid grid-cols-1 gap-10 mt-6">
-        <x-product-grids title="Cafe" />
-        <x-product-grids title="Chicken" />
+        @foreach ( $categories as $category )
+            <x-product-grids
+                :category="$category"
+                :products="$category['products']" />
+        @endforeach
     </main>
 
     <x-bottom-bar />
-    
+
     @vite('resources/js/app.js')
 </body>
 </html>

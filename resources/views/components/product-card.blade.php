@@ -1,12 +1,14 @@
 <div class="flex flex-row bg-white p-2 w-full cursor-pointer hover:shadow-xl">
     <div class="flex-shrink-0">
-        <img class="object-cover h-24 w-24" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150" alt="product image" />
+        <img class="object-cover h-24 w-24" src="{{ $product['thumnail_url'] }}" alt="product image" />
     </div>
     <div class="flex flex-col ml-4 w-full">
-        <h2 class="text-base font-bold text-black">Cappuchino</h2>
-        <p class="mt-3 text-sm">Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk</p>
+        <h2 class="text-base font-bold text-black">{{ $product['name'] }}</h2>
+        <p class="mt-3 text-sm">{{ $product['description'] }}</p>
         <div class="flex flex-row justify-between mt-3">
-            <span class="text-black font-bold text-sm">35,000 VNĐ</span>
+            <span class="text-black font-bold text-sm">
+                {{ number_format($product['price']) }} {{ $product['currency'] }}
+            </span>
 
             <button class="flex flex-row text-violet-800 active:translate-y-1">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Datasets\ProductDataset;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function (ProductDataset $dataset) {
+    $categories = $dataset->getCategoeis()
+                    ->map(function ($category) use ($dataset) {
+
+                        $category['products'] = $dataset->getProductsByCateogry($category);
+
+                        return $category;
+                    });
+
+    return view('welcome', compact('categories'));
 });

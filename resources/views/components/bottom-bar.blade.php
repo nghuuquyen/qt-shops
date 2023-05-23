@@ -1,4 +1,4 @@
-<div class="bg-white py-4 mt-6 sticky bottom-0 px-2 lg:px-0">
+<div class="bg-white py-4 mt-6 fixed bottom-0 left-0 right-0 px-2 lg:px-0">
     <div class="max-w-screen-lg m-auto flex flex-col lg:flex-row lg:items-center">
         <div class="grow flex">
             <img src="/icons/cart-bag.svg" />
