@@ -12,7 +12,7 @@
 
     <x-navigation :categories="$categories" />
 
-    <main class="max-w-screen-lg m-auto grid grid-cols-1 gap-10 mt-6">
+    <main class="max-w-screen-xl m-auto grid grid-cols-1 gap-10 mt-6">
         @foreach ( $categories as $category )
             <x-product-grids
                 :category="$category"

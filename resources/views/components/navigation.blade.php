@@ -4,7 +4,7 @@
                 activeIndex: 0, 
                 navigationHeight: document.querySelector('#app_navigation').getBoundingClientRect().height + 10 }
         ">
-        <ul class="flex flex-row w-full items-center">
+        <ul class="flex flex-row w-full items-center justify-center">
             @foreach ($categories as $category)
                 <li 
                     class="px-6 py-3 cursor-pointer"
