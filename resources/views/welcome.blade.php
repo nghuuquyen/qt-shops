@@ -22,6 +22,8 @@
 
     <x-bottom-bar />
 
+    <x-offcanvas />
+    
     @vite('resources/js/app.js')
 </body>
 </html>

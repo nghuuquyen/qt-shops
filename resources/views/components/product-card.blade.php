@@ -1,4 +1,4 @@
-<div class="flex flex-row bg-white p-2 w-full cursor-pointer hover:shadow-xl">
+<div x-data="{}" class="flex flex-row bg-white p-2 w-full cursor-pointer hover:shadow-xl" @click="$dispatch('offcanvas-ex')">
     <div class="flex-shrink-0">
         <img class="object-cover h-24 w-24" src="{{ $product['thumnail_url'] }}" alt="product image" />
     </div>
