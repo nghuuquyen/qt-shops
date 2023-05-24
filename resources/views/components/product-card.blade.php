@@ -1,6 +1,6 @@
-<div x-data="{}" class="flex flex-row bg-white p-2 w-full cursor-pointer hover:shadow-xl" @click="$dispatch('offcanvas-ex')">
+<div x-data="{}" class="flex flex-row bg-white p-2 w-full cursor-pointer hover:shadow-xl" @click="Livewire.emit('selectProduct', {{ $product['id'] }})">
     <div class="flex-shrink-0">
-        <img class="object-cover h-24 w-24" src="{{ $product['thumnail_url'] }}" alt="product image" />
+        <img class="object-cover h-24 w-24" src="{{ $product['image_url'] }}?w=150&h=150" alt="product image" />
     </div>
     <div class="flex flex-col ml-4 w-full">
         <h2 class="text-xl text-black">{{ $product['name'] }}</h2>

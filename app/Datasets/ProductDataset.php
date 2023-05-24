@@ -2,8 +2,8 @@
 
 namespace App\Datasets;
 
-class ProductDataset {
-
+class ProductDataset
+{
     public $categories = [
         [
             'id' => 1,
@@ -12,7 +12,7 @@ class ProductDataset {
         [
             'id' => 2,
             'name' => 'Chicken',
-        ]
+        ],
     ];
 
     public $products = [
@@ -23,7 +23,7 @@ class ProductDataset {
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 2,
@@ -32,7 +32,7 @@ class ProductDataset {
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 3,
@@ -41,7 +41,7 @@ class ProductDataset {
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 4,
@@ -50,7 +50,7 @@ class ProductDataset {
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 5,
@@ -59,7 +59,7 @@ class ProductDataset {
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 6,
@@ -68,7 +68,7 @@ class ProductDataset {
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 7,
@@ -77,7 +77,7 @@ class ProductDataset {
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 8,
@@ -86,7 +86,7 @@ class ProductDataset {
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 9,
@@ -95,7 +95,7 @@ class ProductDataset {
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 10,
@@ -104,7 +104,7 @@ class ProductDataset {
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 11,
@@ -113,7 +113,7 @@ class ProductDataset {
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
             'id' => 12,
@@ -122,13 +122,18 @@ class ProductDataset {
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
             'currency' => 'VNĐ',
-            'thumnail_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=150&h=150',
-        ]
+            'image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
+        ],
     ];
 
     public function getProducts()
     {
-        return collec($this->products);
+        return collect($this->products);
+    }
+
+    public function getProduct($product_id)
+    {
+        return $this->getProducts()->where('id', $product_id)->first();
     }
 
     public function getCategoeis()
@@ -136,9 +141,9 @@ class ProductDataset {
         return collect($this->categories);
     }
 
-    public function getProductsByCateogry($category) 
+    public function getProductsByCateogry($category)
     {
-        return collect($this->products)->filter(function($product) use ($category) {
+        return collect($this->products)->filter(function ($product) use ($category) {
             return $product['category_id'] == $category['id'];
         });
     }
