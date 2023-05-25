@@ -19,7 +19,7 @@
 
         <div>
             <div class="flex flex-col">
-                <label class="font-bold mb-2">Special instructions</label>
+                <label class="font-normal mb-2">Special instructions</label>
                 <input class="border px-2 py-4" type="text" placeholder="Ex. No opnions please" wire:model="notes" />
             </div>
 
@@ -46,7 +46,7 @@
                     </svg>
         
                     <span class="ml-2">
-                        Add to cart   {{ number_format($product['price'] * $quantity) }} {{ $product['currency'] }}
+                        Add to cart {{ number_format($product['price'] * $quantity) }} {{ $product['currency'] }}
                     </span>
                 </x-submit-button>
             </div>
