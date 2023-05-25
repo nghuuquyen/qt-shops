@@ -20,7 +20,7 @@
         <div>
             <div class="flex flex-col">
                 <label class="font-normal mb-2">Special instructions</label>
-                <input class="border px-2 py-4" type="text" placeholder="Ex. No opnions please" wire:model="notes" />
+                <input class="border px-2 py-4" type="text" placeholder="Ex. No onions please" wire:model="notes" />
             </div>
 
             <div class="flex flex-row items-center mt-4">

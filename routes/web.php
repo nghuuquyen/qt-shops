@@ -14,14 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (ProductDataset $dataset) {
-    $categories = $dataset->getCategoeis()
-                    ->map(function ($category) use ($dataset) {
-
-                        $category['products'] = $dataset->getProductsByCateogry($category);
-
-                        return $category;
-                    });
-
-    return view('welcome', compact('categories'));
-});
+Route::get('/', [ \App\Http\Controllers\HomepageController::class, 'index' ]);
+Route::get('/checkout', [ \App\Http\Controllers\CheckoutController::class, 'index' ]);
