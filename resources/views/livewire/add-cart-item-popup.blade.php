@@ -18,10 +18,7 @@
         </div>
 
         <div>
-            <div class="flex flex-col">
-                <label class="font-normal mb-2">Special instructions</label>
-                <input class="border px-2 py-4" type="text" placeholder="Ex. No onions please" wire:model="notes" />
-            </div>
+            <x-text-input label="Special instructions" model="notes" placeholder="Ex. No onions please" />
 
             <div class="flex flex-row items-center mt-4">
                 <div class="w-1/3 grid grid-cols-3">

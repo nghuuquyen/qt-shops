@@ -4,6 +4,8 @@ namespace App\Datasets;
 
 class ProductDataset
 {
+    public const DEFAULT_CURRENCY = 'VNĐ';
+    
     public $categories = [
         [
             'id' => 1,

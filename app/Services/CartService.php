@@ -2,10 +2,17 @@
 
 namespace App\Services;
 
-use Carbon\Carbon;
+use App\Datasets\ProductDataset;
 
 class CartService
 {
+    public $dataset;
+
+    public function __construct()
+    {
+        $this->dataset = new ProductDataset();
+    }
+
     /**
      * Add new or update exists cart item
      *
@@ -31,7 +38,7 @@ class CartService
 
         $items = collect($cart['items']);
 
-        $cart['items'] = $items->push($item)->all();
+        $cart['items'] = $items->push($this->getCartItemInstance($item))->all();
 
         $this->storeCart($cart);
 
@@ -56,7 +63,7 @@ class CartService
 
         if ($index !== false) {
 
-            $cart['items'] = $items->replace([ $index => $item ])->all();
+            $cart['items'] = $items->replace([$index => $item])->all();
 
             $this->storeCart($cart);
 
@@ -69,7 +76,7 @@ class CartService
     /**
      * Remove exists cart item
      *
-     * @param  mixed $product_id
+     * @param  mixed  $product_id
      * @return void
      */
     public function removeCartitem($product_id)
@@ -127,16 +134,51 @@ class CartService
     public function getCart()
     {
         if (session()->has('cart')) {
-            return session('cart');
+            $cart = session('cart');
+
+            $cart['currency'] = ProductDataset::DEFAULT_CURRENCY;
+
+            $cart['items'] = collect($cart['items'])->map(function ($item) {
+                return $this->getCartItemInstance($item);
+            });
+
+            $cart['total_amount'] = collect($cart['items'])->sum(function($item) {
+                return $item['price'] * $item['quantity'];
+            });
+
+            return $cart;
         }
 
         $cart = [
+            'currency' => ProductDataset::DEFAULT_CURRENCY,
             'items' => collect([]),
         ];
 
         $this->storeCart($cart);
 
         return $cart;
+    }
+
+    /**
+     * Get cart item instance with full data
+     *
+     * @param  mixed  $item
+     * @return void
+     */
+    private function getCartItemInstance($item)
+    {
+        $product = $this->dataset->getProduct($item['id']);
+
+        return [
+            'id' => $item['id'],
+            'quantity' => $item['quantity'],
+            'notes' => $item['notes'],
+            'name' => $product['name'],
+            'description' => $product['description'],
+            'price' => $product['price'],
+            'currency' => $product['currency'],
+            'image_url' => $product['image_url'],
+        ];
     }
 
     /**

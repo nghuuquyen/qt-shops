@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use Livewire\Component;
-use App\Services\CartService;
 use App\Datasets\ProductDataset;
+use App\Services\CartService;
+use Livewire\Component;
 
 class AddCartItemPopup extends Component
 {
@@ -65,7 +65,7 @@ class AddCartItemPopup extends Component
         $this->notes = '';
     }
 
-    private function getCartItemInstance() 
+    private function getCartItemInstance()
     {
         return [
             'id' => $this->product['id'],

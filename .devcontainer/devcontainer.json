@@ -31,7 +31,9 @@
 				"open-southeners.laravel-pint",
 				"naoray.laravel-goto-components",
 				"recca0120.vscode-phpunit",
-				"neilbrayfield.php-docblocker"
+				"neilbrayfield.php-docblocker",
+				"austenc.laravel-blade-spacer",
+				"bradlc.vscode-tailwindcss"
 			],
 			"settings": {}
 		}

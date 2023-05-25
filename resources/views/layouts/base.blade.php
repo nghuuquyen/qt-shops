@@ -9,7 +9,7 @@
     @livewireStyles
     @vite('resources/css/app.css')
 </head>
-<body class="bg-[#F3F3F2] min-h-[2000px]">
+<body class="bg-[#F3F3F2]">
     <x-logo />
 
     @yield('navigation')
