@@ -22,7 +22,7 @@
                             activeIndex = {{ $loop->index }}
                         }
                     "
-                    :class="{ 'border-violet-800 border-b-2': activeIndex == {{ $loop->index }} }">
+                    :class="{ 'border-green-800 border-b-2 text-green-800': activeIndex == {{ $loop->index }} }">
                     <a class="font-normal text-base text-grey hover:text-violet-800">
                         {{ $category['name'] }}
                     </a>

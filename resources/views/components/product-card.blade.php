@@ -1,12 +1,12 @@
-<div x-data="{}" class="flex flex-row bg-white p-2 w-full cursor-pointer hover:shadow-xl" @click="Livewire.emit('selectProduct', {{ $product['id'] }})">
+<div x-data="{}" class="flex flex-row bg-white p-3 w-full cursor-pointer hover:shadow-xl" @click="Livewire.emit('selectProduct', {{ $product['id'] }})">
     <div class="flex-shrink-0">
-        <img class="object-cover h-24 w-24" src="{{ $product['image_url'] }}?w=150&h=150" alt="product image" />
+        <img class="object-cover h-28 w-28 rounded" src="{{ $product['image_url'] }}?w=150&h=150" alt="product image" />
     </div>
     <div class="flex flex-col ml-4 w-full">
         <h2 class="text-xl text-black">{{ $product['name'] }}</h2>
-        <p class="mt-3 lg:mt-6 text-sm text-gray-500">{{ $product['description'] }}</p>
-        <div class="flex flex-row justify-between mt-3 lg:mt-6">
-            <span class="text-black font-bold text-sm">
+        <p class="mt-3 lg:mt-8 text-sm text-gray-500">{{ $product['description'] }}</p>
+        <div class="flex flex-row justify-between mt-3 lg:mt-12">
+            <span class="text-black font-bold text-xl">
                 {{ number_format($product['price']) }} {{ $product['currency'] }}
             </span>
 

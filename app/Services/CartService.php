@@ -31,8 +31,6 @@ class CartService
 
         $items = collect($cart['items']);
 
-        $item['updated_at'] = Carbon::now();
-
         $cart['items'] = $items->push($item)->all();
 
         $this->storeCart($cart);
@@ -56,8 +54,6 @@ class CartService
             return $i['id'] == $item['id'];
         });
 
-        $item['updated_at'] = Carbon::now();
-        
         if ($index !== false) {
 
             $cart['items'] = $items->replace([ $index => $item ])->all();

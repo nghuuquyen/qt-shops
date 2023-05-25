@@ -8,11 +8,11 @@
         <div class="grid gird-cols-1 gap-6">
             <img class="object-cover w-full h-64" src="{{ $product['image_url'] }}?w=600" alt="product image" />
         
-            <span class="text-black text-3xl">
+            <span class="text-black text-3xl font-bold">
                 {{ number_format($product['price']) }} {{ $product['currency'] }}
             </span>
 
-            <p class="overflow-y-auto max-h-32">
+            <p class="overflow-y-auto max-h-32 text-gray-500">
                 {{ $product['description'] }}
             </p> 
         </div>

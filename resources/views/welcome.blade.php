@@ -9,7 +9,7 @@
     @livewireStyles
     @vite('resources/css/app.css')
 </head>
-<body class="bg-[#F3F3F2] min-h-[1400px]">
+<body class="bg-[#F3F3F2] min-h-[2000px]">
     <x-logo />
 
     <x-navigation :categories="$categories" />
