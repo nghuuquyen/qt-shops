@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\OrderCompleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +18,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 /**
- * Homepage
+ * General
  */
-Route::get('/', [ \App\Http\Controllers\HomepageController::class, 'index' ])->name('homepage');
+Route::get('/', [ HomepageController::class, 'index' ])->name('homepage');
+Route::get('/order-complete/{order}', OrderCompleteController::class)->name('orders.complete');
 
 /**
  * Checkout
  */
-Route::get('/checkout', [ \App\Http\Controllers\CheckoutController::class, 'index' ])->name('checkout.index');
-Route::post('/checkout', [ \App\Http\Controllers\CheckoutController::class, 'store' ])->name('checkout.store');
+Route::get('/checkout',  [ CheckoutController::class, 'index' ])->name('checkout.index');
+Route::post('/checkout', [ CheckoutController::class, 'store' ])->name('checkout.store');
+
+/**
+ * Order
+ */
+Route::get('/orders/{order}', [ OrderController::class, 'show' ])->name('orders.show');

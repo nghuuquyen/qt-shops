@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CartService;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Services\CartService;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Http\RedirectResponse;
 
 class CheckoutController extends Controller
 {
@@ -15,7 +17,7 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, CartService $cart): RedirectResponse
     {
         $validated = $request->validate([
             'full_name' => 'required|string',
@@ -26,6 +28,12 @@ class CheckoutController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        dd($validated);
+        $order = $cart->getCart()->order()->save(
+            Order::factory()->make(
+                array_merge($validated, [ 'code' => fake()->numerify('OR-######') ])
+            )
+        );
+
+        return redirect(URL::signedRoute('orders.complete', [ 'order' => $order->id ]));
     }
 }

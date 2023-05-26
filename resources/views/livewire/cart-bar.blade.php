@@ -25,8 +25,8 @@
             </ul>
         </div>
 
-        <x-submit-button class="mt-3 lg:mt-0" @click="window.location.href = '/checkout'" icon="credit-card">
+        <x-button class="mt-3 lg:mt-0" @click="window.location.href = '/checkout'" icon="credit-card">
             Checkout {{ number_format($cart->total_amount) }} {{ $cart->currency }}
-        </x-submit-button>
+        </x-button>
     </div>
 </div>

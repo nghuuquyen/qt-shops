@@ -16,8 +16,28 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-5">
+
                 {{-- left column --}}
                 <div class="col-span-3 grid grid-cols-1 gap-4">
+                    {{-- shippting information form --}}
+                    <x-panel icon="identification" header="Shipping Address">
+                        <div class="grid grid-cols-1 gap-6">
+                            <div class="grid grid-cols-2 gap-4">
+                                <x-text-input label="Your name" name="full_name" value="{{ old('full_name') }}"
+                                    placeholder="Please enter your name" />
+                                <x-text-input label="Phone number" name="phone_number" value="{{ old('phone_number') }}"
+                                    placeholder="Please enter your phone number" />
+                            </div>
+
+                            <x-text-input label="Your email" name="email" value="{{ old('email') }}"
+                                placeholder="Please enter your email address" />
+                            <x-text-input label="Shipping address" name="shipping_address"
+                                value="{{ old('shipping_address') }}" placeholder="Please enter your address" />
+                            <x-text-input label="Notes" name="notes" value="{{ old('notes') }}"
+                                placeholder="Please enter your note if any" />
+                        </div>
+                    </x-panel>
+
                     {{-- cart items --}}
                     <x-panel icon="shopping-cart" header="Cart Items">
                         <ul>
@@ -43,25 +63,6 @@
                                 </li>
                             @endforeach
                         </ul>
-                    </x-panel>
-
-                    {{-- shippting information form --}}
-                    <x-panel icon="identification" header="Shipping Address">
-                        <div class="grid grid-cols-1 gap-6">
-                            <div class="grid grid-cols-2 gap-4">
-                                <x-text-input label="Your name" name="full_name" value="{{ old('full_name') }}"
-                                    placeholder="Please enter your name" />
-                                <x-text-input label="Phone number" name="phone_number" value="{{ old('phone_number') }}"
-                                    placeholder="Please enter your phone number" />
-                            </div>
-
-                            <x-text-input label="Your email" name="email" value="{{ old('email') }}"
-                                placeholder="Please enter your email address" />
-                            <x-text-input label="Shipping address" name="shipping_address"
-                                value="{{ old('shipping_address') }}" placeholder="Please enter your address" />
-                            <x-text-input label="Notes" name="notes" value="{{ old('notes') }}"
-                                placeholder="Please enter your note if any" />
-                        </div>
                     </x-panel>
                 </div>
 
@@ -98,9 +99,9 @@
                             </li>
                         </ul>
 
-                        <x-submit-button class="grow w-full mt-6" type="submit" icon="credit-card">
+                        <x-button class="grow w-full mt-6" type="submit" icon="credit-card">
                             Send Order
-                        </x-submit-button>
+                        </x-button>
                     </x-panel>
                 </div>
             </div>

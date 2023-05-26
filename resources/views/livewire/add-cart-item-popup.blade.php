@@ -44,9 +44,9 @@
                             </button>
                         </div>
 
-                        <x-submit-button class="grow" wire:click="addCartItem" icon="shopping-cart">
+                        <x-button class="grow" wire:click="addCartItem" icon="shopping-cart">
                             Add to cart {{ number_format($product['price'] * $quantity) }} {{ $product['currency'] }}
-                        </x-submit-button>
+                        </x-button>
                     </div>
                 </div>
                 </x-slot>
