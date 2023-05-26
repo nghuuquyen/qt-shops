@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
-use Livewire\Component;
 use App\Services\CartService;
+use Livewire\Component;
 
 class AddCartItemPopup extends Component
 {
@@ -17,7 +17,7 @@ class AddCartItemPopup extends Component
     public $notes = '';
 
     protected $listeners = [
-        'selectProduct' => 'displayAddCartItem',
+        'USER_SELECT_PRODUCT_EVENT' => 'displayAddCartItem',
     ];
 
     public function displayAddCartItem(CartService $cart, $product_id)
@@ -54,7 +54,7 @@ class AddCartItemPopup extends Component
 
         $cart->addCartItem($cart_item);
 
-        $this->emit('cartItemAdded', $cart_item);
+        $this->emit('CART_UPDATED_EVENT', $cart_item);
 
         $this->dispatchBrowserEvent('close-offcanvas');
     }

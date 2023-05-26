@@ -21,22 +21,22 @@
                     {{-- cart items --}}
                     <x-panel icon="shopping-cart" header="Cart Items">
                         <ul>
-                            @foreach ($cart['items'] as $item)
+                            @foreach ($cart->items as $item)
                                 <li class="border-b-2 py-4 flex flex-row">
                                     <div class="flex-shrink-0">
                                         <img class="object-cover h-20 w-20 rounded"
-                                            src="{{ $item['display_image_url'] }}?w=150&h=150" alt="product image" />
+                                            src="{{ $item->product->display_image_url }}?w=150&h=150" alt="product image" />
                                     </div>
 
                                     <div class="flex flex-col ml-2 grow">
-                                        <h2 class="text-base text-black"> {{ $item['quantity'] }}x {{ $item['name'] }}
+                                        <h2 class="text-base text-black"> {{ $item->quantity }}x {{ $item->product->name }}
                                         </h2>
-                                        <p class="mt-2 text-sm text-gray-500">{{ $item['notes'] }}</p>
+                                        <p class="mt-2 text-sm text-gray-500">{{ $item->notes }}</p>
                                     </div>
 
                                     <div class="flex-shrink-0">
                                         <span class="text-black font-bold text-base">
-                                            {{ number_format($item['price'] * $item['quantity']) }}
+                                            {{ number_format($item->product->price * $item->quantity) }}
                                             {{ $item['currency'] }}
                                         </span>
                                     </div>
@@ -77,7 +77,7 @@
                                 <span class="text-lg text-gray-500">Subtotal</span>
 
                                 <span class="text-base">
-                                    {{ number_format($cart['total_amount']) }} {{ $cart['currency'] }}
+                                    {{ number_format($cart->total_amount) }} {{ $cart->currency }}
                                 </span>
                             </li>
 
@@ -93,21 +93,13 @@
                                 <span class="text-lg text-gray-500">Total</span>
 
                                 <span class="text-2xl font-bold">
-                                    {{ number_format($cart['total_amount']) }} {{ $cart['currency'] }}
+                                    {{ number_format($cart->total_amount) }} {{ $cart->currency }}
                                 </span>
                             </li>
                         </ul>
 
-                        <x-submit-button class="grow w-full mt-6" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
-                            </svg>
-
-                            <span class="ml-2">
-                                Send Order
-                            </span>
+                        <x-submit-button class="grow w-full mt-6" type="submit" icon="credit-card">
+                            Send Order
                         </x-submit-button>
                     </x-panel>
                 </div>
