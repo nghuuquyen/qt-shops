@@ -62,7 +62,10 @@ class CartService
     {
         $session_id = session()->getId();
 
-        $cart = Cart::query()->with('items')->where('session_id', $session_id)->first();
+        $cart = Cart::query()->with('items')
+                    ->where('session_id', $session_id)
+                    ->doesntHave('order')
+                    ->first();
 
         if (!$cart) {
             $cart = Cart::factory()->create([
