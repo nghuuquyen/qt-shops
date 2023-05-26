@@ -10,4 +10,26 @@ class CartItem extends Model
     use HasFactory;
 
     const MIN_QUANTITY = 1;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'cart_id',
+        'product_id',
+        'quantity',
+        'notes',
+    ];
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

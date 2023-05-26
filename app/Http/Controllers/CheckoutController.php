@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Datasets\ProductDataset;
 use App\Services\CartService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CheckoutController extends Controller
 {
-    public function index(ProductDataset $dataset, CartService $cart)
+    public function index(CartService $cart)
     {
         return view('checkout', [
             'cart' => $cart->getCart(),

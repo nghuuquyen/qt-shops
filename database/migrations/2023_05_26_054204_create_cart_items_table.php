@@ -33,6 +33,8 @@ return new class extends Migration
                     ->cascadeOnUpdate()
                     ->restrictOnDelete();
 
+            $table->unique([ 'cart_id', 'product_id' ]);
+
             $table->timestamps();
         });
     }

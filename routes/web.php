@@ -1,6 +1,5 @@
 <?php
 
-use App\Datasets\ProductDataset;
 use Illuminate\Support\Facades\Route;
 
 /*

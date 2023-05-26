@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
-use App\Datasets\ProductDataset;
+use App\Models\Cart;
+use App\Models\Product;
+use App\Models\CartItem;
 
 class CartService
 {
@@ -10,7 +12,7 @@ class CartService
 
     public function __construct()
     {
-        $this->dataset = new ProductDataset();
+        // 
     }
 
     /**
@@ -21,56 +23,13 @@ class CartService
      */
     public function addCartItem($item)
     {
-        return $this->isCartItemExists($item)
-                    ? $this->replaceExistsCartItem($item)
-                    : $this->addNewCartItem($item);
-    }
-
-    /**
-     * Add new cart item
-     *
-     * @param  mixed  $item
-     * @return void
-     */
-    public function addNewCartItem($item)
-    {
         $cart = $this->getCart();
 
-        $items = collect($cart['items']);
+        $query_condition = [
+            'cart_id' => $cart->id, 'product_id' => $item['product_id']
+        ];
 
-        $cart['items'] = $items->push($this->getCartItemInstance($item))->all();
-
-        $this->storeCart($cart);
-
-        return true;
-    }
-
-    /**
-     * Replace exists cart item
-     *
-     * @param  mixed  $item
-     * @return void
-     */
-    public function replaceExistsCartItem($item)
-    {
-        $cart = $this->getCart();
-
-        $items = collect($cart['items']);
-
-        $index = $items->search(function ($i) use ($item) {
-            return $i['id'] == $item['id'];
-        });
-
-        if ($index !== false) {
-
-            $cart['items'] = $items->replace([$index => $item])->all();
-
-            $this->storeCart($cart);
-
-            return true;
-        }
-
-        return false;
+        CartItem::updateOrCreate($query_condition, $item);
     }
 
     /**
@@ -81,49 +40,23 @@ class CartService
      */
     public function removeCartitem($product_id)
     {
-        $cart = $this->getCart();
+        $cart_item = $this->getCartItem($product_id);
 
-        $items = collect($cart['items']);
-
-        $index = $items->search(function ($i) use ($product_id) {
-            return $i['id'] == $product_id;
-        });
-
-        if ($index !== false) {
-            $items->splice($index, 1);
-
-            $cart['items'] = $items->all();
-
-            $this->storeCart($cart);
-
-            return true;
+        if ($cart_item) {
+            $cart_item->forceDelete();
         }
 
         return false;
-    }
-
-    /**
-     * Check is item exists in cart or not
-     *
-     * @param  mixed  $item
-     * @return bool
-     */
-    public function isCartItemExists($item)
-    {
-        return $this->getCartItem($item['id']) != null;
     }
 
     public function getCartItem($product_id)
     {
         $cart = $this->getCart();
 
-        $items = collect($cart['items']);
-
-        if ($items->isEmpty()) {
-            return null;
-        }
-
-        return $items->where('id', $product_id)->first();
+        return CartItem::query()
+            ->where('cart_id', $cart->id)
+            ->where('product_id', $product_id)
+            ->first();
     }
 
     /**
@@ -133,10 +66,12 @@ class CartService
      */
     public function getCart()
     {
-        if (session()->has('cart')) {
-            $cart = session('cart');
+        $session_id = session()->getId();
 
-            $cart['currency'] = ProductDataset::DEFAULT_CURRENCY;
+        $cart = Cart::query()->with('items')->where('session_id', $session_id)->first();
+
+        if ($cart) {
+            $cart['currency'] = Product::DEFAULT_CURRENCY;
 
             $cart['items'] = collect($cart['items'])->map(function ($item) {
                 return $this->getCartItemInstance($item);
@@ -149,13 +84,9 @@ class CartService
             return $cart;
         }
 
-        $cart = [
-            'total_amount' => 0,
-            'currency' => ProductDataset::DEFAULT_CURRENCY,
-            'items' => collect([]),
-        ];
-
-        $this->storeCart($cart);
+        $cart = Cart::factory()->create([
+            'session_id' => $session_id,
+        ]);
 
         return $cart;
     }
@@ -168,10 +99,11 @@ class CartService
      */
     private function getCartItemInstance($item)
     {
-        $product = $this->dataset->getProduct($item['id']);
+        $product = $item->product;
 
         return [
             'id' => $item['id'],
+            'product_id' => $item['product_id'],
             'quantity' => $item['quantity'],
             'notes' => $item['notes'],
             'name' => $product['name'],

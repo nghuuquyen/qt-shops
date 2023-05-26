@@ -2,14 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use App\Services\CartService;
+use App\Models\Cart;
 use Livewire\Component;
+use App\Services\CartService;
 
 class CartBar extends Component
 {
-    public $cart;
+    public Cart $cart;
 
-    public $name = 'Quyen';
+    public $display = false;
 
     protected $listeners = [
         'cartItemAdded' => 'loadingCartData',
@@ -25,6 +26,8 @@ class CartBar extends Component
         $cart = new CartService();
 
         $this->cart = $cart->getCart();
+
+        $this->display = $this->cart->items->isNotEmpty();
     }
 
     public function removeCartItem($product_id)

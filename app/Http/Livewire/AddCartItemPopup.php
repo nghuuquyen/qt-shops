@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Datasets\ProductDataset;
-use App\Services\CartService;
+use App\Models\Product;
 use Livewire\Component;
+use App\Services\CartService;
 
 class AddCartItemPopup extends Component
 {
@@ -20,17 +20,17 @@ class AddCartItemPopup extends Component
         'selectProduct' => 'displayAddCartItem',
     ];
 
-    public function displayAddCartItem(ProductDataset $dataset, CartService $cart, $product_id)
+    public function displayAddCartItem(CartService $cart, $product_id)
     {
-        $this->product = $dataset->getProduct($product_id);
+        $this->product = Product::find($product_id);
 
         $this->resetFormData();
 
         $cart_item = $cart->getCartItem($product_id);
 
         if ($cart_item) {
-            $this->quantity = $cart_item['quantity'];
-            $this->notes = $cart_item['notes'];
+            $this->quantity = $cart_item->quantity;
+            $this->notes = $cart_item->notes;
         }
 
         $this->dispatchBrowserEvent('display-offcanvas');
@@ -68,7 +68,7 @@ class AddCartItemPopup extends Component
     private function getCartItemInstance()
     {
         return [
-            'id' => $this->product['id'],
+            'product_id' => $this->product->id,
             'quantity' => $this->quantity,
             'notes' => $this->notes,
         ];
