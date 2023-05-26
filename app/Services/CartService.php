@@ -142,7 +142,7 @@ class CartService
                 return $this->getCartItemInstance($item);
             });
 
-            $cart['total_amount'] = collect($cart['items'])->sum(function($item) {
+            $cart['total_amount'] = collect($cart['items'])->sum(function ($item) {
                 return $item['price'] * $item['quantity'];
             });
 
@@ -178,7 +178,7 @@ class CartService
             'description' => $product['description'],
             'price' => $product['price'],
             'currency' => $product['currency'],
-            'image_url' => $product['image_url'],
+            'display_image_url' => $product['display_image_url'],
         ];
     }
 

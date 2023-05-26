@@ -1,22 +1,15 @@
 <?php
 
-namespace App\Datasets;
+namespace Database\Seeders;
 
-class ProductDataset
+use App\Models\Product;
+use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+class ProductSeeder extends Seeder
 {
     public const DEFAULT_CURRENCY = 'VNĐ';
-
-    public $categories = [
-        [
-            'id' => 1,
-            'name' => 'Cafe',
-        ],
-        [
-            'id' => 2,
-            'name' => 'Chicken',
-        ],
-    ];
-
+    
     public $products = [
         [
             'id' => 1,
@@ -24,7 +17,6 @@ class ProductDataset
             'name' => 'Cappuchino',
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -33,7 +25,6 @@ class ProductDataset
             'name' => 'Cappuchino',
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -42,7 +33,6 @@ class ProductDataset
             'name' => 'Cappuchino',
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -51,7 +41,6 @@ class ProductDataset
             'name' => 'Cappuchino',
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -60,7 +49,6 @@ class ProductDataset
             'name' => 'Cappuchino',
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -69,7 +57,6 @@ class ProductDataset
             'name' => 'Cappuchino',
             'description' => 'Cappuccino is a coffee drink that today is typically composed of a single espresso shot and hot milk',
             'price' => 35000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -78,7 +65,6 @@ class ProductDataset
             'name' => 'Chicken satay salad',
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -87,7 +73,6 @@ class ProductDataset
             'name' => 'Chicken satay salad',
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -96,7 +81,6 @@ class ProductDataset
             'name' => 'Chicken satay salad',
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -105,7 +89,6 @@ class ProductDataset
             'name' => 'Chicken satay salad',
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -114,7 +97,6 @@ class ProductDataset
             'name' => 'Chicken satay salad',
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
         [
@@ -123,30 +105,24 @@ class ProductDataset
             'name' => 'Chicken satay salad',
             'description' => 'Marinate chicken breasts, then drizzle with a punchy peanut satay sauce',
             'price' => 50000,
-            'currency' => 'VNĐ',
             'display_image_url' => 'https://images.unsplash.com/photo-1509042239860-f550ce710b93',
         ],
     ];
 
-    public function getProducts()
+    private function getProducts()
     {
         return collect($this->products);
     }
 
-    public function getProduct($product_id)
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
-        return $this->getProducts()->where('id', $product_id)->first();
-    }
+        foreach ($this->getProducts() as $product) {
+            $product['currency'] = self::DEFAULT_CURRENCY;
 
-    public function getCategoeis()
-    {
-        return collect($this->categories);
-    }
-
-    public function getProductsByCateogry($category)
-    {
-        return collect($this->products)->filter(function ($product) use ($category) {
-            return $product['category_id'] == $category['id'];
-        });
+            Product::create($product);
+        }
     }
 }
