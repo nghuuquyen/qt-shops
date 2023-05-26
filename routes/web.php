@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ \App\Http\Controllers\HomepageController::class, 'index' ]);
-Route::get('/checkout', [ \App\Http\Controllers\CheckoutController::class, 'index' ]);
+/**
+ * Homepage
+ */
+Route::get('/', [ \App\Http\Controllers\HomepageController::class, 'index' ])->name('homepage');
+
+/**
+ * Checkout
+ */
+Route::get('/checkout', [ \App\Http\Controllers\CheckoutController::class, 'index' ])->name('checkout.index');
+Route::post('/checkout', [ \App\Http\Controllers\CheckoutController::class, 'store' ])->name('checkout.store');

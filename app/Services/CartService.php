@@ -150,6 +150,7 @@ class CartService
         }
 
         $cart = [
+            'total_amount' => 0,
             'currency' => ProductDataset::DEFAULT_CURRENCY,
             'items' => collect([]),
         ];
