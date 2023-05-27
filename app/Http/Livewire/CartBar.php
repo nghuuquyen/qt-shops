@@ -3,8 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Cart;
-use App\Services\CartService;
 use Livewire\Component;
+use App\Events\LivewireEvent;
+use App\Services\CartService;
 
 class CartBar extends Component
 {
@@ -13,7 +14,7 @@ class CartBar extends Component
     public $display = false;
 
     protected $listeners = [
-        'CART_UPDATED_EVENT' => 'loadingCartData',
+        LivewireEvent::CART_UPDATED_EVENT => 'loadingCartData',
     ];
 
     public function mount()
@@ -37,6 +38,11 @@ class CartBar extends Component
         $cart->removeCartItem($product_id);
 
         $this->loadingCartData();
+    }
+
+    public function checkout()
+    {
+        return redirect()->route('checkout.index');
     }
 
     public function render()

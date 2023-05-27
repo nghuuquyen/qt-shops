@@ -30,4 +30,9 @@ class Cart extends Model
             return $item->product->price * $item->quantity;
         });
     }
+
+    public function getFormattedTotalAmount()
+    {
+        return number_format($this->total_amount) . ' ' . $this->currency;
+    }
 }

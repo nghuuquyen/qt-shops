@@ -3,8 +3,9 @@
 namespace App\Services;
 
 use App\Models\Cart;
-use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\CartItem;
+use Illuminate\Support\Facades\Session;
 
 class CartService
 {
@@ -60,7 +61,7 @@ class CartService
      */
     public function getCart(): Cart
     {
-        $session_id = session()->getId();
+        $session_id = Session::getId();
 
         $cart = Cart::query()->with('items')
                     ->where('session_id', $session_id)

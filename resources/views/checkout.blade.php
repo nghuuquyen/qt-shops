@@ -56,8 +56,7 @@
 
                                     <div class="flex-shrink-0">
                                         <span class="text-black font-bold text-base">
-                                            {{ number_format($item->product->price * $item->quantity) }}
-                                            {{ $item->product->currency }}
+                                            {{ $item->product->getFormattedTotalAmount($item->quantity) }}
                                         </span>
                                     </div>
                                 </li>

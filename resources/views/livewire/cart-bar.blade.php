@@ -25,8 +25,8 @@
             </ul>
         </div>
 
-        <x-button class="mt-3 lg:mt-0" @click="window.location.href = '/checkout'" icon="credit-card">
-            Checkout {{ number_format($cart->total_amount) }} {{ $cart->currency }}
+        <x-button class="mt-3 lg:mt-0" wire:click="checkout" icon="credit-card">
+            Checkout {{ $cart->getFormattedTotalAmount() }}
         </x-button>
     </div>
 </div>
