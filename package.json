@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "test-coverage": "XDEBUG_MODE=coverage php artisan test --coverage-html ./coverage-reports -d memory_limit=2024M"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.14",
