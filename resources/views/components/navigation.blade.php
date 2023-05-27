@@ -1,4 +1,4 @@
-<div class="bg-white sticky top-0" id="app_navigation">
+<div class="bg-white sticky top-0 mt-[-10px]" id="app_navigation">
     <div class="max-w-screen-lg m-auto" 
         x-data="{ 
                 activeIndex: 0, 

@@ -21,7 +21,7 @@ class CheckoutController extends Controller
     {
         $validated = $request->validate([
             'full_name' => 'required|string',
-            'phone_number' => 'required|numeric',
+            'phone_number' => 'required|string',
             'email' => 'required|email',
             'shipping_address' => 'required',
             'coupon_code' => 'nullable|string',

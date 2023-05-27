@@ -1,4 +1,4 @@
-<div x-data="{}" class="flex flex-row bg-white p-3 w-full cursor-pointer hover:shadow-xl"
+<div x-data="{}" class="flex flex-row bg-white p-3 w-full cursor-pointer hover:shadow-xl rounded"
     @click="Livewire.emit('USER_SELECT_PRODUCT_EVENT', {{ $product['id'] }})">
     <div class="flex-shrink-0">
         <img class="object-cover h-28 w-28 rounded" src="{{ $product['display_image_url'] }}?w=150&h=150"
@@ -12,7 +12,7 @@
                 {{ number_format($product['price']) }} {{ $product['currency'] }}
             </span>
 
-            <button class="flex flex-row text-green-800 active:translate-y-1 bg-green-500">
+            <button class="flex flex-row text-green-800 active:translate-y-1 bg-green-500 items-center w-6 h-6">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                     class="w-6 h-6 text-white">
                     <path fill-rule="evenodd"

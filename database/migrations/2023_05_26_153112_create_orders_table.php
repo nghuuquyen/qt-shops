@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('email');
             $table->string('shipping_address');
-            $table->string('coupon_code');
-            $table->string('notes');
+            $table->string('coupon_code')->nullable();
+            $table->string('notes')->nullable();
             $table->timestamps();
 
             $table->foreign('cart_id')

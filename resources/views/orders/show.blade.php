@@ -101,8 +101,8 @@
             </div>
 
             {{-- payment summary --}}
-            <div class="flex flex-row justify-end mt-10 lg:mt-0">
-                <ul class="w-full lg:px-0 lg:w-2/5">
+            <div class="flex flex-row justify-end mt-10 lg:mt-0 px-6">
+                <ul class="w-full lg:px-0 lg:w-3/5">
                     <li class="flex flex-row items-center justify-between px-6 py-4 border-b-2">
                         <h2 class="text-sm font-bold text-gray-600">SUBTOTAL</h2>
     

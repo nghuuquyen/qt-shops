@@ -1,4 +1,4 @@
-<div class="flex flex-row items-center justify-center pt-6 pb-2 bg-white">
+<div class="flex flex-row items-center justify-center pt-3 pb-3 bg-white">
     <a href="/">
         <h1>
             <svg width="189" height="33" viewBox="0 0 189 33" fill="none" xmlns="http://www.w3.org/2000/svg">
