@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Cart;
-use App\Models\Product;
 use App\Models\CartItem;
 use Illuminate\Support\Facades\Session;
 
@@ -13,7 +12,6 @@ class CartService
      * Add new or update exists cart item
      *
      * @param  mixed  $item
-     * @return bool
      */
     public function addCartItem($item): bool
     {
@@ -32,7 +30,6 @@ class CartService
      * Remove exists cart item
      *
      * @param  mixed  $product_id
-     * @return bool
      */
     public function removeCartItem($product_id): bool
     {
@@ -61,19 +58,32 @@ class CartService
      */
     public function getCart(): Cart
     {
-        $session_id = Session::getId();
+        $user_id = $this->getUserIdFromSession();
 
         $cart = Cart::query()->with('items')
-                    ->where('session_id', $session_id)
-                    ->doesntHave('order')
-                    ->first();
+            ->where('user_id', $user_id)
+            ->doesntHave('order')
+            ->first();
 
-        if (!$cart) {
+        if (! $cart) {
             $cart = Cart::factory()->create([
-                'session_id' => $session_id,
+                'user_id' => $user_id,
             ]);
         }
 
         return $cart;
+    }
+
+    private function getUserIdFromSession()
+    {
+        if (Session::exists('user_id')) {
+            return Session::get('user_id');
+        } 
+
+        $user_id = fake()->uuid();
+
+        Session::put('user_id', $user_id);
+
+        return $user_id;
     }
 }

@@ -17,7 +17,11 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'code' => fake()->numerify('OR-######'),
+            'full_name' => fake()->name(),
+            'phone_number' => fake()->phoneNumber(),
+            'email' => fake()->email(),
+            'shipping_address' => fake()->address(),
         ];
     }
 }
