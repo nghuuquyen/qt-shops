@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use App\Services\UserService;
 use Illuminate\Support\Facades\Session;
 
 class CartService
@@ -58,7 +59,7 @@ class CartService
      */
     public function getCart(): Cart
     {
-        $user_id = $this->getUserIdFromSession();
+        $user_id = UserService::getUserIdFromSession();
 
         $cart = Cart::query()->with('items')
             ->where('user_id', $user_id)
@@ -72,18 +73,5 @@ class CartService
         }
 
         return $cart;
-    }
-
-    private function getUserIdFromSession()
-    {
-        if (Session::exists('user_id')) {
-            return Session::get('user_id');
-        } 
-
-        $user_id = fake()->uuid();
-
-        Session::put('user_id', $user_id);
-
-        return $user_id;
     }
 }

@@ -2,14 +2,16 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Livewire\Livewire;
-use App\Models\Product;
 use App\Events\BrowserEvent;
 use App\Events\LivewireEvent;
-use App\Services\CartService;
 use App\Http\Livewire\AddCartItemPopup;
+use App\Models\Cart;
+use App\Models\CartItem;
+use App\Models\Product;
+use App\Services\CartService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
+use Tests\TestCase;
 
 class AddCartItemPopupTest extends TestCase
 {
@@ -31,7 +33,7 @@ class AddCartItemPopupTest extends TestCase
             ->assertSet('product.name', $product->name)
             ->assertDispatchedBrowserEvent(BrowserEvent::DISPLAY_OFFCANVAS);
 
-        // verify render HTML content is correct 
+        // verify render HTML content is correct
         $component
             ->assertSee($product->display_image_url)
             ->assertSee($product->name)
@@ -41,45 +43,33 @@ class AddCartItemPopupTest extends TestCase
 
     public function test_popup_display_correct_cart_item_data()
     {
-        $product = Product::factory()->create();
+        $cart = Cart::factory()
+            ->has(CartItem::factory()->count(3), 'items')
+            ->create();
 
-        $cart = new CartService();
-
-        $cart_item = [
-            'product_id' => $product->id,
-            'quantity' => 5,
-            'notes' => 'here my notes',
-        ];
-
-        $cart->addCartItem($cart_item);
+        $cart_item = $cart->items->random();
 
         $component = Livewire::test(AddCartItemPopup::class)
-            ->emit(LivewireEvent::USER_SELECT_PRODUCT, $product->id)
-            ->assertSet('product.id', $product->id)
-            ->assertSet('quantity', $cart_item['quantity'])
-            ->assertSet('notes', $cart_item['notes']);
+            ->emit(LivewireEvent::USER_SELECT_PRODUCT, $cart_item->product->id)
+            ->assertSet('product.id', $cart_item->product->id)
+            ->assertSet('quantity', $cart_item->quantity)
+            ->assertSet('notes', $cart_item->notes);
     }
 
     public function test_popup_should_reset_form_data_on_multiple_times_called()
     {
-        $product = Product::factory()->create();
+        $cart = Cart::factory()
+            ->has(CartItem::factory()->count(3), 'items')
+            ->create();
 
-        $cart = new CartService();
-
-        $cart_item = [
-            'product_id' => $product->id,
-            'quantity' => 5,
-            'notes' => 'here my notes',
-        ];
-
-        $cart->addCartItem($cart_item);
+        $cart_item = $cart->items->random();
 
         // case product have cart item, then should display property cart item data
         $component = Livewire::test(AddCartItemPopup::class)
-            ->emit(LivewireEvent::USER_SELECT_PRODUCT, $product->id)
-            ->assertSet('product.id', $product->id)
-            ->assertSet('quantity', $cart_item['quantity'])
-            ->assertSet('notes', $cart_item['notes']);
+            ->emit(LivewireEvent::USER_SELECT_PRODUCT, $cart_item->product->id)
+            ->assertSet('product.id', $cart_item->product->id)
+            ->assertSet('quantity', $cart_item->quantity)
+            ->assertSet('notes', $cart_item->notes);
 
         // case product does have cart item, form should reset previous note and quantity to default value
         $other_product = Product::factory()->create();
@@ -90,11 +80,11 @@ class AddCartItemPopupTest extends TestCase
             ->assertSet('notes', '');
 
         // continue call with other product
-        $component->emit(LivewireEvent::USER_SELECT_PRODUCT, $product->id)
-            ->emit(LivewireEvent::USER_SELECT_PRODUCT, $product->id)
-            ->assertSet('product.id', $product->id)
-            ->assertSet('quantity', $cart_item['quantity'])
-            ->assertSet('notes', $cart_item['notes']);
+        $component
+            ->emit(LivewireEvent::USER_SELECT_PRODUCT, $cart_item->product->id)
+            ->assertSet('product.id', $cart_item->product->id)
+            ->assertSet('quantity', $cart_item->quantity)
+            ->assertSet('notes', $cart_item->notes);
     }
 
     public function test_can_increment_and_decrement_quantity()

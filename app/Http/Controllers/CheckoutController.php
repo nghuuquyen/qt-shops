@@ -29,9 +29,7 @@ class CheckoutController extends Controller
         ]);
 
         $order = $cart->getCart()->order()->save(
-            Order::factory()->make(
-                array_merge($validated, [ 'code' => fake()->numerify('OR-######') ])
-            )
+            Order::factory()->make($validated)
         );
 
         return redirect(URL::signedRoute('orders.complete', [ 'order' => $order->id ]));

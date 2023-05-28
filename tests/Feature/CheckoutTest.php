@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\Cart;
+use App\Models\CartItem;
 use App\Models\Order;
-use App\Models\Product;
-use App\Services\CartService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
@@ -24,27 +24,17 @@ class CheckoutTest extends TestCase
     {
         Session::put('user_id', 'DUMMY_USER_ID');
 
-        $cart = new CartService();
-
-        $products = Product::factory()->count(3)->create();
-
-        foreach ($products as $product) {
-            $cart_item = [
-                'product_id' => $product->id,
-                'quantity' => 5,
-                'notes' => 'here my notes',
-            ];
-
-            $cart->addCartItem($cart_item);
-        }
+        $cart = Cart::factory()
+            ->has(CartItem::factory()->count(3), 'items')
+            ->create();
 
         $response = $this->withSession(['user_id' => 'DUMMY_USER_ID'])
             ->get(route('checkout.index'));
 
-        foreach ($products as $product) {
+        foreach ($cart->items as $item) {
             $response
-                ->assertSee($product->name)
-                ->assertSee($product->getFormattedTotalAmount(5));
+                ->assertSee($item->product->name)
+                ->assertSee($item->product->getFormattedTotalAmount(5));
         }
     }
 
@@ -63,22 +53,9 @@ class CheckoutTest extends TestCase
     {
         Session::put('user_id', 'DUMMY_USER_ID');
 
-        $cart = new CartService();
-
-        $products = Product::factory()->count(3)->create();
-
-        foreach ($products as $product) {
-            $cart_item = [
-                'product_id' => $product->id,
-                'quantity' => 5,
-                'notes' => 'here my notes',
-            ];
-
-            $cart->addCartItem($cart_item);
-        }
-
-        // should do this because after created order, get card will return new instance
-        $original_cart = $cart->getCart();
+        $cart = Cart::factory()
+            ->has(CartItem::factory()->count(3), 'items')
+            ->create();
 
         $body = [
             'full_name' => 'John',
@@ -90,7 +67,9 @@ class CheckoutTest extends TestCase
         $response = $this->withSession(['user_id' => 'DUMMY_USER_ID'])
             ->post(route('checkout.store'), $body);
 
-        $order = Order::query()->where('cart_id', $original_cart->id)->first();
+        $order = Order::query()->where('cart_id', $cart->id)->first();
+
+        $this->assertDatabaseHas('orders', array_merge(['id' => $order->id], $body));
 
         $response->assertRedirectToSignedRoute('orders.complete', ['order' => $order->id]);
     }

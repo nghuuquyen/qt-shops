@@ -2,15 +2,15 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Livewire\Livewire;
-use App\Models\Product;
-use App\Events\BrowserEvent;
 use App\Events\LivewireEvent;
-use App\Services\CartService;
 use App\Http\Livewire\CartBar;
-use App\Http\Livewire\AddCartItemPopup;
+use App\Models\Cart;
+use App\Models\CartItem;
+use App\Models\Product;
+use App\Services\CartService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Livewire\Livewire;
+use Tests\TestCase;
 
 class CartBarTest extends TestCase
 {
@@ -23,72 +23,49 @@ class CartBarTest extends TestCase
 
     public function test_cart_bar_display_correct_cart_items()
     {
-        $cart = new CartService();
-
-        $products = Product::factory()->count(3)->create();
-
-        foreach ($products as $product) {
-            $cart_item = [
-                'product_id' => $product->id,
-                'quantity' => 5,
-                'notes' => 'here my notes',
-            ];
-    
-            $cart->addCartItem($cart_item);    
-        }
+        $cart = Cart::factory()
+            ->has(CartItem::factory()->count(3), 'items')
+            ->create();
 
         // verify internal data
         $component = Livewire::test(CartBar::class)
             ->emit(LivewireEvent::CART_UPDATED_EVENT)
-            ->assertSet('cart.id', $cart->getCart()->id)
+            ->assertSet('cart.id', $cart->id)
             ->assertSet('display', true);
 
         // verify rendered HTML content
-        foreach ($products as $product) {
-            $component->assertSee($product->name);   
+        foreach ($cart->items as $item) {
+            $component->assertSee($item->product->name);
         }
 
         // verify total amount is display correct
-        $component->assertSee($cart->getCart()->getFormattedTotalAmount());
+        $component->assertSee($cart->getFormattedTotalAmount());
     }
 
     public function test_can_remove_cart_item()
     {
-        $product = Product::factory()->create();
+        $cart = Cart::factory()
+            ->has(CartItem::factory()->count(3), 'items')
+            ->create();
 
-        $cart = new CartService();
+        $cart_item = $cart->items->first();
 
-        $cart_item = [
-            'product_id' => $product->id,
-            'quantity' => 5,
-            'notes' => 'here my notes',
-        ];
+        $this->assertNotNull(
+            $cart->items->where('product_id', $cart_item->product_id)->first()
+        );
 
-        $cart->addCartItem($cart_item);
-        
-        $this->assertNotNull($cart->getCartItem($product->id));
+        Livewire::test(CartBar::class)
+            ->call('removeCartItem', $cart_item->product_id);
 
-        Livewire::test(CartBar::class)->call('removeCartItem', $product->id);
+        $cart->refresh();
 
-        $this->assertNull($cart->getCartItem($product->id));
+        $this->assertNull(
+            $cart->items->where('product_id', $cart_item->product_id)->first()
+        );
     }
 
     public function test_can_move_to_checkout_page()
     {
-        $product = Product::factory()->create();
-
-        $cart = new CartService();
-
-        $cart_item = [
-            'product_id' => $product->id,
-            'quantity' => 5,
-            'notes' => 'here my notes',
-        ];
-
-        $cart->addCartItem($cart_item);
-        
-        $this->assertNotNull($cart->getCartItem($product->id));
-
         Livewire::test(CartBar::class)
             ->call('checkout')
             ->assertRedirect(route('checkout.index'));

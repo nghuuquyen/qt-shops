@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Services\UserService;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cart>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CartItem>
  */
-class CartFactory extends Factory
+class CartItemFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +18,9 @@ class CartFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => UserService::getUserIdFromSession(),
+            'product_id' => Product::factory(),
+            'quantity' => 5,
+            'notes' => fake()->paragraph(),
         ];
     }
 }
