@@ -6,7 +6,7 @@
     </div>
     <div class="flex flex-col ml-4 w-full">
         <h2 class="text-xl text-on-surface-600">{{ $product['name'] }}</h2>
-        <p class="mt-3 lg:mt-8 text-sm text-on-surface-600">{{ $product['description'] }}</p>
+        <p class="mt-3 lg:mt-8 text-sm text-on-surface-500">{{ $product['description'] }}</p>
         <div class="flex flex-row justify-between mt-3 lg:mt-12">
             <span class="text-on-surface-600 font-bold text-xl">
                 {{ number_format($product['price']) }} {{ $product['currency'] }}

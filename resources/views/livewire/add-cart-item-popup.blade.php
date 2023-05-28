@@ -13,7 +13,7 @@
                     {{ $product->formatted_price }}
                 </span>
 
-                <p class="overflow-y-auto max-h-32 text-on-surface-600">
+                <p class="overflow-y-auto max-h-32 text-on-surface-500">
                     {{ $product->description }}
                 </p>
             </div>

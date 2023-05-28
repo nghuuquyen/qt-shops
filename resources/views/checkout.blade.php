@@ -52,7 +52,7 @@
                                         <h2 class="text-base text-on-surface-600"> {{ $item->quantity }}x
                                             {{ $item->product->name }}
                                         </h2>
-                                        <p class="mt-2 text-sm text-on-surface-600">{{ $item->notes }}</p>
+                                        <p class="mt-2 text-sm text-on-surface-500">{{ $item->notes }}</p>
                                     </div>
 
                                     <div class="flex-shrink-0">
@@ -75,23 +75,23 @@
 
                         <ul class="text-on-surface-600">
                             <li class="flex flex-row items-center justify-between mt-4 lg:mt-8">
-                                <span class="text-lg">Subtotal</span>
+                                <span class="text-lg text-on-surface-700">Subtotal</span>
 
-                                <span class="text-base">
+                                <span class="text-base font-bold">
                                     {{ $cart->formatted_total_amount }}
                                 </span>
                             </li>
 
                             <li class="flex flex-row items-center justify-between mt-4 lg:mt-8">
-                                <span class="text-lg">Shipping Fee</span>
+                                <span class="text-lg text-on-surface-700">Shipping Fee</span>
 
-                                <span class="text-base">
+                                <span class="text-base font-bold">
                                     free
                                 </span>
                             </li>
 
                             <li class="flex flex-row items-center justify-between mt-4 lg:mt-8">
-                                <span class="text-lg">Total</span>
+                                <span class="text-lg text-on-surface-700">Total</span>
 
                                 <span class="text-2xl font-bold">
                                     {{ $cart->formatted_total_amount }}
