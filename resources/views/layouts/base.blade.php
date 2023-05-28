@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="theme-dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
     @livewireStyles
     @vite('resources/css/app.css')
 </head>
-<body class="theme-dark bg-background">
+<body class="bg-background">
     <x-logo />
 
     @yield('navigation')
