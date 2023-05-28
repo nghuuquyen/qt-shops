@@ -9,7 +9,7 @@
     @livewireStyles
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gradient-to-r from-rose-100 to-teal-100">
+<body class="theme-dark bg-background">
     <x-logo />
 
     @yield('navigation')

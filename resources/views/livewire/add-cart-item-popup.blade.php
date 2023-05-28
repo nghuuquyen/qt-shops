@@ -9,11 +9,11 @@
                 <img class="object-cover w-full h-64" src="{{ $product->display_image_url }}?w=600"
                     alt="product image" />
 
-                <span class="text-black text-3xl font-bold">
+                <span class="text-on-surface-600 text-3xl font-bold">
                     {{ $product->formatted_price }}
                 </span>
 
-                <p class="overflow-y-auto max-h-32 text-gray-500">
+                <p class="overflow-y-auto max-h-32 text-on-surface-600">
                     {{ $product->description }}
                 </p>
             </div>
@@ -21,7 +21,7 @@
             <div>
                 <x-text-input label="Special instructions" model="notes" placeholder="Ex. No onions please" />
 
-                <div class="flex flex-row items-center mt-4">
+                <div class="flex flex-row items-center mt-4 text-on-surface-600">
                     <div class="w-1/3 grid grid-cols-3">
                         <button class="active:translate-y-1" wire:click="decrement">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

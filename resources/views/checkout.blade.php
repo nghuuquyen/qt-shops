@@ -6,7 +6,7 @@
             @csrf
 
             <div class="flex flex-row justify-end mb-3">
-                <a href="/" class="flex flex-row items-center text-gray-500">
+                <a href="/" class="flex flex-row items-center text-on-surface-600">
                     <span class="mr-2">Continue to shopping</span>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -42,20 +42,21 @@
                     <x-panel icon="shopping-cart" header="Cart Items">
                         <ul>
                             @foreach ($cart->items as $item)
-                                <li class="border-b-2 py-4 flex flex-row">
+                                <li class="border-b-2 border-on-surface py-4 flex flex-row">
                                     <div class="flex-shrink-0">
                                         <img class="object-cover h-20 w-20 rounded"
                                             src="{{ $item->product->display_image_url }}?w=150&h=150" alt="product image" />
                                     </div>
 
                                     <div class="flex flex-col ml-2 grow">
-                                        <h2 class="text-base text-black"> {{ $item->quantity }}x {{ $item->product->name }}
+                                        <h2 class="text-base text-on-surface-600"> {{ $item->quantity }}x
+                                            {{ $item->product->name }}
                                         </h2>
-                                        <p class="mt-2 text-sm text-gray-500">{{ $item->notes }}</p>
+                                        <p class="mt-2 text-sm text-on-surface-600">{{ $item->notes }}</p>
                                     </div>
 
                                     <div class="flex-shrink-0">
-                                        <span class="text-black font-bold text-base">
+                                        <span class="text-on-surface-600 font-bold text-base">
                                             {{ $item->product->getFormattedTotalAmount($item->quantity) }}
                                         </span>
                                     </div>
@@ -72,17 +73,17 @@
                         <x-text-input label="Coupon" name="coupon_code" value="{{ old('email') }}"
                             placeholder="Please enter your coupon code" />
 
-                        <ul>
+                        <ul class="text-on-surface-600">
                             <li class="flex flex-row items-center justify-between mt-4 lg:mt-8">
-                                <span class="text-lg text-gray-500">Subtotal</span>
+                                <span class="text-lg">Subtotal</span>
 
                                 <span class="text-base">
-                                    {{ number_format($cart->total_amount) }} {{ $cart->currency }}
+                                    {{ $cart->formatted_total_amount }}
                                 </span>
                             </li>
 
                             <li class="flex flex-row items-center justify-between mt-4 lg:mt-8">
-                                <span class="text-lg text-gray-500">Shipping Fee</span>
+                                <span class="text-lg">Shipping Fee</span>
 
                                 <span class="text-base">
                                     free
@@ -90,10 +91,10 @@
                             </li>
 
                             <li class="flex flex-row items-center justify-between mt-4 lg:mt-8">
-                                <span class="text-lg text-gray-500">Total</span>
+                                <span class="text-lg">Total</span>
 
                                 <span class="text-2xl font-bold">
-                                    {{ number_format($cart->total_amount) }} {{ $cart->currency }}
+                                    {{ $cart->formatted_total_amount }}
                                 </span>
                             </li>
                         </ul>
