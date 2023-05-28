@@ -13,7 +13,7 @@ class OrderCompleteController extends Controller
     public function __invoke(Request $request, Order $order)
     {
         if (! $request->hasValidSignature()) {
-            abort(404);
+            abort(401);
         }
 
         return view('orders.complete', compact('order'));

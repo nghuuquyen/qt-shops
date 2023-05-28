@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use App\Models\Cart;
 use App\Models\CartItem;
@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
-class CheckoutTest extends TestCase
+class CheckoutControllerTest extends TestCase
 {
     use RefreshDatabase;
 

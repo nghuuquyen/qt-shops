@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use App\Models\Cart;
 use App\Models\CartItem;
@@ -10,21 +10,25 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\URL;
 use Tests\TestCase;
 
-class OrderTest extends TestCase
+class OrderControllerTest extends TestCase
 {
     use RefreshDatabase;
 
     public function test_can_render_order_detail_page()
     {
-        $cart = new CartService();
-
-        $order = $cart->getCart()->order()->save(
-            Order::factory()->make()
-        );
+        $order = Order::factory()->create();
 
         $this->get(URL::signedRoute('orders.show', ['order' => $order->id]))
             ->assertOk()
             ->assertViewIs('orders.show');
+    }
+
+    public function test_can_not_access_order_detail_page_with_invalid_signature()
+    {
+        $order = Order::factory()->create();
+
+        $this->get(route('orders.show', [ 'order' => $order->id ]))
+            ->assertUnauthorized();
     }
 
     public function test_order_detail_page_display_correct_data()
