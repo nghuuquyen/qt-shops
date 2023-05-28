@@ -39,7 +39,7 @@ class CartBarTest extends TestCase
         }
 
         // verify total amount is display correct
-        $component->assertSee($cart->getFormattedTotalAmount());
+        $component->assertSee($cart->formatted_total_amount);
     }
 
     public function test_can_remove_cart_item()

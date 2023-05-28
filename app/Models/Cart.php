@@ -31,7 +31,7 @@ class Cart extends Model
         });
     }
 
-    public function getFormattedTotalAmount()
+    public function getFormattedTotalAmountAttribute()
     {
         return number_format($this->total_amount) . ' ' . $this->currency;
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Cart;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
+            'cart_id' => Cart::factory(),
             'code' => fake()->numerify('OR-######'),
             'full_name' => fake()->name(),
             'phone_number' => fake()->phoneNumber(),
