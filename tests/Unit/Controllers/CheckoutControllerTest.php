@@ -2,12 +2,14 @@
 
 namespace Tests\Unit;
 
-use App\Models\Cart;
-use App\Models\CartItem;
-use App\Models\Order;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
+use App\Models\Cart;
+use App\Models\Order;
+use App\Models\CartItem;
+use App\Notifications\OrderCreated;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CheckoutControllerTest extends TestCase
 {
