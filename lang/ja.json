@@ -68,5 +68,13 @@
     "Invoice": "請求書",
     "Status": "ステータス",
     "Issue date": "発行日",
-    "Free": "無料"
+    "Free": "無料",
+    "Themes": "テーマ",
+    "Light": "光",
+    "Dark": "ダーク",
+    "System": "システム",
+    "Languages": "言語",
+    "English": "英語",
+    "Japanese": "日本語",
+    "Vietnamese": "ベトナム語"
 }

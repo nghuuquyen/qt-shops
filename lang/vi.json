@@ -68,5 +68,13 @@
     "Invoice": "Hoá đơn",
     "Status": "Trạng thái",
     "Issue date": "Ngày cấp",
-    "Free": "Miễn phí"
+    "Free": "Miễn phí",
+    "Themes": "Giao diện",
+    "Light": "Sáng",
+    "Dark": "Tối",
+    "System": "Hệ thống",
+    "Languages": "Ngôn ngữ",
+    "English": "Tiếng Anh",
+    "Japanese": "Tiếng Nhật",
+    "Vietnamese": "Tiếng Việt"
 }
