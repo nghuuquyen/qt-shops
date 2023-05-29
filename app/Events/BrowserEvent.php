@@ -8,4 +8,5 @@ class BrowserEvent {
 
     public const CLOSE_OFFCANVAS = 'close-offcanvas';
 
+    public const LANGUAGE_CHANGED = 'language-changed';
 }

@@ -19,7 +19,7 @@
             </div>
 
             <div>
-                <x-text-input label="Special instructions" model="notes" placeholder="Ex. No onions please" />
+                <x-text-input label="{{ __('Special instructions') }}" model="notes" placeholder="Ex. No onions please" />
 
                 <div class="flex flex-row items-center mt-4 text-on-surface-600">
                     <div class="w-1/3 grid grid-cols-3">
@@ -45,7 +45,7 @@
                     </div>
 
                     <x-button class="grow" wire:click="addCartItem" icon="shopping-cart">
-                        Add to cart {{ $product->getFormattedTotalAmount($quantity) }}
+                        {{ __('Add to cart') }} {{ $product->getFormattedTotalAmount($quantity) }}
                     </x-button>
                 </div>
             </div>

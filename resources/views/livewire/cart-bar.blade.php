@@ -26,7 +26,7 @@
         </div>
 
         <x-button class="mt-3 lg:mt-0" wire:click="checkout" icon="credit-card">
-            Checkout {{ $cart->formatted_total_amount }}
+            {{ __('Checkout') }} {{ $cart->formatted_total_amount }}
         </x-button>
     </div>
 </div>
