@@ -1,11 +1,11 @@
 @extends('layouts.base')
 
 @section('main')
-    <section class="mt-10 p-20 lg:mx-48 bg-surface rounded-xl text-on-surface-600">
+    <section class="mt-4 lg:mt-10 p-4 lg:p-20 lg:mx-48 bg-surface rounded-xl text-on-surface-600">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-2 lg:gap-4">
             {{-- first column --}}
-            <div class="col-span-2 grid gird-cols-1 gap-6 lg:border-r-4">
-                <h1 class="text-5xl">INVOICE</h1>
+            <div class="col-span-2 grid gird-cols-1 gap-6 lg:border-r-2 lg:border-r-on-surface-500">
+                <h1 class="text-5xl text-center lg:text-left">INVOICE</h1>
 
                 <div class="flex flex-col">
                     <h2 class="text-xs font-bold text-on-surface-500">ORDER ID</h2>
@@ -103,28 +103,28 @@
             </div>
 
             {{-- payment summary --}}
-            <div class="flex flex-row justify-end mt-10 lg:mt-0">
+            <div class="flex flex-row justify-end mt-10 lg:mt-0 px-4 bg-primary-950 text-on-primary-50 rounded-lg lg:px-0 lg:bg-surface lg:text-on-surface-100">
                 <ul class="w-full lg:px-0 lg:w-3/5">
                     <li class="flex flex-row items-center justify-between lg:px-8 py-4 border-b-2">
-                        <h2 class="text-sm font-bold text-on-surface-500">SUBTOTAL</h2>
+                        <h2 class="text-sm font-bold text-on-surface-100 lg:text-on-surface-500">SUBTOTAL</h2>
 
-                        <span class="text-base">
+                        <span class="text-base text-on-surface-100 lg:text-on-surface-600">
                             {{ number_format($order->cart->total_amount) }} {{ $order->cart->currency }}
                         </span>
                     </li>
 
                     <li class="flex flex-row items-center justify-between lg:px-8 py-4 border-b-2">
-                        <h2 class="text-sm font-bold text-on-surface-500">SHIPPING FEE</h2>
+                        <h2 class="text-sm font-bold text-on-surface-100 lg:text-on-surface-500">SHIPPING FEE</h2>
 
-                        <span class="text-base">
+                        <span class="text-base text-on-surface-100 lg:text-on-surface-600">
                             free
                         </span>
                     </li>
 
                     <li class="flex flex-row items-center justify-between lg:px-8 py-4">
-                        <h2 class="text-sm font-bold text-on-surface-500">TOTAL</h2>
+                        <h2 class="text-sm font-bold text-on-surface-100 lg:text-on-surface-500">TOTAL</h2>
 
-                        <span class="text-2xl font-bold">
+                        <span class="text-2xl font-bold text-on-surface-100 lg:text-on-surface-600">
                             {{ number_format($order->cart->total_amount) }} {{ $order->cart->currency }}
                         </span>
                     </li>
