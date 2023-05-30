@@ -16,7 +16,7 @@
         @endif
         
         {{-- invoice --}}
-        <div class="bg-surface rounded-xl text-on-surface-600 p-4 lg:p-10">
+        <div class="bg-surface rounded-xl text-on-surface-600 p-4 lg:p-10 shadow-lg">
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-2 lg:gap-4">
                 {{-- first column --}}
                 <div class="col-span-2 grid gird-cols-1 gap-6 lg:border-r-2 lg:border-r-on-surface-500">

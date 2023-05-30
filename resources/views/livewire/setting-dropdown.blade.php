@@ -57,7 +57,7 @@
             x-on:click.outside="close($refs.button)"
             :id="$id('dropdown-button')"
             style="display: none;"
-            class="absolute right-0 rounded-lg bg-surface shardow-xl w-52"
+            class="absolute right-0 rounded-lg bg-surface shardow-xl w-52 shadow-lg"
         >
             <div class="text-on-surface-500 p-3">
                 {{ __('Themes') }}
