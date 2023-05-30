@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('main')
-    <section class="mt-4 lg:mt-10 p-4 lg:p-20 lg:mx-48 bg-surface rounded-xl text-on-surface-600">
+    <section class="mt-4 lg:mt-10 m-4 p-4 lg:p-10 lg:mx-64 bg-surface rounded-xl text-on-surface-600">
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-2 lg:gap-4">
             {{-- first column --}}
             <div class="col-span-2 grid gird-cols-1 gap-6 lg:border-r-2 lg:border-r-on-surface-500">
@@ -14,8 +14,9 @@
 
                 <div class="flex flex-col">
                     <h2 class="text-xs font-bold text-on-surface-500 uppercase">{{ __('Issue date') }}</h2>
-                    <span class="text-base">{{ $order->created_at->format('Y-m-d') }}
-                        ({{ $order->created_at->diffForHumans() }})</span>
+                    <span class="text-base">
+                        {{ $order->created_at->format('Y-m-d') }} <span class="text-on-surface-500 text-xs">({{ $order->created_at->diffForHumans() }})</span>
+                    </span>
                 </div>
 
                 <div class="flex flex-col">
@@ -55,30 +56,30 @@
 
         <div>
             {{-- cart items table --}}
-            <div class="relative overflow-x-auto mt-20">
+            <div class="relative overflow-x-auto mt-10 mb-10">
                 <table class="w-full text-left table-auto">
                     <thead class="font-bold text-on-surface-800 uppercase bg-on-surface-200">
                         <tr>
-                            <th scope="col" class="text-xs font-bold px-4 py-3">
+                            <th scope="col" class="text-xs font-bold px-2 py-3">
                                 {{ __('Product name') }}
                             </th>
-                            <th scope="col" class="text-xs font-bold px-4 py-3">
+                            <th scope="col" class="text-xs font-bold px-2 py-3">
                                 {{ __('Notes') }}
                             </th>
-                            <th scope="col" class="text-xs font-bold px-4 py-3">
-                                {{ __('Quantity') }}
-                            </th>
-                            <th scope="col" class="text-xs font-bold px-4 py-3">
+                            <th scope="col" class="text-xs font-bold px-2 py-3">
                                 {{ __('Unit price incl. VAT') }}
                             </th>
-                            <th scope="col" class="text-xs font-bold px-4 py-3">
+                            <th scope="col" class="text-xs font-bold px-2 py-3">
+                                {{ __('Quantity') }}
+                            </th>
+                            <th scope="col" class="text-xs font-bold px-2 py-3">
                                 {{ __('Total') }}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($order->cart->items as $item)
-                            <tr class="border-b-2 border-on-surface">
+                            <tr class="border-b-2 border-on-surface-900 border-on-surface">
                                 <th class="text-base px-2 py-4 font-normal">
                                     {{ $item->product->name }}
                                 </th>
@@ -86,15 +87,13 @@
                                     {{ $item->notes }}
                                 </td>
                                 <td class="text-base px-2 py-4">
+                                    {{ number_format($item->product->price) }} {{ $item->product->currency }}
+                                </td>
+                                <td class="text-base px-2 py-4">
                                     {{ $item->quantity }}
                                 </td>
                                 <td class="text-base px-2 py-4">
-                                    {{ number_format($item->product->price) }} {{ $item->product->currency }}
-                                </td>
-
-                                <td class="text-base px-2 py-4">
-                                    {{ number_format($item->product->price * $item->quantity) }}
-                                    {{ $item->product->currency }}
+                                    {{ $item->product->getFormattedTotalAmount($item->quantity) }}
                                 </td>
                             </tr>
                         @endforeach
@@ -103,9 +102,9 @@
             </div>
 
             {{-- payment summary --}}
-            <div class="flex flex-row justify-end mt-10 lg:mt-0 px-4 bg-primary-950 text-on-primary-50 rounded-lg lg:px-0 lg:bg-surface lg:text-on-surface-100">
+            <div class="flex flex-row justify-end rounded-lg lg:px-0 bg-surface text-on-surface-100">
                 <ul class="w-full lg:px-0 lg:w-3/5">
-                    <li class="flex flex-row items-center justify-between lg:px-8 py-4 border-b-2">
+                    <li class="flex flex-row items-center justify-between py-2">
                         <h2 class="text-sm font-bold text-on-surface-100 lg:text-on-surface-500 uppercase">{{ __('Subtotal') }}</h2>
 
                         <span class="text-base text-on-surface-100 lg:text-on-surface-600">
@@ -113,7 +112,7 @@
                         </span>
                     </li>
 
-                    <li class="flex flex-row items-center justify-between lg:px-8 py-4 border-b-2">
+                    <li class="flex flex-row items-center justify-between py-2">
                         <h2 class="text-sm font-bold text-on-surface-100 lg:text-on-surface-500 uppercase">{{ __('Shipping Fee') }}</h2>
 
                         <span class="text-base text-on-surface-100 lg:text-on-surface-600 lowercase">
@@ -121,7 +120,7 @@
                         </span>
                     </li>
 
-                    <li class="flex flex-row items-center justify-between lg:px-8 py-4">
+                    <li class="flex flex-row items-center justify-between py-2">
                         <h2 class="text-sm font-bold text-on-surface-100 lg:text-on-surface-500 uppercase">{{ __('Total') }}</h2>
 
                         <span class="text-2xl font-bold text-on-surface-100 lg:text-on-surface-600">
