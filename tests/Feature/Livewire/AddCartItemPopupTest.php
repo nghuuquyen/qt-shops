@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Livewire;
 
 use App\Events\BrowserEvent;
 use App\Events\LivewireEvent;
