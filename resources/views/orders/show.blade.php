@@ -1,17 +1,19 @@
-@extends('layouts.base')
-
+@extends($layout)
 @section('main')
-    <section class="lg:mx-64">
+    <section>
+
+        @if($layout !== 'layouts.print')
         {{-- export pdf button --}}
         <div class="flex flex-row justify-end mb-4">
             <x-button 
                 icon="arrow-down-tray" 
-                href="{{ route('orders.downloadPdf', [ 'order' => $order->id ]) }}" 
+                href="{{ $order->exportPdf() }}" 
                 class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-50 hover:bg-transparent"
             >
                 {{ __('Download PDF') }}
             </x-button>
         </div>
+        @endif
         
         {{-- invoice --}}
         <div class="bg-surface rounded-xl text-on-surface-600 p-4 lg:p-10">
@@ -115,28 +117,28 @@
                 </div>
 
                 {{-- payment summary --}}
-                <div class="flex flex-row justify-end rounded-lg lg:px-0 bg-surface text-on-surface-100">
-                    <ul class="w-full lg:px-0 lg:w-3/5">
+                <div class="flex flex-row justify-end rounded-lg lg:px-0 bg-surface">
+                    <ul class="w-full lg:px-0 lg:w-2/5">
                         <li class="flex flex-row items-center justify-between py-2">
-                            <h2 class="text-sm font-bold text-on-surface-100 lg:text-on-surface-500 uppercase">{{ __('Subtotal') }}</h2>
+                            <h2 class="text-sm font-bold uppercase text-on-surface-500">{{ __('Subtotal') }}</h2>
 
-                            <span class="text-base text-on-surface-100 lg:text-on-surface-600">
+                            <span class="text-base">
                                 {{ number_format($order->cart->total_amount) }} {{ $order->cart->currency }}
                             </span>
                         </li>
 
                         <li class="flex flex-row items-center justify-between py-2">
-                            <h2 class="text-sm font-bold text-on-surface-100 lg:text-on-surface-500 uppercase">{{ __('Shipping Fee') }}</h2>
+                            <h2 class="text-sm font-bold uppercase text-on-surface-500">{{ __('Shipping Fee') }}</h2>
 
-                            <span class="text-base text-on-surface-100 lg:text-on-surface-600 lowercase">
+                            <span class="text-base lowercase">
                                 {{ __('Free') }}
                             </span>
                         </li>
 
                         <li class="flex flex-row items-center justify-between py-2">
-                            <h2 class="text-sm font-bold text-on-surface-100 lg:text-on-surface-500 uppercase">{{ __('Total') }}</h2>
+                            <h2 class="text-sm font-bold uppercase text-on-surface-500">{{ __('Total') }}</h2>
 
-                            <span class="text-2xl font-bold text-on-surface-100 lg:text-on-surface-600">
+                            <span class="text-2xl font-bold">
                                 {{ number_format($order->cart->total_amount) }} {{ $order->cart->currency }}
                             </span>
                         </li>

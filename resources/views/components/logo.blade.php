@@ -36,5 +36,7 @@
         </h1>
     </a>
 
-    <livewire:setting-dropdown />
+    @if($hasSetting)
+        <livewire:setting-dropdown />
+    @endif
 </div>

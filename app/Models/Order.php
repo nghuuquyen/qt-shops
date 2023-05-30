@@ -22,7 +22,6 @@ class Order extends Model
 
     public function exportPdf()
     {
-        // @todo implement export data to PDF via browser screenshot
-        return '';
+        return URL::signedRoute('orders.downloadPdf', [ 'order' => $this->id ]);
     }
 }

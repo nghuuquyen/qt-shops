@@ -14,13 +14,19 @@ class OrderController extends Controller
             abort(401);
         }
 
-        return view('orders.show', compact('order'));
+        $layout = 'layouts.base';
+
+        return view('orders.show', compact('order', 'layout'));
     }
 
-    public function downloadPdf(Order $order)
+    public function downloadPdf(Request $request, Order $order)
     {
-        $file = $order->exportPdf();
+        if (! $request->hasValidSignature()) {
+            abort(401);
+        }
 
-        return $file;
+        $layout = 'layouts.print';
+
+        return view('orders.show', compact('order', 'layout'));
     }
 }
