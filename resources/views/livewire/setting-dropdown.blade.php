@@ -2,8 +2,8 @@
     <div
         x-data="{
             open: false,
-            selectedTheme: localStorage.theme || 'auto',
-            selectedLanguage: '{{ \Illuminate\Support\Facades\App::currentLocale() }}',
+            selectedTheme: @entangle('theme'),
+            selectedLocale: @entangle('locale'),
             toggle() {
                 if (this.open) {
                     return this.close()
@@ -13,13 +13,6 @@
  
                 this.open = true
             },
-            async setLanguage(language) {
-                this.selectedLanguage = language
-
-                await $wire.setLanguage(language)
-
-                location.reload()
-            },
             close(focusAfter) {
                 if (! this.open) return
  
@@ -27,52 +20,15 @@
  
                 focusAfter && focusAfter.focus()
             },
-            activeLightTheme() {
-                document.documentElement.classList.remove('theme-dark')
-                document.documentElement.classList.add('theme-light')
+            async setLocale(locale) {
+                await $wire.setLocale(locale)
 
-                document.body.classList.remove('bg-background');
-                document.body.classList.add('bg-gradient-to-r', 'from-rose-100', 'to-teal-100')
+                location.reload()
             },
-            activeDarkTheme() {
-                document.documentElement.classList.remove('theme-light')
-                document.documentElement.classList.add('theme-dark')
-
-                document.body.classList.remove('bg-gradient-to-r', 'from-rose-100', 'to-teal-100')
-                document.body.classList.add('bg-background')
-            },
-            setTheme(targetTheme) {
-
-                switch(targetTheme) {
-                    case 'theme-dark': {
-                        this.activeDarkTheme() 
-                        break
-                    }
-
-                    case 'theme-light': {
-                        this.activeLightTheme() 
-                        break
-                    }
-
-                    case 'auto': {
-                        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                            this.activeDarkTheme()
-                        } else {
-                            this.activeLightTheme()
-                        }
-
-                        break
-                    }
-                }
-
-                localStorage.theme = targetTheme
-
-                this.selectedTheme = targetTheme
+            async setTheme(targetTheme) {
+                await $wire.setTheme(targetTheme)
             }
         }"
-        x-init="
-            setTheme(localStorage.theme || 'auto')
-        "
         x-on:keydown.escape.prevent.stop="close($refs.button)"
         x-on:focusin.window="! $refs.panel.contains($event.target) && close()"
         x-id="['dropdown-button']"
@@ -132,22 +88,22 @@
             </a>
 
             <div class="text-on-surface-500 p-3">
-                Languages
+                {{ __('Languages') }}
             </div>
 
-            <a @click="setLanguage('en')" :class="selectedLanguage == 'en' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'" class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+            <a @click="setLocale('en')" :class="selectedLocale == 'en' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'" class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
                 <span class="fi fi-gb"></span>
 
                 <span class="ml-4">{{ __('English') }}</span>
             </a>
 
-            <a @click="setLanguage('vi')" :class="selectedLanguage == 'vi' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'" class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+            <a @click="setLocale('vi')" :class="selectedLocale == 'vi' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'" class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
                 <span class="fi fi-vn"></span>
 
                 <span class="ml-4">{{ __('Vietnamese') }}</span>
             </a>
 
-            <a @click="setLanguage('ja')" :class="selectedLanguage == 'ja' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'" class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+            <a @click="setLocale('ja')" :class="selectedLocale == 'ja' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'" class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
                 <span class="fi fi-jp"></span>
 
                 <span class="ml-4">{{ __('Japanese') }}</span>

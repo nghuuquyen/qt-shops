@@ -20,6 +20,10 @@
     
     @yield('components')
 
+    <script>
+        window.theme = '{{ \Illuminate\Support\Facades\Session::get('theme', 'auto') }}';
+    </script>
+
     @livewireScripts
     @vite('resources/js/app.js')
 </body>
