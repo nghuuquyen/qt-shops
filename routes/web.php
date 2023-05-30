@@ -33,3 +33,4 @@ Route::post('/checkout', [ CheckoutController::class, 'store' ])->name('checkout
  * Order
  */
 Route::get('/orders/{order}', [ OrderController::class, 'show' ])->name('orders.show');
+Route::get('/orders/{order}/download-pdf', [ OrderController::class, 'downloadPdf' ])->name('orders.downloadPdf');

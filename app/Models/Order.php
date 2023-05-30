@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
-
+use Spatie\Browsershot\Browsershot;
 class Order extends Model
 {
     use HasFactory;
@@ -18,5 +18,11 @@ class Order extends Model
     public function getPath(): string
     {
         return URL::signedRoute('orders.show', [ 'order' => $this->id ]);
+    }
+
+    public function exportPdf()
+    {
+        // @todo implement export data to PDF via browser screenshot
+        return '';
     }
 }

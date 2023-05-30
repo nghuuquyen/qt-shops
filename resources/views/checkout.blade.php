@@ -6,13 +6,13 @@
             @csrf
 
             <div class="flex flex-row justify-end mb-3">
-                <a href="/" class="flex flex-row items-center text-on-surface-600">
-                    <span class="mr-2">{{ __('Continue to shopping') }}</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
-                    </svg>
-                </a>
+                <x-button
+                    icon="arrow-uturn-left" 
+                    href="route('homepage')"
+                    class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-50 hover:bg-transparent"
+                >
+                    {{ __('Continue to shopping') }}
+                </x-button>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-5">
