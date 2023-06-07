@@ -1,23 +1,24 @@
 @extends('layouts.admin')
 
+@section('page_title')
+    {{ $product->name }}
+@endsection
+
+@section('page_action')
+    <div class="flex flex-row justify-end">
+        <x-button icon="arrow-uturn-left" href="{{ route('products.show', ['product' => $product->id]) }}" target="_self"
+            class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
+            {{ __('Back to view') }}
+        </x-button>
+    </div>
+@endsection
+
 @section('main')
     <section>
-        <x-panel icon="cube" header="{{ $product->name }}">
-            <form action="{{ route('products.update', [ 'product' => $product->id ]) }}" method="POST">
+        <x-panel>
+            <form action="{{ route('products.update', ['product' => $product->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
-
-                <div class="flex flex-row justify-end">
-                    <x-button icon="arrow-uturn-left" href="{{ route('products.show', ['product' => $product->id]) }}"
-                        target="_self"
-                        class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-50 hover:bg-transparent">
-                        {{ __('Back to view') }}
-                    </x-button>
-
-                    <x-button type="submit" icon="document" class="text-base font-normal">
-                        {{ __('Save') }}
-                    </x-button>
-                </div>
 
                 <div class="flex flex-col">
                     {{-- line attribute --}}
@@ -37,7 +38,7 @@
                             <label>{{ __('Name') }}</label>
                         </div>
                         <div class="col-span-4 text-on-surface-600">
-                            <x-text-input name="name" value="{{ old('name',  $product->name) }}"
+                            <x-text-input name="name" value="{{ old('name', $product->name) }}"
                                 placeholder="{{ __('Please input this field') }}" />
                         </div>
                     </div>
@@ -48,7 +49,7 @@
                             <label>{{ __('Unit price incl. VAT') }}</label>
                         </div>
                         <div class="col-span-4 text-on-surface-600 flex flex-row items-center">
-                            <x-text-input name="price" value="{{ old('price', $product->price)  }}"
+                            <x-text-input name="price" value="{{ old('price', $product->price) }}"
                                 placeholder="{{ __('Please input this field') }}" />
                             <span class="ml-4 text-on-surface-500">{{ $product->currency }}</span>
                         </div>
@@ -64,6 +65,17 @@
                                 placeholder="{{ __('Please input this field') }}" />
                         </div>
                     </div>
+                </div>
+
+                <div class="flex flex-row justify-end mt-10">
+                    <x-button icon="arrow-uturn-left" href="{{ route('products.show', ['product' => $product->id]) }}"
+                        target="_self"
+                        class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
+                        {{ __('Back to view') }}
+                    </x-button>
+                    <x-button type="submit" icon="document" class="text-base font-normal">
+                        {{ __('Save') }}
+                    </x-button>
                 </div>
             </form>
         </x-panel>

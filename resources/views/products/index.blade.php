@@ -1,14 +1,20 @@
 @extends('layouts.admin')
 
+@section('page_title')
+Products
+@endsection
+
+@section('page_action')
+<div class="flex flex-row justify-end">
+    <x-button href="{{ route('products.create') }}" target="_self" icon="plus" class="text-base font-normal">
+        {{ __('Create') }}
+    </x-button>
+</div>
+@endsection
+
 @section('main')
 <section>
-    <x-panel icon="cube" header="{{ __('Products') }}">
-        <div class="flex flex-row justify-end">
-            <x-button href="{{ route('products.create') }}" target="_self" icon="plus" class="text-base font-normal">
-                {{ __('Create') }}
-            </x-button>
-        </div>
-
+    <x-panel icon="cube">
         {{-- products table --}}
         <div class="relative overflow-x-auto">
             <table class="w-full text-left table-auto text-on-surface-600">

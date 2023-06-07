@@ -7,9 +7,8 @@
                 @csrf
 
                 <div class="flex flex-row justify-end">
-                    <x-button icon="arrow-uturn-left" href="{{ route('products.index') }}"
-                        target="_self"
-                        class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-50 hover:bg-transparent">
+                    <x-button icon="arrow-uturn-left" href="{{ route('products.index') }}" target="_self"
+                        class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
                         {{ __('Back to list') }}
                     </x-button>
 
@@ -36,7 +35,7 @@
                             <label>{{ __('Unit price incl. VAT') }}</label>
                         </div>
                         <div class="col-span-3 text-on-surface-600 flex flex-row items-center">
-                            <x-text-input name="price" value="{{ old('price')  }}"
+                            <x-text-input name="price" value="{{ old('price') }}"
                                 placeholder="{{ __('Please input this field') }}" />
                             <span class="ml-4 text-on-surface-500">{{ $currency }}</span>
                         </div>

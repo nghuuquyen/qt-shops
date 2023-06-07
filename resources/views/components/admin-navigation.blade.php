@@ -36,19 +36,19 @@
         </h1>
     </a>
 
-    <a class="text-on-surface-500 px-6 hover:text-on-primary-50" href="#">
+    <a class="text-on-surface-500 px-6 hover:text-on-surface-600" href="#">
         Dashboard
     </a>
 
-    <a class="{{ Route::is(['products.index', 'products.show', 'products.edit']) ? 'text-on-primary-50' : 'text-on-surface-500' }} px-6 hover:text-on-primary-50" href="{{ route('products.index') }}">
+    <a class="{{ Route::is(['products.index', 'products.show', 'products.edit']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600" href="{{ route('products.index') }}">
         Products
     </a>
 
-    <a class="text-on-surface-500 px-6 hover:text-on-primary-50" href="#">
+    <a class="text-on-surface-500 px-6 hover:text-on-surface-600" href="#">
         Orders
     </a>
 
-    <a class="text-on-surface-500 px-6 hover:text-on-primary-50" href="#">
+    <a class="text-on-surface-500 px-6 hover:text-on-surface-600" href="#">
         Customers
     </a>
 

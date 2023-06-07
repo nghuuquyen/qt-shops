@@ -6,11 +6,8 @@
             @csrf
 
             <div class="flex flex-row justify-end mb-3">
-                <x-button
-                    icon="arrow-uturn-left" 
-                    href="route('homepage')"
-                    class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-50 hover:bg-transparent"
-                >
+                <x-button icon="arrow-uturn-left" href="route('homepage')"
+                    class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
                     {{ __('Continue to shopping') }}
                 </x-button>
             </div>
@@ -25,15 +22,17 @@
                             <div class="grid grid-cols-2 gap-4">
                                 <x-text-input label="{{ __('Your name') }}" name="full_name" value="{{ old('full_name') }}"
                                     placeholder="{{ __('Please enter your name') }}" />
-                                <x-text-input label="{{ __('Phone number') }}" name="phone_number" value="{{ old('phone_number') }}"
+                                <x-text-input label="{{ __('Phone number') }}" name="phone_number"
+                                    value="{{ old('phone_number') }}"
                                     placeholder="{{ __('Please enter your phone number') }}" />
                             </div>
 
                             <x-text-input label="{{ __('Your email') }}" name="email" value="{{ old('email') }}"
                                 placeholder="{{ __('Please enter your email') }}" />
-            
+
                             <x-text-input label="{{ __('Shipping address') }}" name="shipping_address"
-                                value="{{ old('shipping_address') }}" placeholder="{{ __('Please enter your address') }}" />
+                                value="{{ old('shipping_address') }}"
+                                placeholder="{{ __('Please enter your address') }}" />
 
                             <x-text-input label="{{ __('Notes') }}" name="notes" value="{{ old('notes') }}"
                                 placeholder="{{ __('Please enter your note if any') }}" />
@@ -47,7 +46,8 @@
                                 <li class="border-b-2 border-on-surface py-4 flex flex-row">
                                     <div class="flex-shrink-0">
                                         <img class="object-cover h-20 w-20 rounded"
-                                            src="{{ $item->product->display_image_url }}?w=150&h=150" alt="product image" />
+                                            src="{{ $item->product->display_image_url }}?w=150&h=150"
+                                            alt="product image" />
                                     </div>
 
                                     <div class="flex flex-col ml-2 grow">

@@ -2,19 +2,16 @@
 @section('main')
     <section>
 
-        @if($layout !== 'layouts.print')
-        {{-- export pdf button --}}
-        <div class="flex flex-row justify-end mb-4">
-            <x-button 
-                icon="arrow-down-tray" 
-                href="{{ $order->exportPdf() }}" 
-                class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-50 hover:bg-transparent"
-            >
-                {{ __('Download PDF') }}
-            </x-button>
-        </div>
+        @if ($layout !== 'layouts.print')
+            {{-- export pdf button --}}
+            <div class="flex flex-row justify-end mb-4">
+                <x-button icon="arrow-down-tray" href="{{ $order->exportPdf() }}"
+                    class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
+                    {{ __('Download PDF') }}
+                </x-button>
+            </div>
         @endif
-        
+
         {{-- invoice --}}
         <div class="bg-surface rounded-xl text-on-surface-600 p-4 lg:p-10 shadow-lg">
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-2 lg:gap-4">
@@ -30,7 +27,8 @@
                     <div class="flex flex-col">
                         <h2 class="text-xs font-bold text-on-surface-500 uppercase">{{ __('Issue date') }}</h2>
                         <span class="text-base">
-                            {{ $order->created_at->format('Y-m-d') }} <span class="text-on-surface-500 text-xs">({{ $order->created_at->diffForHumans() }})</span>
+                            {{ $order->created_at->format('Y-m-d') }} <span
+                                class="text-on-surface-500 text-xs">({{ $order->created_at->diffForHumans() }})</span>
                         </span>
                     </div>
 
@@ -145,7 +143,7 @@
                     </ul>
                 </div>
             </div>
-       </div>
+        </div>
     </section>
 
     {{-- add more space for avoid cart bar override content --}}

@@ -29,6 +29,21 @@
 
         <x-admin-navigation :hasSetting="true" />
 
+        {{-- screen title --}}
+        <div class="flex flex-row bg-surface border-t border-on-surface-500">
+            <div class="max-w-screen-xl m-auto flex flex-row  justify-between items-center lg:p-10 p-4 w-full ">
+                <h1 class="text-on-surface-600 font-bold text-3xl">@yield('page_title')</h1>
+                @yield('page_action')
+            </div>
+        </div>
+
+        {{-- main content --}}
+        <main class="max-w-screen-xl m-auto grid grid-cols-1 gap-10 lg:p-10 p-4">
+            @yield('main')
+        </main>
+        
+        @yield('components')
+
         {{-- flash message --}}
         <div class="absolute top-10 z-10 right-5 w-64">
             @if (session()->has('message'))
@@ -38,12 +53,6 @@
                 </div>
             @endif
         </div>
-
-        <main class="max-w-screen-xl m-auto grid grid-cols-1 gap-10 mt-6 lg:p-10 p-4">
-            @yield('main')
-        </main>
-        
-        @yield('components')
 
         <script>
             window.theme = '{{ $theme }}';
