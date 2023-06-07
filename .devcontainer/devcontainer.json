@@ -34,7 +34,8 @@
 				"neilbrayfield.php-docblocker",
 				"austenc.laravel-blade-spacer",
 				"bradlc.vscode-tailwindcss",
-				"alexcvzz.vscode-sqlite"
+				"alexcvzz.vscode-sqlite",
+				"shufo.vscode-blade-formatter"
 			],
 			"settings": {}
 		}

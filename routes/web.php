@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\OrderCompleteController;
@@ -20,17 +21,24 @@ use App\Http\Controllers\OrderCompleteController;
 /**
  * General
  */
-Route::get('/', [ HomepageController::class, 'index' ])->name('homepage');
+Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/order-complete/{order}', OrderCompleteController::class)->name('orders.complete');
 
 /**
  * Checkout
  */
-Route::get('/checkout',  [ CheckoutController::class, 'index' ])->name('checkout.index');
-Route::post('/checkout', [ CheckoutController::class, 'store' ])->name('checkout.store');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
 /**
  * Order
  */
-Route::get('/orders/{order}', [ OrderController::class, 'show' ])->name('orders.show');
-Route::get('/orders/{order}/download-pdf', [ OrderController::class, 'downloadPdf' ])->name('orders.downloadPdf');
+Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+Route::get('/orders/{order}/download-pdf', [OrderController::class, 'downloadPdf'])->name('orders.downloadPdf');
+
+/**
+ * Admin
+ */
+Route::group(['prefix' => '/admin'], function () {
+    Route::resource('products', ProductController::class);
+});

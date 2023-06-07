@@ -18,14 +18,14 @@ return new class extends Migration
             $table->double('price');
             $table->string('currency');
             $table->string('display_image_url');
-            $table->foreignId('category_id');
+            $table->foreignId('category_id')->nullable();
 
             $table->foreign('category_id')
                     ->references('id')
                     ->on('categories')
                     ->constrained()
                     ->cascadeOnUpdate()
-                    ->cascadeOnDelete();
+                    ->nullOnDelete();
     
             $table->timestamps();
         });
