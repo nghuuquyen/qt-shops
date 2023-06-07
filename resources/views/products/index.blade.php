@@ -14,23 +14,23 @@
             <table class="w-full text-left table-auto text-on-surface-600">
                 <thead class="font-bold text-on-surface-600">
                     <tr class="border-b border-on-surface-600">
-                        <th scope="col" class="text-base font-bold px-2 py-4">
+                        <th scope="col" class="text-base font-bold px-2 py-4 uppercase">
                             {{ __('Image') }}
                         </th>
-                        <th scope="col" class="text-base font-bold px-2 py-4">
+                        <th scope="col" class="text-base font-bold px-2 py-4 uppercase">
                             {{ __('Name') }}
                         </th>
-                        <th scope="col" class="text-base font-bold px-2 py-4">
+                        <th scope="col" class="text-base font-bold px-2 py-4 uppercase">
                             {{ __('Unit price incl. VAT') }}
                         </th>
-                        <th scope="col" class="text-base font-bold px-2 py-4">
+                        <th scope="col" class="text-base font-bold px-2 py-4 uppercase">
                         
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($products as $product)
-                        <tr class="border-b-2 border-on-surface-900 border-on-surface">
+                        <tr class="border-b border-on-surface-400">
                             <th class="text-base px-2 py-4 font-normal">
                                 <img class="w-10 h-10 object-cover rounded" src="{{ $product->display_image_url }}?w=150&h=150" />
                             </th>
