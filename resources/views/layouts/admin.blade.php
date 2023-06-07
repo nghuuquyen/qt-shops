@@ -32,7 +32,7 @@
         {{-- screen title --}}
         <div class="flex flex-row bg-surface border-t border-on-surface-500">
             <div class="max-w-screen-xl m-auto flex flex-row  justify-between items-center lg:p-10 p-4 w-full ">
-                <h1 class="text-on-surface-600 font-bold text-3xl">@yield('page_title')</h1>
+                <h1 class="text-on-surface-600 font-bold text-3xl ml-2">@yield('page_title')</h1>
                 @yield('page_action')
             </div>
         </div>
@@ -45,7 +45,7 @@
         @yield('components')
 
         {{-- flash message --}}
-        <div class="absolute top-10 z-10 right-5 w-64">
+        <div class="absolute z-10 left-5 bottom-5 w-auto">
             @if (session()->has('message'))
                 <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)" x-transtion
                     class="bg-primary-500 text-on-primary-50 p-4 mb-2 rounded-lg">
