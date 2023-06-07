@@ -1,14 +1,12 @@
-@extends('layouts.base')
+@extends('layouts.user')
 
 @section('navigation')
     <x-navigation :categories="$categories" />
 @endsection
 
 @section('main')
-    @foreach ( $categories as $category )
-        <x-product-grids
-            :category="$category"
-            :products="$category['products']" />
+    @foreach ($categories as $category)
+        <x-product-grids :category="$category" :products="$category['products']" />
     @endforeach
 
     {{-- add more space for avoid cart bar override content --}}
@@ -17,6 +15,6 @@
 
 @section('components')
     <livewire:cart-bar />
-    
+
     <livewire:add-cart-item-popup />
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('layouts.user')
 
 @section('main')
     <section class="p-4 mt-6 px-2 py-2 lg:px-24">
@@ -6,7 +6,7 @@
             @csrf
 
             <div class="flex flex-row justify-end mb-3">
-                <x-button icon="arrow-uturn-left" href="route('homepage')"
+                <x-button icon="arrow-uturn-left" href="{{ route('homepage') }}" target="_self"
                     class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
                     {{ __('Continue to shopping') }}
                 </x-button>

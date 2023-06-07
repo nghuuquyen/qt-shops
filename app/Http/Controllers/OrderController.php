@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 
 class OrderController extends Controller
 {
@@ -14,7 +13,7 @@ class OrderController extends Controller
             abort(401);
         }
 
-        $layout = 'layouts.base';
+        $layout = 'layouts.user';
 
         return view('orders.show', compact('order', 'layout'));
     }
