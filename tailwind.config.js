@@ -35,7 +35,20 @@ export default {
           900: 'var(--color-on-primary-900)',
           950: 'var(--color-on-primary-950)'
         },
-        'surface': 'var(--color-surface)',
+        'surface': {
+          DEFAULT: 'var(--color-surface)',
+          50: 'var(--color-surface-50)',
+          100: 'var(--color-surface-100)',
+          200: 'var(--color-surface-200)',
+          300: 'var(--color-surface-300)',
+          400: 'var(--color-surface-400)',
+          500: 'var(--color-surface-500)',
+          600: 'var(--color-surface-600)',
+          700: 'var(--color-surface-700)',
+          800: 'var(--color-surface-800)',
+          900: 'var(--color-surface-900)',
+          950: 'var(--color-surface-950)'
+        },
         'on-surface': {
           50: 'var(--color-on-surface-50)',
           100: 'var(--color-on-surface-100)',
