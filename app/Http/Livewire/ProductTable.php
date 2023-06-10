@@ -2,35 +2,26 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Datatable\Columns\ImageColumn;
+use App\Http\Livewire\Datatable\Columns\LinkColumn;
+use App\Http\Livewire\Datatable\Columns\TextColumn;
+use App\Http\Livewire\Datatable\Table;
 use App\Models\Product;
 
-class ProductTable extends Datatable
+class ProductTable extends Table
 {
     protected function getColumns()
     {
         return [
-            [
-                'name' => 'Image',
-                'type' => DataTable::IMAGE_COLUMN,
-                'field' => 'display_image_url',
-                'format' => fn($value) => $value . '?w=150&h=150',
-            ],
-            [
-                'name' => 'Name',
-                'type' => DataTable::TEXT_COLUMN,
-                'field' => 'name',
-            ],
-            [
-                'name' => 'Unit price incl. VAT',
-                'type' => DataTable::TEXT_COLUMN,
-                'field' => 'formatted_price',
-            ],
-            [
-                'name' => 'Action',
-                'type' => DataTable::LINK_COLUMN,
-                'title' => 'View',
-                'value' => fn($product) => route('products.show', ['product' => $product->id])
-            ],
+            ImageColumn::make('Image', 'display_image_url')
+                ->format(fn ($value) => $value.'?w=150&h=150'),
+
+            TextColumn::make('Name', 'name'),
+
+            TextColumn::make('Unit price incl. VAT', 'formatted_price'),
+
+            LinkColumn::make('Action')
+                ->value(fn ($product) => route('products.show', ['product' => $product->id])),
         ];
     }
 

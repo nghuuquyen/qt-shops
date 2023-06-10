@@ -4,7 +4,7 @@
             <tr class="border-b border-on-surface-600">
                 @foreach($columns as $column)
                 <th scope="col" class="text-base font-bold px-2 py-4 uppercase">
-                    {{ __($column['name']) }}
+                    {{ __($column->title) }}
                 </th>
                 @endforeach
             </tr>
@@ -13,7 +13,7 @@
             @foreach ($items as $item)
                 <tr class="border-b border-on-surface-400">
                     @foreach($columns as $column)
-                        <livewire:data-table-cell :column="$column" :item="$item" />
+                        <livewire:datatable.cell :column="$column" :item="$item" />
                     @endforeach
                 </tr>
             @endforeach
