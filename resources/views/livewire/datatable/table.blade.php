@@ -3,7 +3,8 @@
     <div class="flex flex-row justify-between items-center mb-6 mt-4">
         {{-- left-side --}}
         <div class="flex flex-row justify-start items-center">
-            <x-text-input class="w-80" name="search" placeholder="{{ __('Search') }}" />
+            <x-text-input class="w-80" wire:model="search" name="search" placeholder="{{ __('Search') }}" />
+
             <div class="ml-5">
                 <x-dropdown title="{{ __('Filters') }}" icon="funnel">
                     <div class="min-w-[200px]">
@@ -41,39 +42,39 @@
 
         {{-- right-side --}}
         <div class="flex flex-row gap-4">
-            <x-dropdown title="{{ __('Columns') }}" icon="chevron-down">
+            <x-dropdown title="{{ __('Actions') }}" icon="chevron-down">
                 <ul class="w-full min-w-full text-on-surface-600">
-                    <li class="py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
-                        <input type="checkbox" />
-                        <span class="ml-2 flex-shrink-0">Column A</span>
-                    </li>
-                    <li class="py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
-                        <input type="checkbox" />
-                        <span class="ml-2 flex-shrink-0">Column B</span>
-                    </li>
-                    <li class="py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
-                        <input type="checkbox" />
-                        <span class="ml-2 flex-shrink-0">Column C</span>
-                    </li>
-                    <li class="py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
-                        <input type="checkbox" />
-                        <span class="ml-2 flex-shrink-0">Column D</span>
-                    </li>
-                    <li class="py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
-                        <input type="checkbox" />
-                        <span class="ml-2 flex-shrink-0">Column E</span>
+
+                    <li
+                        class="px-4 py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
+                        <span>{{ __('Export as CSV') }}</span>
                     </li>
                 </ul>
             </x-dropdown>
 
-            <x-dropdown title="{{ __('Rows') }}" icon="chevron-down">
+            <x-dropdown title="{{ __('Columns') }}" icon="chevron-down">
+                <ul class="w-full min-w-full text-on-surface-600">
+
+                    @foreach ($display_columns as $index => $column)
+                        <li
+                            class="px-4 py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
+                            <input id="{{ $column['id'] }}" wire:model="display_columns.{{ $index }}.display"
+                                type="checkbox" />
+
+                            <label for="{{ $column['id'] }}"
+                                class="ml-2 w-full flex-shrink-0">{{ $column['title'] }}</label>
+                        </li>
+                    @endforeach
+                </ul>
+            </x-dropdown>
+
+            <x-dropdown title="{{ $page_size }}" icon="chevron-down">
                 <ul class="w-full text-on-surface-600 text-center">
-                    <li class="px-6 py-2 cursor-pointer hover:bg-surface-800 rounded-lg">5</li>
-                    <li class="px-6 py-2 cursor-pointer hover:bg-surface-800 rounded-lg">10</li>
-                    <li class="px-6 py-2 cursor-pointer hover:bg-surface-800 rounded-lg">20</li>
-                    <li class="px-6 py-2 cursor-pointer hover:bg-surface-800 rounded-lg">30</li>
-                    <li class="px-6 py-2 cursor-pointer hover:bg-surface-800 rounded-lg">40</li>
-                    <li class="px-6 py-2 cursor-pointer hover:bg-surface-800 rounded-lg">50</li>
+                    @foreach ($page_size_options as $option)
+                        <li wire:click="setPageSize({{ $option }})" @click="toggle()"
+                            class="px-6 py-2 cursor-pointer hover:bg-surface-800 rounded-lg {{ $option == $page_size ? 'bg-primary-600 text-on-primary-50' : '' }}">
+                            {{ $option }}</li>
+                    @endforeach
                 </ul>
             </x-dropdown>
         </div>
@@ -85,17 +86,22 @@
             <thead class="font-bold text-on-surface-600">
                 <tr class="border-b border-on-surface-600">
                     @foreach ($columns as $column)
-                        <th scope="col" class="text-base font-bold px-2 py-4 uppercase">
-                            {{ __($column->title) }}
-                        </th>
+                        @if ($column->display)
+                            <th scope="col" class="text-base font-bold px-2 py-4 uppercase">
+                                {{ __($column->title) }}
+                            </th>
+                        @endif
                     @endforeach
                 </tr>
             </thead>
             <tbody>
-                @foreach ($items as $item)
+                @foreach ($items as $row => $item)
                     <tr class="border-b border-on-surface-400">
-                        @foreach ($columns as $column)
-                            <livewire:datatable.cell :column="$column" :item="$item" />
+                        @foreach ($columns as $col => $column)
+                            @if ($column->display)
+                                <livewire:datatable.cell :column="$column" :item="$item"
+                                    wire:key="{{ $row . $col }}" />
+                            @endif
                         @endforeach
                     </tr>
                 @endforeach

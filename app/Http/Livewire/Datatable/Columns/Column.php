@@ -14,6 +14,16 @@ abstract class Column
 
     protected $formatter;
 
+    protected $searchable = FALSE;
+
+    protected $search_callback;
+
+    public $display = TRUE;
+
+    abstract public function getView();
+
+    abstract public function getData($row_item);
+
     public function __construct(string $title, string $from = null)
     {
         $this->title = trim($title);
@@ -39,13 +49,40 @@ abstract class Column
         return $this;
     }
 
-    abstract public function getView();
+    public function searchable() 
+    {
+        $this->searchable = TRUE;
 
-    abstract public function getData($row_item);
+        return $this;
+    }
 
-    /**
-     * @return static
-     */
+    public function search($callable) 
+    {
+        $this->search_callback = $callable;
+
+        return $this;
+    } 
+
+    public function isSearchable()
+    {
+        return $this->searchable;
+    }
+
+    public function hasSearchCallback()
+    {
+        return $this->search_callback != null;
+    }
+
+    public function getSearchCallback()
+    {
+        return $this->search_callback;
+    }
+
+    public function getColumn()
+    {
+        return $this->relations . $this->field;
+    }
+
     public static function make(string $title, string $from = null): Column
     {
         return new static($title, $from);

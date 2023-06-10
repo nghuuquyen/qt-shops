@@ -23,6 +23,11 @@
 
         @livewireStyles
         @vite('resources/css/app.css')
+        <script>
+            window.theme = '{{ $theme }}';
+        </script>
+        @livewireScripts
+        @vite('resources/js/app.js')
     </head>
 
     <body class="{{ $bg_backgroud }}">
@@ -30,12 +35,5 @@
         @yield('content')
         
         @yield('components')
-
-        <script>
-            window.theme = '{{ $theme }}';
-        </script>
-
-        @livewireScripts
-        @vite('resources/js/app.js')
     </body>
 </html>

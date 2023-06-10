@@ -16,7 +16,8 @@ class ProductTable extends Table
             ImageColumn::make('Image', 'display_image_url')
                 ->format(fn ($value) => $value.'?w=150&h=150'),
 
-            TextColumn::make('Name', 'name'),
+            TextColumn::make('Name', 'name')
+                ->searchable(),
 
             TextColumn::make('Unit price incl. VAT', 'formatted_price'),
 

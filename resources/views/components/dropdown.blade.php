@@ -31,7 +31,7 @@
         <!-- Panel -->
         <div x-ref="panel" x-show="open" x-transition.origin.top.left x-on:click.outside="close($refs.button)"
             :id="$id('dropdown-button')" style="display: none;"
-            class="absolute right-0 rounded-lg bg-surface-900 shardow-xl w-auto shadow-lg z-10 p-3">
+            class="absolute right-0 rounded-lg bg-surface-900 shardow-xl w-max shadow-lg z-10 p-3">
             {{ $slot }}
         </div>
     </div>
