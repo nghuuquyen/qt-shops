@@ -110,11 +110,15 @@ abstract class Table extends Component
         }
 
         unset($this->{$this->table_name}['filters'][$filter->getKey()]);
+
+        $this->resetPage();
     }
 
     public function removeAllFilter(): void
     {
         $this->{$this->table_name}['filters'] = [];
+
+        $this->resetPage();
     }
 
     public function setPageSize($page_size)

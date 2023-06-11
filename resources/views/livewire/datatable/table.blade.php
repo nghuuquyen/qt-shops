@@ -41,7 +41,7 @@
 
             <div class="ml-5">
                 <x-dropdown title="{{ __('Filters') }}" icon="funnel">
-                    <div class="w-full min-w-[250px]">
+                    <div class="w-full min-w-[250px] grid grid-cols-1 gap-4">
                         @foreach ($filters as $filter)
                             {{ $filter->render($table) }}
                         @endforeach
