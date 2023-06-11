@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait WithSearch
 {
+    public ?string $search = null;
+
     /**
      * Get all searchable columns
      *

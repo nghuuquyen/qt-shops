@@ -42,7 +42,7 @@
             <div class="ml-5">
                 <x-dropdown title="{{ __('Filters') }}" icon="funnel">
                     <div class="w-full min-w-[250px] grid grid-cols-1 gap-4">
-                        @foreach ($filters as $filter)
+                        @foreach ($table->getFilters() as $filter)
                             {{ $filter->render($table) }}
                         @endforeach
                     </div>
@@ -65,7 +65,7 @@
             <x-dropdown title="{{ __('Columns') }}" icon="chevron-down">
                 <ul class="w-full min-w-full text-on-surface-600">
 
-                    @foreach ($display_columns as $index => $column)
+                    @foreach ($table->getDisplayColumns() as $index => $column)
                         <li
                             class="px-4 py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
                             <input id="{{ $column['id'] }}" wire:model="display_columns.{{ $index }}.display"
@@ -78,11 +78,11 @@
                 </ul>
             </x-dropdown>
 
-            <x-dropdown title="{{ $page_size }}" icon="chevron-down">
+            <x-dropdown title="{{ $per_page }}" icon="chevron-down">
                 <ul class="w-full text-on-surface-600 text-center">
-                    @foreach ($page_size_options as $option)
-                        <li wire:click="setPageSize({{ $option }})" @click="toggle()"
-                            class="px-6 py-2 cursor-pointer hover:bg-surface-800 rounded-lg {{ $option == $page_size ? 'bg-primary-600 text-on-primary-50' : '' }}">
+                    @foreach ($table->getPerPageOptions() as $option)
+                        <li wire:click="setPerPage({{ $option }})" @click="toggle()"
+                            class="px-6 py-2 cursor-pointer hover:bg-surface-800 rounded-lg {{ $option == $per_page ? 'bg-primary-600 text-on-primary-50' : '' }}">
                             {{ $option }}</li>
                     @endforeach
                 </ul>
@@ -95,8 +95,8 @@
         <table class="w-full text-left table-auto text-on-surface-600">
             <thead class="font-bold text-on-surface-600 bg-surface-900">
                 <tr class="border-b border-on-surface-600">
-                    @foreach ($columns as $column)
-                        @if ($column->display)
+                    @foreach ($table->getColumns() as $column)
+                        @if ($table->isDisplayColumn($column))
                             <th scope="col" class="text-base font-bold px-2 py-4 uppercase">
                                 {{ __($column->title) }}
                             </th>
@@ -107,8 +107,8 @@
             <tbody>
                 @foreach ($items as $row => $item)
                     <tr class="border-b border-on-surface-400">
-                        @foreach ($columns as $col => $column)
-                            @if ($column->display)
+                        @foreach ($table->getColumns() as $col => $column)
+                            @if ($table->isDisplayColumn($column))
                                 {{ $column->render($item) }}
                             @endif
                         @endforeach

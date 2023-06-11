@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Datatable;
 
 use App\Http\Livewire\Datatable\Filters\Filter;
+use App\Http\Livewire\Datatable\Traits\WithColumns;
 use App\Http\Livewire\Datatable\Traits\WithData;
 use App\Http\Livewire\Datatable\Traits\WithFilters;
 use App\Http\Livewire\Datatable\Traits\WithSearch;
@@ -13,31 +14,39 @@ use Livewire\WithPagination;
 
 abstract class Table extends Component
 {
-    use WithSearch,
+    use WithColumns,
+        WithSearch,
         WithFilters,
         WithData,
         WithPagination;
 
     public string $table_name = 'datatable';
 
-    public $search;
-
-    public $page_size_options = [5, 10, 20, 30, 40, 50];
-
-    public $page_size = 10;
-
-    public $display_columns = [];
-
     protected $queryString = [
         'search' => ['except' => ''],
-        'page_size' => ['except' => 10],
+        'per_page' => ['except' => 10],
         'datatable' => ['except' => []],
     ];
 
-    abstract protected function getColumns();
+    /**
+     * Get table columns
+     *
+     * @return void
+     */
+    abstract protected function getColumns(): array;
 
-    abstract protected function getQuery();
+    /**
+     * Get table query builder
+     */
+    abstract protected function getQuery(): Builder;
 
+    /**
+     * Hook on updating data
+     *
+     * @param  string  $name
+     * @param  mixed  $value
+     * @return void
+     */
     public function updating($name, $value)
     {
         // need reset pagination if we updating the search and filter condition
@@ -46,24 +55,11 @@ abstract class Table extends Component
         }
     }
 
-    public function setPageSize($page_size)
-    {
-        $this->page_size = $page_size;
-    }
-
     /**
-     * Runs on every request, immediately after the component is instantiated, 
-     * but before any other lifecycle methods are called
+     * Livewire mount hook
+     *
+     * @return void
      */
-    public function boot(): void
-    {
-        $this->{$this->table_name} = [
-            'sorts' => $this->{$this->table_name}['sorts'] ?? [],
-            'filters' => $this->{$this->table_name}['filters'] ?? [],
-            'columns' => $this->{$this->table_name}['columns'] ?? [],
-        ];
-    }
-
     public function mount()
     {
         $this->display_columns = collect($this->getColumns())->map(function ($column) {
@@ -75,26 +71,31 @@ abstract class Table extends Component
         });
     }
 
+    /**
+     * Runs on every request, immediately after the component is instantiated,
+     * but before any other lifecycle methods are called
+     */
+    public function boot(): void
+    {
+        $this->{$this->table_name} = [
+            'sorts' => $this->{$this->table_name}['sorts'] ?? [],
+            'filters' => $this->{$this->table_name}['filters'] ?? [],
+            'columns' => $this->{$this->table_name}['columns'] ?? [],
+        ];
+    }
+
+    /**
+     * Render table
+     *
+     * @return void
+     */
     public function render()
     {
-        $columns = $this->getColumns();
+        $this->setupQueryBuilder();
 
-        foreach ($columns as &$column) {
-            $column->display = $this->display_columns->firstWhere('title', $column->title)['display'];
-        }
-
-        $filters = $this->getFilters();
-
-        $this->setBuilder($this->getQuery());
-
-        $this->setBuilder($this->applySearch());
-
-        $this->setBuilder($this->applyFilters());
-
-        $items = $this->getBuilder()->paginate($this->page_size);
-
-        $table = $this;
-
-        return view('livewire.datatable.table', compact('table', 'columns', 'filters', 'items'));
+        return view('livewire.datatable.table', [
+            'table' => $this,
+            'items' => $this->getItems(),
+        ]);
     }
 }

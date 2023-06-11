@@ -13,7 +13,7 @@ use App\Http\Livewire\Datatable\Filters\SelectFilter;
 
 class ProductTable extends Table
 {
-    protected function getColumns()
+    protected function getColumns(): array
     {
         return [
             ImageColumn::make('Image', 'display_image_url')
@@ -54,7 +54,7 @@ class ProductTable extends Table
         ];
     }
 
-    protected function getQuery()
+    protected function getQuery(): Builder
     {
         return Product::query()->with('category');
     }
