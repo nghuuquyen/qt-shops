@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Datatable;
 
+use App\Http\Livewire\Datatable\Filters\Filter;
+use App\Http\Livewire\Datatable\Traits\WithFilters;
+use App\Http\Livewire\Datatable\Traits\WithSearch;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Illuminate\Database\Eloquent\Builder;
-use App\Http\Livewire\Datatable\Filters\Filter;
-use App\Http\Livewire\Datatable\Traits\WithSearch;
-use App\Http\Livewire\Datatable\Traits\WithFilters;
 
 abstract class Table extends Component
 {
@@ -15,7 +16,7 @@ abstract class Table extends Component
     use WithFilters;
     use WithPagination;
 
-    public string $table_name = 'defaut_table';
+    public string $table_name = 'datatable';
 
     public $search;
 
@@ -33,6 +34,7 @@ abstract class Table extends Component
         'search' => ['except' => ''],
         'data_filters' => ['except' => []],
         'page_size' => ['except' => 10],
+        'datatable' => ['except' => []],
     ];
 
     abstract protected function getColumns();
@@ -42,6 +44,14 @@ abstract class Table extends Component
     protected function getFilters()
     {
         return [];
+    }
+
+    public function updating($name, $value)
+    {
+        // need reset pagination if we updating the search and filter condition
+        if (Str::startsWith($name, $this->table_name.'.filters') || $name == 'search') {
+            $this->resetPage();
+        }
     }
 
     protected function setBuilder(Builder $builder)
@@ -154,7 +164,7 @@ abstract class Table extends Component
         $items = $this->getBuilder()->paginate($this->page_size);
 
         $table = $this;
-        
+
         return view('livewire.datatable.table', compact('table', 'columns', 'filters', 'items'));
     }
 }
