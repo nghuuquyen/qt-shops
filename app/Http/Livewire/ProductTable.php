@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Product;
-use App\Models\Category;
-use App\Http\Livewire\Datatable\Table;
-use Illuminate\Database\Eloquent\Builder;
+use App\Http\Livewire\Datatable\Columns\ImageColumn;
 use App\Http\Livewire\Datatable\Columns\LinkColumn;
 use App\Http\Livewire\Datatable\Columns\TextColumn;
-use App\Http\Livewire\Datatable\Columns\ImageColumn;
 use App\Http\Livewire\Datatable\Filters\SelectFilter;
+use App\Http\Livewire\Datatable\Table;
+use App\Models\Category;
+use App\Models\Product;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductTable extends Table
 {
@@ -28,7 +28,16 @@ class ProductTable extends Table
             TextColumn::make('Unit price incl. VAT', 'formatted_price'),
 
             LinkColumn::make('Action')
-                ->value(fn ($product) => route('products.show', ['product' => $product->id])),
+                ->value(fn ($product) => [
+                    [
+                        'title' => 'View',
+                        'value' => route('products.show', ['product' => $product->id]),
+                    ],
+                    [
+                        'title' => 'Edit',
+                        'value' => route('products.edit', ['product' => $product->id]),
+                    ],
+                ]),
         ];
     }
 

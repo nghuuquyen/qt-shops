@@ -106,7 +106,7 @@
             </thead>
             <tbody>
                 @foreach ($items as $row => $item)
-                    <tr class="border-b border-on-surface-400">
+                    <tr class="border-b border-on-surface-400 hover:bg-surface-800">
                         @foreach ($table->getColumns() as $col => $column)
                             @if ($table->isDisplayColumn($column))
                                 {{ $column->render($item) }}
