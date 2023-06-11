@@ -13,9 +13,7 @@ trait WithFilters
                 foreach ($this->getAppliedFiltersWithValues() as $key => $value) {
                     if ($filter->getKey() === $key && $filter->hasFilterCallback()) {
 
-                        $value = $filter->validate($value);
-
-                        if ($value === false) {
+                        if ($filter->validate($value) == false) {
                             continue;
                         }
 

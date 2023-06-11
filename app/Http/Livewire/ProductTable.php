@@ -45,11 +45,17 @@ class ProductTable extends Table
                 ->filter(function (Builder $query, $value) {
                     return $query->where('category_id', $value);
                 }),
+
+            SelectFilter::make('Status')
+                ->options([
+                    1 => 'Active',
+                    0 => 'Disabled',
+                ]),
         ];
     }
 
     protected function getQuery()
     {
-        return Product::query();
+        return Product::query()->with('category');
     }
 }

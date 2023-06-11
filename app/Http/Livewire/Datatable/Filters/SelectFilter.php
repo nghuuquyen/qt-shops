@@ -44,7 +44,7 @@ class SelectFilter extends Filter
             return false;
         }
 
-        return $value;
+        return true;
     }
 
     public function getFilterPillTitle()
