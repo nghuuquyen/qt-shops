@@ -16,7 +16,7 @@ class TextColumn extends Column
 
     public function getData($row_item)
     {
-        $value = $row_item[$this->field];
+        $value = $this->getCellValue($row_item);
 
         return [
             'value' => $value,

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Datatable\Columns;
 
+use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 abstract class Column
@@ -14,11 +16,11 @@ abstract class Column
 
     protected $formatter;
 
-    protected $searchable = FALSE;
+    protected $searchable = false;
 
     protected $search_callback;
 
-    public $display = TRUE;
+    public $display = true;
 
     abstract public function getView();
 
@@ -49,19 +51,29 @@ abstract class Column
         return $this;
     }
 
-    public function searchable() 
+    public function hasFormatter()
     {
-        $this->searchable = TRUE;
+        return $this->formatter instanceof Closure;
+    }
+
+    public function getFormatter()
+    {
+        return $this->formatter;
+    }
+
+    public function searchable()
+    {
+        $this->searchable = true;
 
         return $this;
     }
 
-    public function search($callable) 
+    public function search($callable)
     {
         $this->search_callback = $callable;
 
         return $this;
-    } 
+    }
 
     public function isSearchable()
     {
@@ -80,7 +92,16 @@ abstract class Column
 
     public function getColumn()
     {
-        return $this->relations . $this->field;
+        if ($this->relations) {
+            return implode('.', $this->relations).'.'.$this->field;
+        }
+
+        return $this->field;
+    }
+
+    public function getCellValue($row_item)
+    {
+        return Arr::get($row_item, $this->getColumn());
     }
 
     public static function make(string $title, string $from = null): Column
