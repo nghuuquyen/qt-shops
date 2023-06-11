@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait WithSearch
 {
-    public function getSearchableColumns()
+    /**
+     * Get all searchable columns
+     *
+     * @return array
+     */
+    public function getSearchableColumns(): array
     {
         $searchable_columns = [];
 
@@ -19,11 +24,31 @@ trait WithSearch
         return $searchable_columns;
     }
 
+    /**
+     * Check user already input search text or not
+     *
+     * @return boolean
+     */
+    public function hasSearch(): bool
+    {
+        return isset($this->search);
+    }
+
+    /**
+     * Get search text
+     *
+     * @return void
+     */
     public function getSearch()
     {
         return $this->search;
     }
 
+    /**
+     * Apply search query conditions
+     *
+     * @return Builder
+     */
     public function applySearch(): Builder
     {
         if ($this->hasSearch()) {

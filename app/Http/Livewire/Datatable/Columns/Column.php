@@ -5,27 +5,59 @@ namespace App\Http\Livewire\Datatable\Columns;
 use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 abstract class Column
 {
-    public $title;
+    /**
+     * Column title
+     */
+    public ?string $title = null;
 
-    public $field;
+    /**
+     * The field name that use to get data from database table
+     */
+    public ?string $field = null;
 
-    protected $relations;
+    /**
+     * Store the relation to get data from nested column. for example if you get data
+     * from "product.category.name" then the field is "name" and the relations is ['product', 'category']
+     */
+    protected array $relations = [];
 
-    protected $formatter;
+    /**
+     * Formatter function
+     */
+    protected Closure $formatter;
 
-    protected $searchable = false;
+    /**
+     * Is searchable columm
+     */
+    protected bool $searchable = false;
 
-    protected $search_callback;
+    /**
+     * Search callback
+     */
+    protected Closure $search_callback;
 
-    public $display = true;
+    /**
+     * Is display on screen or not
+     */
+    public bool $display = true;
 
-    abstract public function getView();
+    /**
+     * Get column view
+     */
+    abstract public function getView(): string;
 
-    abstract public function getData($row_item);
+    /**
+     * Get column view data for binding
+     */
+    abstract public function getData(mixed $row_item): mixed;
 
+    /**
+     * Construct
+     */
     public function __construct(string $title, string $from = null)
     {
         $this->title = trim($title);
@@ -44,53 +76,84 @@ abstract class Column
         }
     }
 
-    public function format($callable)
+    /**
+     * Set formatter
+     *
+     * @param [type] $callable
+     */
+    public function format(Closure $callable): Column
     {
         $this->formatter = $callable;
 
         return $this;
     }
 
-    public function hasFormatter()
+    /**
+     * Check has formatter or not
+     */
+    public function hasFormatter(): bool
     {
         return $this->formatter instanceof Closure;
     }
 
-    public function getFormatter()
+    /**
+     * Get formatter
+     */
+    public function getFormatter(): Closure
     {
         return $this->formatter;
     }
 
-    public function searchable()
+    /**
+     * Set searchable
+     */
+    public function searchable(): Column
     {
         $this->searchable = true;
 
         return $this;
     }
 
-    public function search($callable)
+    /**
+     * Set search callback
+     *
+     * @param [type] $callable
+     */
+    public function search($callable): Column
     {
         $this->search_callback = $callable;
 
         return $this;
     }
 
-    public function isSearchable()
+    /**
+     * Check is searchable or not
+     */
+    public function isSearchable(): bool
     {
         return $this->searchable;
     }
 
-    public function hasSearchCallback()
+    /**
+     * Check has search callback or not
+     */
+    public function hasSearchCallback(): bool
     {
         return $this->search_callback != null;
     }
 
-    public function getSearchCallback()
+    /**
+     * Get search callback
+     */
+    public function getSearchCallback(): Closure
     {
         return $this->search_callback;
     }
 
-    public function getColumn()
+    /**
+     * Get column data path
+     */
+    public function getColumn(): string
     {
         if ($this->relations) {
             return implode('.', $this->relations).'.'.$this->field;
@@ -99,11 +162,17 @@ abstract class Column
         return $this->field;
     }
 
-    public function getCellValue($row_item)
+    /**
+     * Get cell value
+     */
+    public function getCellValue(mixed $row_item): mixed
     {
         return Arr::get($row_item, $this->getColumn());
     }
 
+    /**
+     * Make column instance
+     */
     public static function make(string $title, string $from = null): Column
     {
         return new static($title, $from);

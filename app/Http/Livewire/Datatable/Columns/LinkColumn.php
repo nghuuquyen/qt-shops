@@ -6,26 +6,32 @@ use Closure;
 
 class LinkColumn extends Column
 {
-    protected $href;
+    /**
+     * Link href
+     *
+     * @var Closure|null
+     */
+    protected ?Closure $href = null;
 
-    public function __construct(string $title)
-    {
-        parent::__construct($title);
-    }
-
-    public function value($callable)
+    /**
+     * Set get value callback
+     *
+     * @param Closure $callable
+     * @return void
+     */
+    public function value(Closure $callable): LinkColumn
     {
         $this->href = $callable;
 
         return $this;
     }
 
-    public function getView()
+    public function getView(): string
     {
         return 'livewire.datatable.cells.link';
     }
 
-    public function getData($row_item)
+    public function getData(mixed $row_item): mixed
     {
         $href = $this->href;
 

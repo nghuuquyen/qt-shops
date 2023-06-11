@@ -6,16 +6,28 @@ use Closure;
 
 class ImageColumn extends Column
 {
-    protected $width = 50;
+    /**
+     * Image width
+     *
+     * @var integer
+     */
+    protected int $width = 50;
 
-    protected $height = 50;
+    /**
+     * Image height
+     *
+     * @var integer
+     */
+    protected int $height = 50;
 
-    public function __construct(string $title, string $from = null)
-    {
-        parent::__construct($title, $from);
-    }
-
-    public function size($width, $height)
+    /**
+     * Set widht and height
+     *
+     * @param integer $width
+     * @param integer $height
+     * @return ImageColumn
+     */
+    public function size(int $width, int $height): ImageColumn
     {
         $this->width = $width;
         $this->height = $height;
@@ -23,12 +35,12 @@ class ImageColumn extends Column
         return $this;
     }
 
-    public function getView()
+    public function getView(): string
     {
         return 'livewire.datatable.cells.image';
     }
 
-    public function getData($row_item)
+    public function getData(mixed $row_item): mixed
     {
         $src = $this->getCellValue($row_item);
 

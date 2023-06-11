@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Datatable;
 
 use App\Http\Livewire\Datatable\Filters\Filter;
+use App\Http\Livewire\Datatable\Traits\WithData;
 use App\Http\Livewire\Datatable\Traits\WithFilters;
 use App\Http\Livewire\Datatable\Traits\WithSearch;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,15 +13,14 @@ use Livewire\WithPagination;
 
 abstract class Table extends Component
 {
-    use WithSearch;
-    use WithFilters;
-    use WithPagination;
+    use WithSearch,
+        WithFilters,
+        WithData,
+        WithPagination;
 
     public string $table_name = 'datatable';
 
     public $search;
-
-    public $data_filters = [];
 
     public $page_size_options = [5, 10, 20, 30, 40, 50];
 
@@ -28,11 +28,8 @@ abstract class Table extends Component
 
     public $display_columns = [];
 
-    protected Builder $builder;
-
     protected $queryString = [
         'search' => ['except' => ''],
-        'data_filters' => ['except' => []],
         'page_size' => ['except' => 10],
         'datatable' => ['except' => []],
     ];
@@ -40,11 +37,6 @@ abstract class Table extends Component
     abstract protected function getColumns();
 
     abstract protected function getQuery();
-
-    protected function getFilters()
-    {
-        return [];
-    }
 
     public function updating($name, $value)
     {
@@ -54,80 +46,14 @@ abstract class Table extends Component
         }
     }
 
-    protected function setBuilder(Builder $builder)
-    {
-        $this->builder = $builder;
-
-        return $this;
-    }
-
-    protected function getBuilder()
-    {
-        return $this->builder;
-    }
-
-    public function hasSearch()
-    {
-        return isset($this->search);
-    }
-
-    public function hasFilters()
-    {
-        return count($this->getFilters()) > 0;
-    }
-
-    public function hasFilterPills()
-    {
-        $count = 0;
-
-        foreach ($this->getAppliedFiltersWithValues() as $key => $value) {
-            $filter = $this->getFilterByKey($key);
-
-            if ($filter->validate($value)) {
-                $count++;
-            }
-        }
-
-        return $count > 0;
-    }
-
-    public function getAppliedFiltersWithValues()
-    {
-        return $this->{$this->table_name}['filters'];
-    }
-
-    public function getFilterByKey(string $key)
-    {
-        return collect($this->getFilters())->first(function ($filter) use ($key) {
-            return $filter->getKey() === $key;
-        });
-    }
-
-    public function removeFilter($filter): void
-    {
-        if (! $filter instanceof Filter) {
-            $filter = $this->getFilterByKey($filter);
-        }
-
-        unset($this->{$this->table_name}['filters'][$filter->getKey()]);
-
-        $this->resetPage();
-    }
-
-    public function removeAllFilter(): void
-    {
-        $this->{$this->table_name}['filters'] = [];
-
-        $this->resetPage();
-    }
-
     public function setPageSize($page_size)
     {
         $this->page_size = $page_size;
     }
 
     /**
-     * Runs on every request, immediately after the component is instantiated, but before any other lifecycle methods are called
+     * Runs on every request, immediately after the component is instantiated, 
+     * but before any other lifecycle methods are called
      */
     public function boot(): void
     {

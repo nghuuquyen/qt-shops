@@ -32,7 +32,7 @@ class ProductTable extends Table
         ];
     }
 
-    protected function getFilters()
+    protected function getFilters(): array
     {
         return [
             SelectFilter::make('Category')
