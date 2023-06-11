@@ -7,34 +7,10 @@
 
             <div class="ml-5">
                 <x-dropdown title="{{ __('Filters') }}" icon="funnel">
-                    <div class="min-w-[200px]">
-                        {{-- filter item --}}
-                        <div>
-                            <div class="text-on-surface-500 mb-2">
-                                {{ __('Category') }}
-                            </div>
-
-                            <x-select>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
-                            </x-select>
-                        </div>
-
-                        {{-- filter item --}}
-                        <div>
-                            <div class="text-on-surface-500 mb-2 mt-2">
-                                {{ __('Category') }}
-                            </div>
-
-                            <x-select>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
-                            </x-select>
-                        </div>
+                    <div class="w-full">
+                        @foreach ($filters as $filter)
+                            <livewire:datatable.filter :filter="$filter" wire:key="{{ $filter->uuid }}" />
+                        @endforeach
                     </div>
                 </x-dropdown>
             </div>

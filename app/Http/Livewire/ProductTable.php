@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use App\Http\Livewire\Datatable\Columns\ImageColumn;
+use App\Models\Product;
+use App\Models\Category;
+use App\Http\Livewire\Datatable\Table;
 use App\Http\Livewire\Datatable\Columns\LinkColumn;
 use App\Http\Livewire\Datatable\Columns\TextColumn;
-use App\Http\Livewire\Datatable\Table;
-use App\Models\Product;
+use App\Http\Livewire\Datatable\Columns\ImageColumn;
+use App\Http\Livewire\Datatable\Filters\SelectFilter;
 
 class ProductTable extends Table
 {
@@ -26,6 +28,19 @@ class ProductTable extends Table
 
             LinkColumn::make('Action')
                 ->value(fn ($product) => route('products.show', ['product' => $product->id])),
+        ];
+    }
+
+    protected function getFilters()
+    {
+        return [
+            SelectFilter::make('Category', 'category.id')
+                ->options(
+                    Category::get()
+                        ->keyBy('id')
+                        ->map(fn($category) => $category->name)
+                        ->toArray()
+                ),
         ];
     }
 
