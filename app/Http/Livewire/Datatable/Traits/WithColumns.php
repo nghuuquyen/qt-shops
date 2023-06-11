@@ -2,32 +2,44 @@
 
 namespace App\Http\Livewire\Datatable\Traits;
 
-use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Datatable\Columns\Column;
+use Illuminate\Support\Collection;
 
 trait WithColumns
 {
-    public $display_columns = [];
+    public $columns = [];
 
     /**
      * Get display columns
      *
      * @return array
      */
-    public function getDisplayColumns(): Collection
+    public function getDisplayColumns()
     {
-        return $this->display_columns;
+        return $this->columns;
     }
 
     /**
      * Check column allow to display or not
-     *
-     * @param Column $column
-     * @return boolean
      */
     public function isDisplayColumn(Column $column): bool
     {
-        return $this->display_columns->firstWhere('title', $column->title)['display'] == true;
+        return $this->columns->firstWhere('title', $column->title)['display'] == true;
+    }
+
+    /**
+     * Setup columns settings
+     *
+     * @return void
+     */
+    public function setupColumns(): void
+    {
+        $this->columns = collect($this->getColumns())->map(function ($column) {
+            return [
+                'uuid' => fake()->uuid(),
+                'title' => $column->title,
+                'display' => true,
+            ];
+        });
     }
 }

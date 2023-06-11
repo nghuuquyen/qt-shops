@@ -38,7 +38,7 @@ abstract class Column
     /**
      * Search callback
      */
-    protected Closure $search_callback;
+    protected ?Closure $search_callback = null;
 
     /**
      * Is display on screen or not

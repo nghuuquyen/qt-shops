@@ -68,11 +68,11 @@
                     @foreach ($table->getDisplayColumns() as $index => $column)
                         <li
                             class="px-4 py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
-                            <input id="{{ $column['id'] }}" wire:model="display_columns.{{ $index }}.display"
+                            <input id="{{ $column['uuid'] }}" wire:model="columns.{{ $index }}.display"
                                 type="checkbox" />
 
-                            <label for="{{ $column['id'] }}"
-                                class="ml-2 w-full flex-shrink-0">{{ $column['title'] }}</label>
+                            <label for="{{ $column['uuid'] }}"
+                                class="ml-2 w-full h-full flex-shrink-0">{{ $column['title'] }}</label>
                         </li>
                     @endforeach
                 </ul>

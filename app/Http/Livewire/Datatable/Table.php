@@ -62,13 +62,7 @@ abstract class Table extends Component
      */
     public function mount()
     {
-        $this->display_columns = collect($this->getColumns())->map(function ($column) {
-            return [
-                'id' => fake()->uuid(),
-                'title' => $column->title,
-                'display' => true,
-            ];
-        });
+        $this->setupColumns();
     }
 
     /**
@@ -78,9 +72,7 @@ abstract class Table extends Component
     public function boot(): void
     {
         $this->{$this->table_name} = [
-            'sorts' => $this->{$this->table_name}['sorts'] ?? [],
             'filters' => $this->{$this->table_name}['filters'] ?? [],
-            'columns' => $this->{$this->table_name}['columns'] ?? [],
         ];
     }
 

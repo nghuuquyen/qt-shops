@@ -8,7 +8,7 @@ trait WithData
 {
     protected array $per_page_options = [5, 10, 20, 30, 40, 50];
 
-    public int $per_page = 10;
+    public int $per_page = 5;
 
     /**
      * Query builder
