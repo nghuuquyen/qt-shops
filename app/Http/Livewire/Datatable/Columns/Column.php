@@ -46,14 +46,9 @@ abstract class Column
     public bool $display = true;
 
     /**
-     * Get column view
+     * Render cell view
      */
-    abstract public function getView(): string;
-
-    /**
-     * Get column view data for binding
-     */
-    abstract public function getData(mixed $row_item): mixed;
+    abstract public function render(mixed $row_item): View;
 
     /**
      * Construct

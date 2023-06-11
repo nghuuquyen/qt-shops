@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Datatable\Columns;
 
 use Closure;
+use Illuminate\View\View;
 
 class ImageColumn extends Column
 {
@@ -35,11 +36,12 @@ class ImageColumn extends Column
         return $this;
     }
 
-    public function getView(): string
-    {
-        return 'livewire.datatable.cells.image';
-    }
-
+    /**
+     * Get view data
+     *
+     * @param mixed $row_item
+     * @return mixed
+     */
     public function getData(mixed $row_item): mixed
     {
         $src = $this->getCellValue($row_item);
@@ -53,5 +55,16 @@ class ImageColumn extends Column
             'width' => $this->width,
             'height' => $this->height,
         ];
+    }
+    
+    /**
+     * Render cell view
+     *
+     * @param mixed $row_item
+     * @return View
+     */
+    public function render(mixed $row_item): View
+    {
+        return view('livewire.datatable.cells.image', $this->getData($row_item));
     }
 }

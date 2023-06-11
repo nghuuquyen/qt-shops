@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire\Datatable\Columns;
 
+use Illuminate\View\View;
+
 class TextColumn extends Column
 {
-    public function getView(): string
-    {
-        return 'livewire.datatable.cells.text';
-    }
-
+    /**
+     * Get view data
+     *
+     * @param mixed $row_item
+     * @return mixed
+     */
     public function getData(mixed $row_item): mixed
     {
         $value = $this->getCellValue($row_item);
@@ -16,5 +19,10 @@ class TextColumn extends Column
         return [
             'value' => $value,
         ];
+    }
+
+    public function render(mixed $row_item): View
+    {
+        return view('livewire.datatable.cells.text', $this->getData($row_item));
     }
 }

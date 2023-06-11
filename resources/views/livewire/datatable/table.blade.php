@@ -109,8 +109,7 @@
                     <tr class="border-b border-on-surface-400">
                         @foreach ($columns as $col => $column)
                             @if ($column->display)
-                                <livewire:datatable.cell :column="$column" :item="$item"
-                                    wire:key="{{ $row . $col }}_{{ $item->id }}" />
+                                {{ $column->render($item) }}
                             @endif
                         @endforeach
                     </tr>

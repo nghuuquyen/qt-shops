@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Datatable\Columns;
 
 use Closure;
+use Illuminate\View\View;
 
 class LinkColumn extends Column
 {
@@ -26,11 +27,12 @@ class LinkColumn extends Column
         return $this;
     }
 
-    public function getView(): string
-    {
-        return 'livewire.datatable.cells.link';
-    }
-
+    /**
+     * Get view data
+     *
+     * @param mixed $row_item
+     * @return mixed
+     */
     public function getData(mixed $row_item): mixed
     {
         $href = $this->href;
@@ -43,5 +45,10 @@ class LinkColumn extends Column
             'title' => $this->title,
             'href' => $href,
         ];
+    }
+
+    public function render(mixed $row_item): View
+    {
+        return view('livewire.datatable.cells.link', $this->getData($row_item));
     }
 }
