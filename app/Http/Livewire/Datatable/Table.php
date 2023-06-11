@@ -66,9 +66,45 @@ abstract class Table extends Component
         return count($this->getFilters()) > 0;
     }
 
+    public function hasFilterPills()
+    {
+        $count = 0;
+
+        foreach ($this->getAppliedFiltersWithValues() as $key => $value) {
+            $filter = $this->getFilterByKey($key);
+
+            if ($filter->validate($value)) {
+                $count++;
+            }
+        }
+
+        return $count > 0;
+    }
+
     public function getAppliedFiltersWithValues()
     {
         return $this->{$this->table_name}['filters'];
+    }
+
+    public function getFilterByKey(string $key)
+    {
+        return collect($this->getFilters())->first(function ($filter) use ($key) {
+            return $filter->getKey() === $key;
+        });
+    }
+
+    public function removeFilter($filter): void
+    {
+        if (! $filter instanceof Filter) {
+            $filter = $this->getFilterByKey($filter);
+        }
+
+        unset($this->{$this->table_name}['filters'][$filter->getKey()]);
+    }
+
+    public function removeAllFilter(): void
+    {
+        $this->{$this->table_name}['filters'] = [];
     }
 
     public function setPageSize($page_size)

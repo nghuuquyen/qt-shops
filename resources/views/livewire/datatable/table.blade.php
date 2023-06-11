@@ -1,4 +1,38 @@
 <div>
+    {{-- filter pills --}}
+    @if ($table->hasFilterPills())
+        <div class="flex flex-row items-center">
+            <div class="mr-2">
+                <span class="text-on-surface-500">{{ __('Applied Filters') }}</span>
+            </div>
+
+            <ul class="flex flex-row">
+                @foreach ($table->getAppliedFiltersWithValues() as $key => $value)
+                    @php
+                        $filter = $table->getFilterByKey($key);
+                    @endphp
+
+                    @if ($filter->validate($value))
+                        <li
+                            class="bg-surface-800 text-on-surface-100 px-4 py-2 mr-2 rounded-lg flex flex-row items-center">
+                            <span>{{ $filter->getFilterPillTitle() }}: {{ $filter->getFilterPillValue($value) }}</span>
+
+                            <x-button icon="x-mark" wire:click="removeFilter('{{ $filter->getKey() }}')"
+                                class="bg-transparent hover:bg-transparent hover:text-on-surface-100"
+                                style="padding: 0; margin-left: 5px;" />
+                        </li>
+                    @endif
+                @endforeach
+
+                <x-button wire:click="removeAllFilter()"
+                    class="bg-transparent hover:bg-transparent hover:text-on-surface-100"
+                    style="padding: 0; margin-left: 5px;">
+                    {{ __('Clear all') }}
+                </x-button>
+            </ul>
+        </div>
+    @endif
+
     {{-- toolbar --}}
     <div class="flex flex-row justify-between items-center mb-6 mt-4">
         {{-- left-side --}}
@@ -59,7 +93,7 @@
     {{-- table --}}
     <div class="relative overflow-x-auto">
         <table class="w-full text-left table-auto text-on-surface-600">
-            <thead class="font-bold text-on-surface-600">
+            <thead class="font-bold text-on-surface-600 bg-surface-900">
                 <tr class="border-b border-on-surface-600">
                     @foreach ($columns as $column)
                         @if ($column->display)

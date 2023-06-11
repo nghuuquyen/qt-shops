@@ -38,7 +38,6 @@ class SelectFilter extends Filter
             ->toArray();
     }
 
-
     public function validate($value)
     {
         if (! in_array($value, $this->getKeys())) {
@@ -46,6 +45,20 @@ class SelectFilter extends Filter
         }
 
         return $value;
+    }
+
+    public function getFilterPillTitle()
+    {
+        return $this->name;
+    }
+
+    public function getFilterPillValue($value)
+    {
+        foreach ($this->options as $key => $text) {
+            if ($key == $value) {
+                return $text;
+            }
+        }
     }
 
     public function render(Table $table)
