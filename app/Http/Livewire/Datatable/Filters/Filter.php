@@ -3,41 +3,31 @@
 namespace App\Http\Livewire\Datatable\Filters;
 
 use Illuminate\Support\Str;
+use App\Http\Livewire\Datatable\Table;
 
 abstract class Filter 
 {
     public $uuid;
 
-    public $title;
+    public $name;
 
-    public $field;
+    public $key;
 
     protected $relations;
 
     protected $filterCallback = null;
 
-    abstract public function getView();
+    abstract public function render(Table $table);
 
-    abstract public function getData();
-
-    public function __construct(string $title, string $from = null)
+    public function __construct(string $name, string $key = null)
     {
-        $this->title = trim($title);
+        $this->name = $name;
 
-        if ($from) {
-            $this->from = trim($from);
-
-            if (Str::contains($this->from, '.')) {
-                $this->field = Str::afterLast($this->from, '.');
-                $this->relations = explode('.', Str::beforeLast($this->from, '.'));
-            } else {
-                $this->field = $this->from;
-            }
+        if ($key) {
+            $this->key = $key;
         } else {
-            $this->field = Str::snake($title);
+            $this->key = Str::snake($name);
         }
-
-        $this->uuid = fake()->uuid();
     }
 
     public function filter(callable $callback): Filter
@@ -59,12 +49,7 @@ abstract class Filter
 
     public function getKey(): string
     {
-        return $this->field;
-    }
-
-    public function getStoreKey(): string
-    {
-        return Str::of($this->title)->lower();
+        return $this->key;
     }
 
     public static function make(string $title, string $from = null): Filter

@@ -1,5 +1,5 @@
 <div>
-    {{-- header bar --}}
+    {{-- toolbar --}}
     <div class="flex flex-row justify-between items-center mb-6 mt-4">
         {{-- left-side --}}
         <div class="flex flex-row justify-start items-center">
@@ -7,9 +7,9 @@
 
             <div class="ml-5">
                 <x-dropdown title="{{ __('Filters') }}" icon="funnel">
-                    <div class="w-full">
+                    <div class="w-full min-w-[250px]">
                         @foreach ($filters as $filter)
-                            <livewire:datatable.filter :filter="$filter" wire:key="{{ $filter->uuid }}" />
+                            {{ $filter->render($table) }}
                         @endforeach
                     </div>
                 </x-dropdown>
@@ -76,7 +76,7 @@
                         @foreach ($columns as $col => $column)
                             @if ($column->display)
                                 <livewire:datatable.cell :column="$column" :item="$item"
-                                    wire:key="{{ $row . $col }}" />
+                                    wire:key="{{ $row . $col }}_{{ $item->id }}" />
                             @endif
                         @endforeach
                     </tr>

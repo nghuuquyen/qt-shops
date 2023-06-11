@@ -15,13 +15,13 @@ abstract class Table extends Component
     use WithFilters;
     use WithPagination;
 
+    public string $table_name = 'defaut_table';
+
     public $search;
 
     public $data_filters = [];
 
     public $page_size_options = [5, 10, 20, 30, 40, 50];
-
-    protected $listeners = ['FILTER_CHANGE' => 'filterChanged'];
 
     public $page_size = 10;
 
@@ -68,12 +68,24 @@ abstract class Table extends Component
 
     public function getAppliedFiltersWithValues()
     {
-        return [];
+        return $this->{$this->table_name}['filters'];
     }
 
     public function setPageSize($page_size)
     {
         $this->page_size = $page_size;
+    }
+
+    /**
+     * Runs on every request, immediately after the component is instantiated, but before any other lifecycle methods are called
+     */
+    public function boot(): void
+    {
+        $this->{$this->table_name} = [
+            'sorts' => $this->{$this->table_name}['sorts'] ?? [],
+            'filters' => $this->{$this->table_name}['filters'] ?? [],
+            'columns' => $this->{$this->table_name}['columns'] ?? [],
+        ];
     }
 
     public function mount()
@@ -85,11 +97,6 @@ abstract class Table extends Component
                 'display' => true,
             ];
         });
-    }
-
-    public function filterChanged(Filter $filter, $value)
-    {
-
     }
 
     public function render()
@@ -110,6 +117,8 @@ abstract class Table extends Component
 
         $items = $this->getBuilder()->paginate($this->page_size);
 
-        return view('livewire.datatable.table', compact('columns', 'filters', 'items'));
+        $table = $this;
+        
+        return view('livewire.datatable.table', compact('table', 'columns', 'filters', 'items'));
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Product;
 use App\Models\Category;
 use App\Http\Livewire\Datatable\Table;
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Datatable\Columns\LinkColumn;
 use App\Http\Livewire\Datatable\Columns\TextColumn;
 use App\Http\Livewire\Datatable\Columns\ImageColumn;
@@ -34,13 +35,16 @@ class ProductTable extends Table
     protected function getFilters()
     {
         return [
-            SelectFilter::make('Category', 'category.id')
+            SelectFilter::make('Category')
                 ->options(
                     Category::get()
                         ->keyBy('id')
-                        ->map(fn($category) => $category->name)
+                        ->map(fn ($category) => $category->name)
                         ->toArray()
-                ),
+                )
+                ->filter(function (Builder $query, $value) {
+                    return $query->where('category_id', $value);
+                }),
         ];
     }
 

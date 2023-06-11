@@ -2,15 +2,24 @@
 
 namespace App\Http\Livewire\Datatable\Filters;
 
+use App\Http\Livewire\Datatable\Table;
+
 class SelectFilter extends Filter
 {
     protected array $options = [];
+
+    protected $placeholder;
 
     public function options(array $options = []): SelectFilter
     {
         $this->options = $options;
 
         return $this;
+    }
+
+    public function placeholder($placeholder)
+    {
+        $this->placeholder = $placeholder;
     }
 
     public function getOptions(): array
@@ -29,15 +38,24 @@ class SelectFilter extends Filter
             ->toArray();
     }
 
-    public function getView()
+
+    public function validate($value)
     {
-        return 'livewire.datatable.filters.select';
+        if (! in_array($value, $this->getKeys())) {
+            return false;
+        }
+
+        return $value;
     }
 
-    public function getData()
+    public function render(Table $table)
     {
-        return [
+        return view('livewire.datatable.filters.select', [
+            'table' => $table,
+            'name' => $this->name,
+            'filter' => $this,
             'options' => $this->options,
-        ];
+            'placeholder' => $this->placeholder,
+        ]);
     }
 }

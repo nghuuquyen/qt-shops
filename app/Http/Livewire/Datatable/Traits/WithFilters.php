@@ -12,16 +12,18 @@ trait WithFilters
             foreach ($this->getFilters() as $filter) {
                 foreach ($this->getAppliedFiltersWithValues() as $key => $value) {
                     if ($filter->getKey() === $key && $filter->hasFilterCallback()) {
-                        // Let the filter class validate the value
+
                         $value = $filter->validate($value);
 
                         if ($value === false) {
                             continue;
                         }
 
-                        ($filter->getFilterCallback())($this->getBuilder(), $value);
+                        $this->setBuilder(
+                            ($filter->getFilterCallback())($this->getBuilder(), $value)
+                        );
                     }
-                }
+                }   
             }
         }
 
