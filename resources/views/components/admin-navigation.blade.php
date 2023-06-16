@@ -44,11 +44,11 @@
         Products
     </a>
 
-    <a class="text-on-surface-500 px-6 hover:text-on-surface-600" href="#">
+    <a class="{{ Route::is(['orders.index', 'orders.show']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600" href="{{ route('orders.index') }}">
         Orders
     </a>
 
-    <a class="text-on-surface-500 px-6 hover:text-on-surface-600" href="#">
+    <a class="{{ Route::is(['customers.index']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600" href="{{ route('customers.index') }}">
         Customers
     </a>
 

@@ -17,7 +17,7 @@ class ProductTable extends Table
     {
         return [
             ImageColumn::make('Image', 'display_image_url')
-                ->size(70, 70)
+                ->size(50, 50)
                 ->format(fn ($value) => $value.'?w=150&h=150'),
 
             TextColumn::make('Name', 'name')

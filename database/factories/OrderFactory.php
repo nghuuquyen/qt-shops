@@ -19,11 +19,12 @@ class OrderFactory extends Factory
     {
         return [
             'cart_id' => Cart::factory(),
-            'code' => fake()->numerify('OR-######'),
+            'code' => fake()->numerify('OR-#########'),
             'full_name' => fake()->name(),
             'phone_number' => fake()->phoneNumber(),
             'email' => fake()->email(),
-            'shipping_address' => fake()->address(),
+            'shipping_address' => fake()->streetAddress() . ', ' . fake()->city(),
+            'notes' => fake()->paragraph(1),
         ];
     }
 }

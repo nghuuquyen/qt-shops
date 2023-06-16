@@ -39,15 +39,17 @@
         <div class="flex flex-row justify-start items-center">
             <x-text-input class="w-80" wire:model="search" name="search" placeholder="{{ __('Search') }}" />
 
-            <div class="ml-5">
-                <x-dropdown title="{{ __('Filters') }}" icon="funnel">
-                    <div class="w-full min-w-[250px] grid grid-cols-1 gap-4">
-                        @foreach ($table->getFilters() as $filter)
-                            {{ $filter->render($table) }}
-                        @endforeach
-                    </div>
-                </x-dropdown>
-            </div>
+            @if ($table->hasFilters())
+                <div class="ml-5">
+                    <x-dropdown title="{{ __('Filters') }}" icon="funnel">
+                        <div class="w-full min-w-[250px] grid grid-cols-1 gap-4">
+                            @foreach ($table->getFilters() as $filter)
+                                {{ $filter->render($table) }}
+                            @endforeach
+                        </div>
+                    </x-dropdown>
+                </div>
+            @endif
         </div>
 
         {{-- right-side --}}

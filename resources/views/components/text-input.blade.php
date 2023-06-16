@@ -6,8 +6,8 @@
     <input
         {{ $attributes->merge([
             'class' =>
-                'border text-on-surface-600 border-on-surface-300 px-2 py-4 bg-surface ' .
-                ($errors->has($name) ? ' border-red-500' : ''),
+                'border text-on-surface-600 border-on-surface-300 px-4 py-4 bg-surface ' .
+                ($errors->has($name ?? null) ? ' border-red-500' : ''),
         ]) }}
         type="{{ $type ?? 'text' }}" placeholder="{{ $placeholder ?? '' }}"
         @if (isset($model)) wire:model="{{ $model }}" @endif

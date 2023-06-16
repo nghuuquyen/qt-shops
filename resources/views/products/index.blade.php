@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page_title')
-Products
+{{ __('Products') }}
 @endsection
 
 @section('page_action')

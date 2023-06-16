@@ -22,7 +22,7 @@ class CartItemFactory extends Factory
             'cart_id' => Cart::factory(),
             'product_id' => Product::factory(),
             'quantity' => 5,
-            'notes' => fake()->paragraph(),
+            'notes' => fake()->paragraph(1),
         ];
     }
 }

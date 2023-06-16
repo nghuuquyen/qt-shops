@@ -28,7 +28,7 @@ abstract class Column
     /**
      * Formatter function
      */
-    protected Closure $formatter;
+    protected ?Closure $formatter = null;
 
     /**
      * Is searchable columm

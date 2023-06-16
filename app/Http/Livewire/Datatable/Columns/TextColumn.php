@@ -16,6 +16,10 @@ class TextColumn extends Column
     {
         $value = $this->getCellValue($row_item);
 
+        if ($this->hasFormatter()) {
+            $value = ($this->getFormatter())($value);
+        }
+
         return [
             'value' => $value,
         ];
