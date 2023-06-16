@@ -19,13 +19,13 @@ class OrderTable extends Table
         return [
             TextColumn::make('Code', 'code')->searchable(),
 
-            TextColumn::make('Fullname', 'full_name')->searchable(),
+            TextColumn::make('Date', 'created_at')->searchable(),
+
+            TextColumn::make('Full Name', 'full_name')->searchable(),
 
             TextColumn::make('Phone', 'phone_number')->searchable(),
 
             TextColumn::make('Email', 'email')->searchable(),
-
-            TextColumn::make('Shipping Address', 'shipping_address'),
 
             LinkColumn::make('Action')
                 ->value(fn ($order) => [

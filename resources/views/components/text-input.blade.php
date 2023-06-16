@@ -1,4 +1,4 @@
-<div class="flex flex-col">
+<div class="flex flex-col w-full">
     @isset($label)
         <label class="font-normal mb-2 text-on-surface-600">{{ $label ?? '' }}</label>
     @endisset

@@ -34,10 +34,10 @@
     @endif
 
     {{-- toolbar --}}
-    <div class="flex flex-row justify-between items-center mb-6 mt-4">
+    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-6 mt-4">
         {{-- left-side --}}
-        <div class="flex flex-row justify-start items-center">
-            <x-text-input class="w-80" wire:model="search" name="search" placeholder="{{ __('Search') }}" />
+        <div class="flex flex-row justify-start items-center w-full lg:w-max mb-4 lg:mb-0">
+            <x-text-input class="w-full lg:w-80" wire:model="search" name="search" placeholder="{{ __('Search') }}" />
 
             @if ($table->hasFilters())
                 <div class="ml-5">
@@ -53,7 +53,7 @@
         </div>
 
         {{-- right-side --}}
-        <div class="flex flex-row gap-4">
+        <div class="flex flex-row justify-between lg:gap-4">
             <x-dropdown title="{{ __('Actions') }}" icon="chevron-down">
                 <ul class="w-full min-w-full text-on-surface-600">
 
@@ -94,13 +94,13 @@
 
     {{-- table --}}
     <div class="relative overflow-x-auto">
-        <table class="w-full text-left table-auto text-on-surface-600">
+        <table class="w-full text-left table-auto text-on-surface-600 whitespace-nowrap">
             <thead class="font-bold text-on-surface-600 bg-surface-900">
                 <tr class="border-b border-on-surface-600">
                     @foreach ($table->getColumns() as $column)
                         @if ($table->isDisplayColumn($column))
-                            <th scope="col" class="text-base font-bold px-2 py-4 uppercase">
-                                {{ __($column->title) }}
+                            <th scope="col" class="text-base font-bold px-2 py-4">
+                                {{ Str::ucfirst(__($column->title)) }}
                             </th>
                         @endif
                     @endforeach
@@ -118,9 +118,9 @@
                 @endforeach
             </tbody>
         </table>
-
-        <div class="mt-5">
-            {{ $items->links() }}
-        </div>
+    </div>
+    {{-- pagination --}}
+    <div class="mt-5">
+        {{ $items->links() }}
     </div>
 </div>
