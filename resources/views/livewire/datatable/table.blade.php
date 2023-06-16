@@ -34,10 +34,10 @@
     @endif
 
     {{-- toolbar --}}
-    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-6 mt-4">
+    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 mt-4">
         {{-- left-side --}}
-        <div class="flex flex-row justify-start items-center w-full lg:w-max mb-4 lg:mb-0">
-            <x-text-input class="w-full lg:w-80" wire:model="search" name="search" placeholder="{{ __('Search') }}" />
+        <div class="flex flex-row justify-start items-center w-full md:w-max mb-4 md:mb-0">
+            <x-text-input class="w-full md:w-80" wire:model="search" name="search" placeholder="{{ __('Search') }}" />
 
             @if ($table->hasFilters())
                 <div class="ml-5">
@@ -53,7 +53,7 @@
         </div>
 
         {{-- right-side --}}
-        <div class="flex flex-row justify-between lg:gap-4">
+        <div class="flex flex-row justify-between md:gap-4">
             <x-dropdown title="{{ __('Actions') }}" icon="chevron-down">
                 <ul class="w-full min-w-full text-on-surface-600">
 
