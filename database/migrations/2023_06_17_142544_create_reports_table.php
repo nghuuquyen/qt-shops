@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('type');
+            $table->string('schedule');
+            $table->text('notify_to');
             $table->timestamps();
         });
     }

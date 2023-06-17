@@ -30,6 +30,9 @@ class ReportController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string',
+            'type' => 'required|string',
+            'schedule' => 'required|string',
+            'notify_to' => 'required|string',
         ]);
 
         $report = Report::factory()->create($validated);
@@ -62,9 +65,15 @@ class ReportController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string',
+            'type' => 'required|string',
+            'schedule' => 'required|string',
+            'notify_to' => 'required|string',
         ]);
 
         $report->title = $validated['title'];
+        $report->type = $validated['type'];
+        $report->schedule = $validated['schedule'];
+        $report->notify_to = $validated['notify_to'];
 
         $report->save();
 
