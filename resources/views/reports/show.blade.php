@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 
 @section('page_title')
-    {{ $mail_delivery->name }}
+    {{ $report->name }}
 @endsection
 
 @section('page_action')
     <div class="flex flex-row justify-end">
-        <x-button icon="arrow-uturn-left" href="{{ route('mail-deliveries.index') }}" target="_self"
+        <x-button icon="arrow-uturn-left" href="{{ route('reports.index') }}" target="_self"
             class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
             {{ __('Back to list') }}
         </x-button>
 
-        <x-button href="{{ route('mail-deliveries.edit', ['mail_delivery' => $mail_delivery->id]) }}" target="_self" icon="edit"
+        <x-button href="{{ route('reports.edit', ['report' => $report->id]) }}" target="_self" icon="edit"
             class="text-base font-normal">
             {{ __('Edit') }}
         </x-button>
@@ -28,13 +28,12 @@
                         <label>{{ __('Title') }}</label>
                     </div>
                     <div class="col-span-4 text-on-surface-600">
-                        <span>{{ $mail_delivery->title }}</span>
+                        <span>{{ $report->title }}</span>
                     </div>
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('mail-deliveries.destroy', ['mail_delivery' => $mail_delivery->id]) }}"
-                class="mt-5 -mr-5">
+            <form method="POST" action="{{ route('reports.destroy', ['report' => $report->id]) }}" class="mt-5 -mr-5">
                 @csrf
                 @method('DELETE')
 

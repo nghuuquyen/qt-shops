@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MailDelivery;
+use App\Models\Report;
 use Illuminate\Http\Request;
 
-class MailDeliveryController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('mail-deliveries.index');
+        return view('reports.index');
     }
 
     /**
@@ -20,7 +20,7 @@ class MailDeliveryController extends Controller
      */
     public function create()
     {
-        return view('mail-deliveries.create');
+        return view('reports.create');
     }
 
     /**
@@ -32,56 +32,56 @@ class MailDeliveryController extends Controller
             'title' => 'required|string',
         ]);
 
-        $mail_delivery = MailDelivery::factory()->create($validated);
+        $report = Report::factory()->create($validated);
 
         session()->flash('message', __('Successfully created'));
 
-        return redirect()->route('mail-deliveries.show', ['mail_delivery' => $mail_delivery->id]);
+        return redirect()->route('reports.show', ['report' => $report->id]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(MailDelivery $mail_delivery)
+    public function show(Report $report)
     {
-        return view('mail-deliveries.show', compact('mail_delivery'));
+        return view('reports.show', compact('report'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MailDelivery $mail_delivery)
+    public function edit(Report $report)
     {
-        return view('mail-deliveries.edit', compact('mail_delivery'));
+        return view('reports.edit', compact('report'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MailDelivery $mail_delivery)
+    public function update(Request $request, Report $report)
     {
         $validated = $request->validate([
             'title' => 'required|string',
         ]);
 
-        $mail_delivery->title = $validated['title'];
+        $report->title = $validated['title'];
 
-        $mail_delivery->save();
+        $report->save();
 
         session()->flash('message', __('Successfully updated'));
 
-        return redirect()->route('mail-deliveries.show', ['mail_delivery' => $mail_delivery->id]);
+        return redirect()->route('reports.show', ['report' => $report->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MailDelivery $mail_delivery)
+    public function destroy(Report $report)
     {
-        $mail_delivery->forceDelete();
+        $report->forceDelete();
 
         session()->flash('message', __('Successfully deleted'));
 
-        return redirect()->route('mail-deliveries.index');
+        return redirect()->route('reports.index');
     }
 }

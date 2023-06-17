@@ -42,24 +42,28 @@
         <a class="text-on-surface-500 px-6 hover:text-on-surface-600" href="#">
             Dashboard
         </a>
-    
-        <a class="{{ Route::is(['products.index', 'products.show', 'products.edit', 'products.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600" href="{{ route('products.index') }}">
+
+        <a class="{{ Route::is(['products.index', 'products.show', 'products.edit', 'products.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+            href="{{ route('products.index') }}">
             Products
         </a>
-    
-        <a class="{{ Route::is(['orders.index', 'orders.show']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600" href="{{ route('orders.index') }}">
+
+        <a class="{{ Route::is(['orders.index', 'orders.show']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+            href="{{ route('orders.index') }}">
             Orders
         </a>
-    
-        <a class="{{ Route::is(['customers.index']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600" href="{{ route('customers.index') }}">
+
+        <a class="{{ Route::is(['customers.index']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+            href="{{ route('customers.index') }}">
             Customers
         </a>
-    
-        <a class="{{ Route::is(['mail-deliveries.index', 'mail-deliveries.show', 'mail-deliveries.edit', 'mail-deliveries.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600" href="{{ route('mail-deliveries.index') }}">
-            Mail Deliveries
+
+        <a class="{{ Route::is(['reports.index', 'reports.show', 'reports.edit', 'reports.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+            href="{{ route('reports.index') }}">
+            Reports
         </a>
 
-        @if($hasSetting)
+        @if ($hasSetting)
             <livewire:setting-dropdown />
         @endif
     </div>

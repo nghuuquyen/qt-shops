@@ -3,10 +3,10 @@
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\MailDeliveryController;
 use App\Http\Controllers\OrderCompleteController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -48,5 +48,5 @@ Route::group(['prefix' => '/admin'], function () {
 
     Route::resource('customers', CustomerController::class)->only(['index', 'show']);
 
-    Route::resource('mail-deliveries', MailDeliveryController::class)->parameters(['mail-deliveries' => 'mail_delivery']);
+    Route::resource('reports', ReportController::class);
 });

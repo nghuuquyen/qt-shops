@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\MailDelivery;
-use App\Http\Livewire\Datatable\Table;
-use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Datatable\Columns\LinkColumn;
 use App\Http\Livewire\Datatable\Columns\TextColumn;
+use App\Http\Livewire\Datatable\Table;
+use App\Models\Report;
+use Illuminate\Database\Eloquent\Builder;
 
-class MailDeliveryTable extends Table
+class ReportTable extends Table
 {
     protected function getColumns(): array
     {
@@ -20,14 +20,14 @@ class MailDeliveryTable extends Table
             TextColumn::make('Updated At', 'updated_at'),
 
             LinkColumn::make('Action')
-                ->value(fn ($mail_delivery) => [
+                ->value(fn ($report) => [
                     [
                         'title' => 'View',
-                        'value' => route('mail-deliveries.show', ['mail_delivery' => $mail_delivery->id]),
+                        'value' => route('reports.show', ['report' => $report->id]),
                     ],
                     [
                         'title' => 'Edit',
-                        'value' => route('mail-deliveries.edit', ['mail_delivery' => $mail_delivery->id]),
+                        'value' => route('reports.edit', ['report' => $report->id]),
                     ],
                 ]),
         ];
@@ -35,6 +35,6 @@ class MailDeliveryTable extends Table
 
     protected function getQuery(): Builder
     {
-        return MailDelivery::query();
+        return Report::query();
     }
 }

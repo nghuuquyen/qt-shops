@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 
 @section('page_title')
-    {{ $mail_delivery->title }}
+    {{ __('Create New') }}
 @endsection
 
 @section('page_action')
-    <div class="flex flex-row justify-end -mx-5">
-        <x-button icon="arrow-uturn-left" href="{{ route('mail-deliveries.show', ['mail_delivery' => $mail_delivery->id]) }}" target="_self"
+    <div class="flex flex-row justify-end">
+        <x-button icon="arrow-uturn-left" href="{{ route('reports.index') }}" target="_self"
             class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
-            {{ __('Back to view') }}
+            {{ __('Back to list') }}
         </x-button>
     </div>
 @endsection
@@ -16,9 +16,8 @@
 @section('main')
     <section>
         <x-panel>
-            <form action="{{ route('mail-deliveries.update', ['mail_delivery' => $mail_delivery->id]) }}" method="POST">
+            <form action="{{ route('reports.store') }}" method="POST">
                 @csrf
-                @method('PUT')
 
                 <div class="flex flex-col">
                     {{-- line attribute --}}
@@ -27,7 +26,7 @@
                             <label>{{ __('Title') }}</label>
                         </div>
                         <div class="col-span-4 text-on-surface-600">
-                            <x-text-input name="title" value="{{ old('title', $mail_delivery->title) }}"
+                            <x-text-input name="title" value="{{ old('title') }}"
                                 placeholder="{{ __('Please input this field') }}" />
                         </div>
                     </div>
@@ -38,6 +37,7 @@
                         class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
                         {{ __('Reset') }}
                     </x-button>
+
                     <x-button type="submit" icon="document" class="text-base font-normal">
                         {{ __('Save') }}
                     </x-button>
