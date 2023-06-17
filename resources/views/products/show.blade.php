@@ -72,7 +72,7 @@
                 <div class="flex flex-row justify-end">
                     <x-button icon="trash" type="submit"
                         class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
-                        {{ __('Remove this product') }}
+                        {{ __('Remove this item') }}
                     </x-button>
                 </div>
             </form>

@@ -1,12 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\MailDeliveryController;
 use App\Http\Controllers\OrderCompleteController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,10 @@ Route::get('/orders/{order}/download-pdf', [OrderController::class, 'downloadPdf
  */
 Route::group(['prefix' => '/admin'], function () {
     Route::resource('products', ProductController::class);
-    Route::resource('orders', OrderController::class)->only([ 'index', 'show' ]);
-    Route::resource('customers', CustomerController::class)->only([ 'index', 'show' ]);
+
+    Route::resource('orders', OrderController::class)->only(['index', 'show']);
+
+    Route::resource('customers', CustomerController::class)->only(['index', 'show']);
+
+    Route::resource('mail-deliveries', MailDeliveryController::class)->parameters(['mail-deliveries' => 'mail_delivery']);
 });

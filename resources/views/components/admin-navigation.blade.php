@@ -43,7 +43,7 @@
             Dashboard
         </a>
     
-        <a class="{{ Route::is(['products.index', 'products.show', 'products.edit']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600" href="{{ route('products.index') }}">
+        <a class="{{ Route::is(['products.index', 'products.show', 'products.edit', 'products.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600" href="{{ route('products.index') }}">
             Products
         </a>
     
@@ -55,6 +55,10 @@
             Customers
         </a>
     
+        <a class="{{ Route::is(['mail-deliveries.index', 'mail-deliveries.show', 'mail-deliveries.edit', 'mail-deliveries.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600" href="{{ route('mail-deliveries.index') }}">
+            Mail Deliveries
+        </a>
+
         @if($hasSetting)
             <livewire:setting-dropdown />
         @endif
