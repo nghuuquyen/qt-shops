@@ -11,8 +11,13 @@
             {{ __('Back to list') }}
         </x-button>
 
+        <x-button href="{{ route('reports.edit', ['report' => $report->id]) }}" target="_self" icon="arrow-path"
+            class="text-base font-normal bg-[#ea9240] hover:bg-[#ffa755]">
+            {{ __('Generate Report File') }}
+        </x-button>
+
         <x-button href="{{ route('reports.edit', ['report' => $report->id]) }}" target="_self" icon="edit"
-            class="text-base font-normal">
+            class="text-base font-normal ml-2">
             {{ __('Edit') }}
         </x-button>
     </div>

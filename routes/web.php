@@ -1,13 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\ReportFileController;
 use App\Http\Controllers\OrderCompleteController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ReportController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GenerateReportFileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,4 +51,6 @@ Route::group(['prefix' => '/admin'], function () {
     Route::resource('customers', CustomerController::class)->only(['index', 'show']);
 
     Route::resource('reports', ReportController::class);
+
+    Route::resource('reports.report-files', ReportFileController::class);
 });

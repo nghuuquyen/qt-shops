@@ -35,7 +35,8 @@
 				"austenc.laravel-blade-spacer",
 				"bradlc.vscode-tailwindcss",
 				"alexcvzz.vscode-sqlite",
-				"shufo.vscode-blade-formatter"
+				"shufo.vscode-blade-formatter",
+				"brano.typopo-vscode"
 			],
 			"settings": {}
 		}

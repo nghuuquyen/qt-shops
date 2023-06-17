@@ -26,10 +26,13 @@ class ReportControllerTest extends TestCase
         }
     }
 
-    public function test_can_create_an_mail_delivery()
+    public function test_can_create_an_report()
     {
         $body = [
             'title' => 'Dummy title',
+            'type' => Report::SALE_REPORT,
+            'schedule' =>  Report::SCHEDULE_DAILY,
+            'notify_to' => 'nghuuquyen@gmail.com',
         ];
 
         $response = $this->post(route('reports.store'), $body);
@@ -64,12 +67,15 @@ class ReportControllerTest extends TestCase
             ->assertOk();
     }
 
-    public function test_can_update_an_mail_delivery()
+    public function test_can_update_an_report()
     {
         $report = Report::factory()->create();
 
         $body = [
             'title' => 'Updated title',
+            'type' => Report::SALE_REPORT,
+            'schedule' =>  Report::SCHEDULE_DAILY,
+            'notify_to' => 'nghuuquyen@gmail.com',
         ];
 
         $response = $this->put(route('reports.update', ['report' => $report->id]), $body);
@@ -79,6 +85,12 @@ class ReportControllerTest extends TestCase
         $report->refresh();
 
         $this->assertSame($report->title, $body['title']);
+
+        $this->assertSame($report->type, $body['type']);
+
+        $this->assertSame($report->schedule, $body['schedule']);
+
+        $this->assertSame($report->notify_to, $body['notify_to']);
     }
 
     public function test_should_got_validation_error()
@@ -89,10 +101,10 @@ class ReportControllerTest extends TestCase
 
         $response = $this->put(route('reports.update', ['report' => $report->id]), $body);
 
-        $response->assertInvalid(['title']);
+        $response->assertInvalid(['title', 'type', 'schedule', 'notify_to']);
     }
 
-    public function test_can_delete_an_mail_delivery()
+    public function test_can_delete_an_report()
     {
         $report = Report::factory()->create();
 
