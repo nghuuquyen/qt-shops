@@ -41,6 +41,8 @@ class ExportReportFile implements ShouldQueue
      */
     public function handle(): void
     {
+        $this->report_file->setStatus(ReportFile::STATUS_PROCESSING);
+
         $filename = $this->getExportFileName();
 
         $disk = Report::REPORT_FILE_DISK;
@@ -58,5 +60,7 @@ class ExportReportFile implements ShouldQueue
                 Excel::store(new CustomerReportExport($this->report_file), $filename, $disk);
                 break;
         }
+
+        $this->report_file->setStatus(ReportFile::STATUS_PROCESSED);
     }
 }

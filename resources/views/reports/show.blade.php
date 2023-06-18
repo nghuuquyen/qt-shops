@@ -11,10 +11,14 @@
             {{ __('Back to list') }}
         </x-button>
 
-        <x-button href="{{ route('reports.edit', ['report' => $report->id]) }}" target="_self" icon="arrow-path"
-            class="text-base font-normal bg-[#ea9240] hover:bg-[#ffa755]">
-            {{ __('Generate Report File') }}
-        </x-button>
+        <form method="POST" action="{{ route('reports.report-files.store', ['report' => $report->id]) }}">
+            @csrf
+
+            <x-button type="submit" target="_self" icon="arrow-path"
+                class="text-base font-normal bg-[#ea9240] hover:bg-[#ffa755]">
+                {{ __('Generate Report File') }}
+            </x-button>
+        </form>
 
         <x-button href="{{ route('reports.edit', ['report' => $report->id]) }}" target="_self" icon="edit"
             class="text-base font-normal ml-2">
@@ -24,8 +28,8 @@
 @endsection
 
 @section('main')
-    <section class="relative">
-        <x-panel>
+    <section class="relative grid grid-cols-1 gap-6">
+        <x-panel icon="cube" header="{{ __('Informations') }}">
             <div class="flex flex-col">
                 {{-- line attribute --}}
                 <div class="grid grid-cols-5 pb-6 pt-6 items-top border-b border-on-surface-900">
@@ -81,6 +85,10 @@
                     </x-button>
                 </div>
             </form>
+        </x-panel>
+
+        <x-panel icon="cube" header="{{ __('Report Files') }}">
+            <livewire:report-file-table :report="$report" />
         </x-panel>
     </section>
 @endsection

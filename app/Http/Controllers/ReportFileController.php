@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Report;
 use App\Models\ReportFile;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Jobs\ExportReportFile;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class ReportFileController extends Controller
 {
@@ -34,26 +33,30 @@ class ReportFileController extends Controller
     {
         $report_file = ReportFile::factory()
             ->create([
-                'report_id' => $report->id
+                'report_id' => $report->id,
             ]);
 
         ExportReportFile::dispatch($report_file)->afterCommit();
 
-        return $report_file;
+        return redirect()->route('reports.show', ['report' => $report->id]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ReportFile $reportFile)
+    public function show(Report $report, ReportFile $reportFile)
     {
-        //
+        if (!Storage::disk(Report::REPORT_FILE_DISK)->exists($reportFile->filename)) {
+            return abort(404);
+        }
+
+        return Storage::disk(Report::REPORT_FILE_DISK)->download($reportFile->filename);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ReportFile $reportFile)
+    public function edit(Report $report, ReportFile $reportFile)
     {
         //
     }
@@ -61,7 +64,7 @@ class ReportFileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ReportFile $reportFile)
+    public function update(Request $request, Report $report, ReportFile $reportFile)
     {
         //
     }
@@ -69,7 +72,7 @@ class ReportFileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ReportFile $reportFile)
+    public function destroy(Report $report, ReportFile $reportFile)
     {
         //
     }
