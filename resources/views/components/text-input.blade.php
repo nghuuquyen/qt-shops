@@ -12,6 +12,7 @@
         type="{{ $type ?? 'text' }}" placeholder="{{ $placeholder ?? '' }}"
         @if (isset($model)) wire:model="{{ $model }}" @endif
         @if (isset($name)) name="{{ $name }}" @endif
+        @if (isset($readonly)) readonly="true" @endif
         @if (isset($value)) value="{{ $value }}" @endif />
 
     @error($name ?? '')

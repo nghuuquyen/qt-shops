@@ -15,7 +15,7 @@
         @includeIf('components/icons/' . ($icon ?? ''))
 
         @if(trim($slot))
-            <span class="ml-2">
+            <span class="{{ isset($icon) ? 'ml-2' : '' }}">
                 {{ $slot }}
             </span>
         @endisset

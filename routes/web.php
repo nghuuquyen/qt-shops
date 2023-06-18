@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomepageController;
@@ -44,6 +45,8 @@ Route::get('/orders/{order}/download-pdf', [OrderController::class, 'downloadPdf
  * Admin
  */
 Route::group(['prefix' => '/admin'], function () {
+    Route::singleton('profile', ProfileController::class);
+
     Route::resource('products', ProductController::class);
 
     Route::resource('orders', OrderController::class)->only(['index', 'show']);

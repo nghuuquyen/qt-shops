@@ -31,7 +31,11 @@
         x-on:focusin.window="! $refs.panel.contains($event.target) && close()" x-id="['dropdown-button']" class="relative">
         <!-- Button -->
         <button x-ref="button" x-on:click="toggle()" :aria-expanded="open" :aria-controls="$id('dropdown-button')"
-            type="button" class="text-on-surface-600 active:translate-y-1">
+            type="button" class="flex flex-row text-on-surface-600 active:translate-y-1 items-center">
+            @auth
+                <span class="mr-2">{{ __('Hello, ') }}{{ auth()->user()->name }}</span>
+            @endauth
+
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -43,14 +47,14 @@
         <!-- Panel -->
         <div x-ref="panel" x-show="open" x-transition.origin.top.left x-on:click.outside="close($refs.button)"
             :id="$id('dropdown-button')" style="display: none;"
-            class="absolute right-0 rounded-lg bg-surface shardow-xl w-52 shadow-lg">
+            class="absolute right-0 top-10 rounded-lg bg-surface shardow-xl w-64 shadow-lg p-4">
             <div class="text-on-surface-500 p-3">
                 {{ __('Themes') }}
             </div>
 
             <a @click="setTheme('theme-light')"
                 :class="selectedTheme == 'theme-light' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'"
-                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-6 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -62,7 +66,7 @@
 
             <a @click="setTheme('theme-dark')"
                 :class="selectedTheme == 'theme-dark' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'"
-                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-6 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -74,7 +78,7 @@
 
             <a @click="setTheme('auto')"
                 :class="selectedTheme == 'auto' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'"
-                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-6 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -90,7 +94,7 @@
 
             <a @click="setLocale('en')"
                 :class="selectedLocale == 'en' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'"
-                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-6 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
                 <span class="fi fi-gb"></span>
 
                 <span class="ml-4">{{ __('English') }}</span>
@@ -98,7 +102,7 @@
 
             <a @click="setLocale('vi')"
                 :class="selectedLocale == 'vi' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'"
-                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-6 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
                 <span class="fi fi-vn"></span>
 
                 <span class="ml-4">{{ __('Vietnamese') }}</span>
@@ -106,11 +110,62 @@
 
             <a @click="setLocale('ja')"
                 :class="selectedLocale == 'ja' ? 'bg-primary-600 text-on-primary-50' : 'bg-surface text-on-surface-500'"
-                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-10 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+                class="cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-6 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
                 <span class="fi fi-jp"></span>
 
                 <span class="ml-4">{{ __('Japanese') }}</span>
             </a>
+
+            @auth
+                <div class="text-on-surface-500 p-3">
+                    {{ __('Account') }}
+                </div>
+                <a href="{{ route('profile.show') }}"
+                    class="bg-surface text-on-surface-500 cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-6 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span class="ml-4">{{ __('Profile') }}</span>
+                </a>
+
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+
+                    <button type="submit"
+                        class="bg-surface text-on-surface-500 cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-6 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                        </svg>
+                        <span class="ml-4">{{ __('Logout') }}</span>
+                    </button>
+                </form>
+            @else
+                <div class="text-on-surface-500 p-3">
+                    {{ __('Account') }}
+                </div>
+                <a href="{{ route('register') }}"
+                    class="bg-surface text-on-surface-500 cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-6 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span class="ml-4">{{ __('Register') }}</span>
+                </a>
+                <a href="{{ route('login') }}"
+                    class="bg-surface text-on-surface-500 cursor-pointer flex items-center gap-1 w-full first-of-type:rounded-t-md last-of-type:rounded-b-md px-6 py-2 text-left text-base hover:bg-primary-600 hover:text-on-primary-50 disabled:text-gray-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                    </svg>
+                    <span class="ml-4">{{ __('Login') }}</span>
+                </a>
+            @endauth
         </div>
     </div>
 </div>
