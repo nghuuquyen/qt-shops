@@ -18,6 +18,8 @@ class Report extends Model
     const PRODUCT_PERFORMANCE_REPORT = 'product_performance_report';
     const CUSTOMER_REPORT = 'customer_report';
 
+    const DEFAULT_REPORT_TO = 'nghuuquyen@gmail.com';
+
     public function reportFiles()
     {
         return $this->hasMany(ReportFile::class);

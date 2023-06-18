@@ -63,7 +63,7 @@ class CustomerReportExport implements FromQuery, WithHeadings, WithMapping
             ->leftJoin('carts', 'orders.cart_id', '=', 'carts.id')
             ->leftJoin('cart_items', 'carts.id', '=', 'cart_items.cart_id')
             ->leftJoin('products', 'products.id', '=', 'cart_items.product_id')
-            ->groupBy('full_name', 'phone_number', 'email')
+            ->groupBy('full_name', 'phone_number', 'email', 'product_currency')
             ->orderBy('total_spent', 'DESC')
             ->orderBy('total_order', 'DESC');
     }

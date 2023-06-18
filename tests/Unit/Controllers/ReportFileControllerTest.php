@@ -30,7 +30,7 @@ class ReportFileControllerTest extends TestCase
             ])
             ->create();
 
-        $response = $this->post(route('reports.report-files.store', ['report' => $report->id]))->assertCreated();
+        $response = $this->post(route('reports.report-files.store', ['report' => $report->id]))->assertRedirect();
 
         $report->refresh();
 
@@ -57,7 +57,7 @@ class ReportFileControllerTest extends TestCase
             ])
             ->create();
 
-        $response = $this->post(route('reports.report-files.store', ['report' => $report->id]))->assertCreated();
+        $response = $this->post(route('reports.report-files.store', ['report' => $report->id]))->assertRedirect();
 
         $report->refresh();
 
@@ -84,7 +84,7 @@ class ReportFileControllerTest extends TestCase
             ])
             ->create();
 
-        $response = $this->post(route('reports.report-files.store', ['report' => $report->id]))->assertCreated();
+        $response = $this->post(route('reports.report-files.store', ['report' => $report->id]))->assertRedirect();
 
         $report->refresh();
 

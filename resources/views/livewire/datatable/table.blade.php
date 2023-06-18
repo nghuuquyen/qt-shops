@@ -34,26 +34,40 @@
     @endif
 
     {{-- toolbar --}}
-    <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-6 mt-4">
+    <div class="flex flex-col lg:flex-row md:justify-between md:items-center mb-6 mt-4">
         {{-- left-side --}}
-        <div class="flex flex-row justify-start items-center w-full md:w-max mb-4 md:mb-0">
-            <x-text-input class="w-full md:w-80" wire:model="search" name="search" placeholder="{{ __('Search') }}" />
+        <div class="flex flex-col md:flex-row justify-start items-center w-full lg:w-max mb-4 md:mb-0">
+            <x-text-input class="w-full lg:w-80" wire:model="search" name="search" placeholder="{{ __('Search') }}" />
 
-            @if ($table->hasFilters())
-                <div class="ml-5">
-                    <x-dropdown title="{{ __('Filters') }}" icon="funnel">
-                        <div class="w-full min-w-[250px] grid grid-cols-1 gap-4">
-                            @foreach ($table->getFilters() as $filter)
-                                {{ $filter->render($table) }}
-                            @endforeach
-                        </div>
-                    </x-dropdown>
+            <div class="flex row mt-4 md:mt-0 w-full md:w-auto">
+                @if ($table->hasFilters())
+                    <div class="md:ml-5">
+                        <x-dropdown title="{{ __('Filters') }}" icon="funnel">
+                            <div class="w-full min-w-[250px] grid grid-cols-1 gap-4">
+                                @foreach ($table->getFilters() as $filter)
+                                    {{ $filter->render($table) }}
+                                @endforeach
+                            </div>
+                        </x-dropdown>
+                    </div>
+                @endif
+
+                <div class="flex">
+                    <button x-ref="button" x-on:click="toggle()" :aria-expanded="open"
+                        wire:click="$refresh"
+                        :aria-controls="$id('dropdown-button')" type="button"
+                        class="text-on-surface-600 active:translate-y-1 flex flex-row justify-center items-center bg-surface-800 py-4 px-4 rounded ml2 md:ml-5">
+                        <span class="mr-2 text-on-surface-100">{{ __('Reload') }}</span>
+                        <span wire:loading.class="animate-spin" x-transition.duration.500ms>
+                            @includeIf('components/icons/arrow-path')
+                        </span>
+                    </button>
                 </div>
-            @endif
+            </div>
         </div>
 
         {{-- right-side --}}
-        <div class="flex flex-row justify-between md:gap-4">
+        <div class="flex flex-row justify-between md:justify-start lg:justify-between w-full lg:w-max md:gap-4 md:mt-4 lg:mt-0">
             <x-dropdown title="{{ __('Actions') }}" icon="chevron-down">
                 <ul class="w-full min-w-full text-on-surface-600">
 

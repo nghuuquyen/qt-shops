@@ -15,6 +15,7 @@ class ReportFile extends Model
 
     const STATUS_PROCESSED = 2;
 
+    const STATUS_FAILED = 3;
 
     public function report()
     {
@@ -54,6 +55,9 @@ class ReportFile extends Model
             }            
             case ReportFile::STATUS_PROCESSED: {
                 return __('Processed');
+            }
+            case ReportFile::STATUS_FAILED: {
+                return __('Failed');
             }
         }
     }

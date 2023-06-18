@@ -38,11 +38,11 @@
                             <label>{{ __('Type') }}</label>
                         </div>
                         <div class="col-span-4 text-on-surface-600">
-                            <x-select name="schedule" value="{{ old('type', $report->type) }}">
+                            <x-select name="type" value="{{ old('type', $report->type) }}">
                                 <option value="" disabled>{{ __('Please choose') }}</option>
                                 <option value="sale_report">Sale Report</option>
                                 <option value="customer_report">Customer Report</option>
-                                <option value="performance_report">Performance Report</option>
+                                <option value="product_performance_report">Performance Report</option>
                             </x-select>
                         </div>
                     </div>
