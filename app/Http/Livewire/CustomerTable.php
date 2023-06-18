@@ -44,8 +44,8 @@ class CustomerTable extends Table
                 'phone_number',
                 'email',
             ])
-            ->addSelect(DB::raw('COUNT(0) as total_order'))
-            ->addSelect(DB::raw('SUM(cart_items.quantity) as total_products'))
+            ->addSelect(DB::raw('COUNT(DISTINCT orders.id) as total_order'))
+            ->addSelect(DB::raw('SUM(DISTINCT products.id) as total_products'))
             ->addSelect(DB::raw('SUM(cart_items.quantity * products.price) as total_spent'))
 
             ->leftJoin('carts', 'orders.cart_id', '=', 'carts.id')

@@ -57,12 +57,14 @@ class CustomerReportExport implements FromQuery, WithHeadings, WithMapping
                 'email',
                 'products.currency AS product_currency',
             ])
-            ->addSelect(DB::raw('COUNT(0) as total_order'))
-            ->addSelect(DB::raw('SUM(cart_items.quantity) as total_products'))
+            ->addSelect(DB::raw('COUNT(DISTINCT orders.id) as total_order'))
+            ->addSelect(DB::raw('SUM(DISTINCT products.id) as total_products'))
             ->addSelect(DB::raw('SUM(cart_items.quantity * products.price) as total_spent'))
+
             ->leftJoin('carts', 'orders.cart_id', '=', 'carts.id')
             ->leftJoin('cart_items', 'carts.id', '=', 'cart_items.cart_id')
             ->leftJoin('products', 'products.id', '=', 'cart_items.product_id')
+
             ->groupBy('full_name', 'phone_number', 'email', 'product_currency')
             ->orderBy('total_spent', 'DESC')
             ->orderBy('total_order', 'DESC');

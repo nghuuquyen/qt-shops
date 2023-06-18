@@ -54,7 +54,7 @@ class ProductPerformanceReportExport implements FromQuery, WithHeadings, WithMap
             ->addSelect(DB::raw('
             (
                 SELECT
-                    COUNT(0) 
+                    COUNT(DISTINCT orders.id)
                 FROM cart_items
                 JOIN carts ON cart_items.cart_id = carts.id
                 JOIN orders ON carts.id = orders.cart_id
