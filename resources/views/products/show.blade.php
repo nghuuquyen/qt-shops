@@ -11,10 +11,12 @@
             {{ __('Back to list') }}
         </x-button>
 
-        <x-button href="{{ route('products.edit', ['product' => $product->id]) }}" target="_self" icon="edit"
-            class="text-base font-normal">
-            {{ __('Edit') }}
-        </x-button>
+        @can('edit products')
+            <x-button href="{{ route('products.edit', ['product' => $product->id]) }}" target="_self" icon="edit"
+                class="text-base font-normal">
+                {{ __('Edit') }}
+            </x-button>
+        @endcan
     </div>
 @endsection
 
@@ -64,18 +66,19 @@
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('products.destroy', ['product' => $product->id]) }}"
-                class="mt-5 -mr-5">
-                @csrf
-                @method('DELETE')
+            @can('delete products')
+                <form method="POST" action="{{ route('products.destroy', ['product' => $product->id]) }}" class="mt-5 -mr-5">
+                    @csrf
+                    @method('DELETE')
 
-                <div class="flex flex-row justify-end">
-                    <x-button icon="trash" type="submit"
-                        class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
-                        {{ __('Remove this item') }}
-                    </x-button>
-                </div>
-            </form>
+                    <div class="flex flex-row justify-end">
+                        <x-button icon="trash" type="submit"
+                            class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
+                            {{ __('Remove this item') }}
+                        </x-button>
+                    </div>
+                </form>
+            @endcan
         </x-panel>
     </section>
 @endsection

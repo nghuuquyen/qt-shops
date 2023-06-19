@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 
 @section('page_title')
-{{ __('Create New') }}
+    {{ __('Create New') }}
 @endsection
 
 @section('page_action')
-<div class="flex flex-row justify-end">
-    <x-button icon="arrow-uturn-left" href="{{ route('products.index') }}" target="_self"
-        class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
-        {{ __('Back to list') }}
-    </x-button>
-</div>
+    <div class="flex flex-row justify-end">
+        <x-button icon="arrow-uturn-left" href="{{ route('products.index') }}" target="_self"
+            class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
+            {{ __('Back to list') }}
+        </x-button>
+    </div>
 @endsection
 
 @section('main')
@@ -61,7 +61,7 @@
                         {{ __('Reset') }}
                     </x-button>
 
-                    <x-button type="submit" icon="document" class="text-base font-normal">
+                    <x-button type="submit" icon="check" class="text-base font-normal">
                         {{ __('Save') }}
                     </x-button>
                 </div>

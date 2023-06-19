@@ -14,6 +14,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Role::class);
+
         return view('roles.index');
     }
 
@@ -22,6 +24,8 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Role::class);
+
         $permissions = Permission::all();
 
         return view('roles.create', compact('permissions'));
@@ -32,6 +36,8 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Role::class);
+
         $validated = $request->validate([
             'name' => 'required|string',
             'permissions' => 'required|array',
@@ -50,6 +56,8 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
+        $this->authorize('view', $role);
+
         return view('roles.show', compact('role'));
     }
 
@@ -58,6 +66,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        $this->authorize('update', $role);
+
         $permissions = $this->getRolePermissionSelectOption($role);
 
         return view('roles.edit', compact('role', 'permissions'));
@@ -68,6 +78,8 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+        $this->authorize('update', $role);
+
         $validated = $request->validate([
             'name' => 'required|string',
             'permissions' => 'required|array',
@@ -89,6 +101,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
+        $this->authorize('delete', $role);
+
         $role->forceDelete();
 
         session()->flash('message', __('Successfully deleted'));

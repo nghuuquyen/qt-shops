@@ -78,7 +78,7 @@
                         class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
                         {{ __('Reset') }}
                     </x-button>
-                    <x-button type="submit" icon="document" class="text-base font-normal">
+                    <x-button type="submit" icon="check" class="text-base font-normal">
                         {{ __('Save') }}
                     </x-button>
                 </div>

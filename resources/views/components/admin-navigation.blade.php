@@ -43,30 +43,40 @@
             Dashboard
         </a>
 
-        <a class="{{ Route::is(['products.index', 'products.show', 'products.edit', 'products.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
-            href="{{ route('products.index') }}">
-            Products
-        </a>
+        @can('viewAny products')
+            <a class="{{ Route::is(['products.index', 'products.show', 'products.edit', 'products.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+                href="{{ route('products.index') }}">
+                Products
+            </a>
+        @endcan
 
-        <a class="{{ Route::is(['orders.index', 'orders.show']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
-            href="{{ route('orders.index') }}">
-            Orders
-        </a>
+        @can('viewAny orders')
+            <a class="{{ Route::is(['orders.index', 'orders.show']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+                href="{{ route('orders.index') }}">
+                Orders
+            </a>
+        @endcan
 
-        <a class="{{ Route::is(['customers.index']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
-            href="{{ route('customers.index') }}">
-            Customers
-        </a>
+        @can('viewAny customers')
+            <a class="{{ Route::is(['customers.index']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+                href="{{ route('customers.index') }}">
+                Customers
+            </a>
+        @endcan
 
-        <a class="{{ Route::is(['reports.index', 'reports.show', 'reports.edit', 'reports.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
-            href="{{ route('reports.index') }}">
-            Reports
-        </a>
+        @can('viewAny reports')
+            <a class="{{ Route::is(['reports.index', 'reports.show', 'reports.edit', 'reports.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+                href="{{ route('reports.index') }}">
+                Reports
+            </a>
+        @endcan
 
-        <a class="{{ Route::is(['roles.index', 'roles.show', 'roles.edit', 'roles.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
-            href="{{ route('roles.index') }}">
-            Roles
-        </a>
+        @can('viewAny roles')
+            <a class="{{ Route::is(['roles.index', 'roles.show', 'roles.edit', 'roles.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+                href="{{ route('roles.index') }}">
+                Roles
+            </a>
+        @endcan
 
         @if ($hasSetting)
             <livewire:setting-dropdown />

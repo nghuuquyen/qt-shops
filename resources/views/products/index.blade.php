@@ -6,9 +6,11 @@
 
 @section('page_action')
 <div class="flex flex-row justify-end">
-    <x-button href="{{ route('products.create') }}" target="_self" icon="plus" class="text-base font-normal">
-        {{ __('Create') }}
-    </x-button>
+    @can('create products')
+        <x-button href="{{ route('products.create') }}" target="_self" icon="plus" class="text-base font-normal">
+            {{ __('Create') }}
+        </x-button>
+    @endcan
 </div>
 @endsection
 

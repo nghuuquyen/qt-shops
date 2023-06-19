@@ -12,6 +12,8 @@ class ReportController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Report::class);
+
         return view('reports.index');
     }
 
@@ -20,6 +22,8 @@ class ReportController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Report::class);
+
         return view('reports.create');
     }
 
@@ -28,6 +32,8 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Report::class);
+
         $validated = $request->validate([
             'title' => 'required|string',
             'type' => 'required|string',
@@ -47,6 +53,8 @@ class ReportController extends Controller
      */
     public function show(Report $report)
     {
+        $this->authorize('view', $report);
+
         return view('reports.show', compact('report'));
     }
 
@@ -55,6 +63,8 @@ class ReportController extends Controller
      */
     public function edit(Report $report)
     {
+        $this->authorize('update', $report);
+
         return view('reports.edit', compact('report'));
     }
 
@@ -63,6 +73,8 @@ class ReportController extends Controller
      */
     public function update(Request $request, Report $report)
     {
+        $this->authorize('update', $report);
+
         $validated = $request->validate([
             'title' => 'required|string',
             'type' => 'required|string',
@@ -87,6 +99,8 @@ class ReportController extends Controller
      */
     public function destroy(Report $report)
     {
+        $this->authorize('delete', $report);
+
         $report->forceDelete();
 
         session()->flash('message', __('Successfully deleted'));

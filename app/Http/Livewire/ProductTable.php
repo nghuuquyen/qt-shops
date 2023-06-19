@@ -31,16 +31,25 @@ class ProductTable extends Table
             TextColumn::make('Total Orders', 'total_orders'),
 
             LinkColumn::make('Action')
-                ->value(fn ($product) => [
-                    [
-                        'title' => 'View',
-                        'value' => route('products.show', ['product' => $product->id]),
-                    ],
-                    [
-                        'title' => 'Edit',
-                        'value' => route('products.edit', ['product' => $product->id]),
-                    ],
-                ]),
+                ->value(function ($product) {
+                    $links = [];
+
+                    if (auth()->user()->can('view products')) {
+                        $links[] = [
+                            'title' => 'View',
+                            'value' => route('products.show', ['product' => $product->id]),
+                        ];
+                    }
+
+                    if (auth()->user()->can('update products')) {
+                        $links[] = [
+                            'title' => 'Edit',
+                            'value' => route('products.edit', ['product' => $product->id]),
+                        ];
+                    }
+
+                    return $links;
+                }),
         ];
     }
 

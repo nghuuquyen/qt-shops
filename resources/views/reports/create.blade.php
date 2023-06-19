@@ -30,7 +30,7 @@
                                 placeholder="{{ __('Please input this field') }}" />
                         </div>
                     </div>
-    
+
                     {{-- line attribute --}}
                     <div class="grid grid-cols-5 pb-6 pt-6 items-center border-b border-on-surface-900">
                         <div class="col-span-1 text-on-surface-500 font-bold">
@@ -78,7 +78,7 @@
                         {{ __('Reset') }}
                     </x-button>
 
-                    <x-button type="submit" icon="document" class="text-base font-normal">
+                    <x-button type="submit" icon="check" class="text-base font-normal">
                         {{ __('Save') }}
                     </x-button>
                 </div>

@@ -12,6 +12,8 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Order::class);
+
         return view('orders.index');
     }
 
@@ -20,6 +22,8 @@ class OrderController extends Controller
         if (! $request->hasValidSignature()) {
             abort(401);
         }
+
+        $this->authorize('view', $order);
 
         $layout = 'layouts.user';
 
@@ -31,6 +35,8 @@ class OrderController extends Controller
         if (! $request->hasValidSignature()) {
             abort(401);
         }
+
+        $this->authorize('view', $order);
 
         $layout = 'layouts.print';
 

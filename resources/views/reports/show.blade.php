@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page_title')
-    {{ $report->name }}
+    {{ $report->title }}
 @endsection
 
 @section('page_action')
@@ -11,19 +11,23 @@
             {{ __('Back to list') }}
         </x-button>
 
-        <form method="POST" action="{{ route('reports.report-files.store', ['report' => $report->id]) }}">
-            @csrf
+        @can('create reports')
+            <form method="POST" action="{{ route('reports.report-files.store', ['report' => $report->id]) }}">
+                @csrf
 
-            <x-button type="submit" target="_self" icon="arrow-path"
-                class="text-base font-normal bg-[#ea9240] hover:bg-[#ffa755]">
-                {{ __('Generate Report File') }}
+                <x-button type="submit" target="_self" icon="arrow-path"
+                    class="text-base font-normal bg-[#ea9240] hover:bg-[#ffa755]">
+                    {{ __('Generate Report File') }}
+                </x-button>
+            </form>
+        @endcan
+
+        @can('update reports')
+            <x-button href="{{ route('reports.edit', ['report' => $report->id]) }}" target="_self" icon="edit"
+                class="text-base font-normal ml-2">
+                {{ __('Edit') }}
             </x-button>
-        </form>
-
-        <x-button href="{{ route('reports.edit', ['report' => $report->id]) }}" target="_self" icon="edit"
-            class="text-base font-normal ml-2">
-            {{ __('Edit') }}
-        </x-button>
+        @endcan
     </div>
 @endsection
 
@@ -67,24 +71,26 @@
                         <label>{{ __('Notify To') }}</label>
                     </div>
                     <div class="col-span-4 text-on-surface-600">
-                        @foreach (explode(",", $report->notify_to) as $to)
+                        @foreach (explode(',', $report->notify_to) as $to)
                             <span class="bg-surface-800 px-4 py-2 rounded-lg">{{ $to }}</span>
                         @endforeach
                     </div>
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('reports.destroy', ['report' => $report->id]) }}" class="mt-5 -mr-5">
-                @csrf
-                @method('DELETE')
+            @can('delete reports')
+                <form method="POST" action="{{ route('reports.destroy', ['report' => $report->id]) }}" class="mt-5 -mr-5">
+                    @csrf
+                    @method('DELETE')
 
-                <div class="flex flex-row justify-end">
-                    <x-button icon="trash" type="submit"
-                        class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
-                        {{ __('Remove this item') }}
-                    </x-button>
-                </div>
-            </form>
+                    <div class="flex flex-row justify-end">
+                        <x-button icon="trash" type="submit"
+                            class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
+                            {{ __('Remove this item') }}
+                        </x-button>
+                    </div>
+                </form>
+            @endcan
         </x-panel>
 
         <x-panel icon="cube" header="{{ __('Report Files') }}">

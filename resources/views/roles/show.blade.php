@@ -11,10 +11,12 @@
             {{ __('Back to list') }}
         </x-button>
 
-        <x-button href="{{ route('roles.edit', ['role' => $role->id]) }}" target="_self" icon="edit"
-            class="text-base font-normal ml-2">
-            {{ __('Edit') }}
-        </x-button>
+        @can('update roles')
+            <x-button href="{{ route('roles.edit', ['role' => $role->id]) }}" target="_self" icon="edit"
+                class="text-base font-normal ml-2">
+                {{ __('Edit') }}
+            </x-button>
+        @endcan
     </div>
 @endsection
 
@@ -50,17 +52,19 @@
                 </div>
             </div>
 
-            <form method="POST" action="{{ route('roles.destroy', ['role' => $role->id]) }}" class="mt-5 -mr-5">
-                @csrf
-                @method('DELETE')
+            @can('delete roles')
+                <form method="POST" action="{{ route('roles.destroy', ['role' => $role->id]) }}" class="mt-5 -mr-5">
+                    @csrf
+                    @method('DELETE')
 
-                <div class="flex flex-row justify-end">
-                    <x-button icon="trash" type="submit"
-                        class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
-                        {{ __('Remove this item') }}
-                    </x-button>
-                </div>
-            </form>
+                    <div class="flex flex-row justify-end">
+                        <x-button icon="trash" type="submit"
+                            class="bg-transparent text-on-surface-500 px-0 py-0 hover:text-on-surface-600 hover:bg-transparent">
+                            {{ __('Remove this item') }}
+                        </x-button>
+                    </div>
+                </form>
+            @endcan
         </x-panel>
     </section>
 @endsection

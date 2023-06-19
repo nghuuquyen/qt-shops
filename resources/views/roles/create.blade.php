@@ -51,7 +51,7 @@
                         {{ __('Reset') }}
                     </x-button>
 
-                    <x-button type="submit" icon="document" class="text-base font-normal">
+                    <x-button type="submit" icon="check" class="text-base font-normal">
                         {{ __('Save') }}
                     </x-button>
                 </div>

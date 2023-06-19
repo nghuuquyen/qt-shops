@@ -31,7 +31,7 @@ return new class extends Migration
                     ->on('products')
                     ->constrained()
                     ->cascadeOnUpdate()
-                    ->restrictOnDelete();
+                    ->cascadeOnDelete();
 
             $table->unique([ 'cart_id', 'product_id' ]);
 

@@ -51,11 +51,11 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
 
     Route::resource('orders', OrderController::class)->only(['index', 'show']);
 
-    Route::resource('customers', CustomerController::class)->only(['index', 'show']);
+    Route::resource('customers', CustomerController::class)->only(['index']);
 
     Route::resource('reports', ReportController::class);
 
-    Route::resource('reports.report-files', ReportFileController::class);
+    Route::resource('reports.report-files', ReportFileController::class)->only(['store', 'show']);
 
     Route::resource('roles', RoleController::class);
 });
