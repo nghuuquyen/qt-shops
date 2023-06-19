@@ -63,6 +63,11 @@
             Reports
         </a>
 
+        <a class="{{ Route::is(['roles.index', 'roles.show', 'roles.edit', 'roles.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+            href="{{ route('roles.index') }}">
+            Roles
+        </a>
+
         @if ($hasSetting)
             <livewire:setting-dropdown />
         @endif

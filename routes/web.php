@@ -1,15 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\OrderCompleteController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportFileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderCompleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,4 +56,6 @@ Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
     Route::resource('reports', ReportController::class);
 
     Route::resource('reports.report-files', ReportFileController::class);
+
+    Route::resource('roles', RoleController::class);
 });
