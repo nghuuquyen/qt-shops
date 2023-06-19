@@ -6,12 +6,15 @@
 @tailwind components;
 @tailwind utilities;
 
-[x-cloak] { display: none !important; }
+[x-cloak] { 
+  display: none !important; 
+}
 
-@layer base {
-    :root {
-      --color-primary: 255 115 179;
-      --color-secondary: 111 114 185;
-      /* ... */
-    }
-  }
+/* this css use to customize the autofill background of browser */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: var(--color-on-surface-600);
+}
