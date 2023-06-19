@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page_title')
-    {{ __('Profile') }}
+    {{ __('Settings') }}
 @endsection
 
 @section('page_action')
@@ -15,7 +15,7 @@
 
 @section('main')
     <section class="relative grid grid-cols-1 gap-6">
-        <x-panel icon="cube" header="{{ __('User Profile') }}">
+        <x-panel icon="cube" header="{{ __('Profile') }}">
             <div class="flex flex-col">
                 {{-- line attribute --}}
                 <div class="grid grid-cols-5 pb-6 pt-6 items-top border-b border-on-surface-900">

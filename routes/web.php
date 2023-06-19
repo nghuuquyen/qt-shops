@@ -1,16 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\ReportFileController;
 use App\Http\Controllers\OrderCompleteController;
-use App\Http\Controllers\GenerateReportFileController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReportFileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +43,7 @@ Route::get('/orders/{order}/download-pdf', [OrderController::class, 'downloadPdf
 /**
  * Admin
  */
-Route::group(['prefix' => '/admin'], function () {
+Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
     Route::singleton('profile', ProfileController::class);
 
     Route::resource('products', ProductController::class);
