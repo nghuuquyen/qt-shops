@@ -16,7 +16,8 @@
                                 <span>{{ __($field->getFormattedOptionLabel($text)) }}</span>
                             @else
                                 <x-icon class="mr-2 text-on-surface-900" icon="check-circle" />
-                                <span class="text-on-surface-900">{{ __($field->getFormattedOptionLabel($text)) }}</span>
+                                <span
+                                    class="text-on-surface-900">{{ __($field->getFormattedOptionLabel($text)) }}</span>
                             @endif
                         </div>
                     @endforeach
@@ -25,15 +26,18 @@
                 <div class="text-on-surface-600 grid grid-cols-2 md:grid-cols-3 gap-4 mb-4 w-full">
                     @foreach ($options as $value => $text)
                         <div class="flex flex-row items-center">
-                            <input
-                                class="{{ 'border text-on-surface-600 border-on-surface-300 px-4 py-4 bg-surface ' . ($errors->has($name ?? null) ? ' border-red-500' : '') }}"
+                            <input id="checkbox_list_value_{{ md5($value) }}"
+                                class="{{ 'border text-on-surface-600 border-on-surface-300 px-4 py-4 bg-surface cursor-pointer ' . ($errors->has($name ?? null) ? ' border-red-500' : '') }}"
                                 @if ($field->hasModel()) wire:model="{{ $field->getModel() }}" @endif
                                 @if ($field->hasName()) name="{{ $field->getName() }}[]" @endif
                                 @if ($field->isReadonly()) readonly="true" @endif
                                 @if ($values->search($value) !== false) checked @endif
                                 value="{{ old($field->getName(), $value) }}" type="checkbox" />
 
-                            <span class="font-normal ml-2 text-on-surface-600">{{ __($field->getFormattedOptionLabel($text)) }}</span>
+                            <label for="checkbox_list_value_{{ md5($value) }}"
+                                class="font-normal ml-2 text-on-surface-600 cursor-pointer">
+                                {{ __($field->getFormattedOptionLabel($text)) }}
+                            </label>
                         </div>
                     @endforeach
                 </div>

@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Roles;
 
+use App\Http\Livewire\Forms\Fields\CheckboxListField;
+use App\Http\Livewire\Forms\Fields\InputField;
+use App\Http\Livewire\Forms\Form;
 use App\Models\Permission;
 use Illuminate\Support\Str;
-use App\Http\Livewire\Forms\Form;
-use App\Http\Livewire\Forms\Fields\InputField;
-use App\Http\Livewire\Forms\Fields\CheckboxListField;
 
 class RoleForm extends Form
 {
@@ -33,7 +33,10 @@ class RoleForm extends Form
                     ->map(fn ($permission) => $permission->name)
                     ->toArray()
                 )
-                ->values(fn (mixed $role) => $role->permissions->pluck('name'))
+                ->values(fn (mixed $role) => $role
+                    ? $role->permissions->pluck('name')
+                    : collect([])
+                )
                 ->formatOptionLabel(fn ($text) => Str::title($text)),
         ];
     }
