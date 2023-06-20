@@ -1,20 +1,20 @@
-@extends('layouts.user')
+<x-user-layout>
+    <x-slot name="navigation">
+        <x-navigation :categories="$categories" />
+    </x-slot>
 
-@section('navigation')
-    <x-navigation :categories="$categories" />
-@endsection
+    <x-slot name="main">
+        @foreach ($categories as $category)
+            <x-product-grids :category="$category" :products="$category['products']" />
+        @endforeach
 
-@section('main')
-    @foreach ($categories as $category)
-        <x-product-grids :category="$category" :products="$category['products']" />
-    @endforeach
+        {{-- add more space for avoid cart bar override content --}}
+        <div class="w-full min-h-[150px]"></div>
+    </x-slot>
 
-    {{-- add more space for avoid cart bar override content --}}
-    <div class="w-full min-h-[150px]"></div>
-@endsection
+    <x-slot name="components">
+        <livewire:cart-bar />
 
-@section('components')
-    <livewire:cart-bar />
-
-    <livewire:add-cart-item-popup />
-@endsection
+        <livewire:add-cart-item-popup />
+    </x-slot>
+</x-user-layout>
