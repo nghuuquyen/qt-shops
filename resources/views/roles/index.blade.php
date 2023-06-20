@@ -17,7 +17,7 @@
 @section('main')
     <section>
         <x-panel icon="cube">
-            <livewire:role-table />
+            <livewire:roles.role-table />
         </x-panel>
     </section>
 @endsection

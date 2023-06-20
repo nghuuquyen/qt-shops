@@ -7,7 +7,7 @@
 @section('main')
 <section>
     <x-panel icon="cube">
-        <livewire:order-table />
+        <livewire:orders.order-table />
     </x-panel>
 </section>
 @endsection

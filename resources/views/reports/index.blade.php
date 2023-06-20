@@ -17,7 +17,7 @@
 @section('main')
     <section>
         <x-panel icon="cube">
-            <livewire:report-table />
+            <livewire:reports.report-table />
         </x-panel>
     </section>
 @endsection
