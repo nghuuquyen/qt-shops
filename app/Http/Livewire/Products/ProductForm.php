@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Products;
 
-use App\Http\Livewire\Forms\Fields\InputField;
+use App\Models\Product;
 use App\Http\Livewire\Forms\Form;
+use App\Http\Livewire\Forms\Fields\InputField;
 
 class ProductForm extends Form
 {
@@ -26,7 +27,7 @@ class ProductForm extends Form
 
             InputField::make('price', 'Unit price incl. VAT')
                 ->type('number')
-                ->suffix(fn (mixed $product, string $mode) => $product->currency),
+                ->suffix(fn () => Product::DEFAULT_CURRENCY),
 
             InputField::make('description', 'Description'),
         ];

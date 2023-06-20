@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Products;
 
 use App\Http\Livewire\Datatable\Columns\ImageColumn;
 use App\Http\Livewire\Datatable\Columns\LinkColumn;

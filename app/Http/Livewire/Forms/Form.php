@@ -77,7 +77,23 @@ abstract class Form extends Component
      */
     public function isViewMode(): bool
     {
-        return $this->mode == 'view';
+        return $this->mode == self::MODE_VIEW;
+    }
+    
+    /**
+     * Check is edit mode or not
+     */
+    public function isEditMode(): bool
+    {
+        return $this->mode == self::MODE_EDIT;
+    }
+
+    /**
+     * Check is create mode or not
+     */
+    public function isCreateMode(): bool
+    {
+        return $this->mode == self::MODE_CREATE;
     }
 
     /**

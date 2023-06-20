@@ -23,48 +23,7 @@
 @section('main')
     <section class="relative">
         <x-panel>
-            <div class="flex flex-col">
-                {{-- line attribute --}}
-                <div class="grid grid-cols-5 pb-6 pt-6 items-top border-b border-on-surface-900">
-                    <div class="col-span-1 text-on-surface-500 font-bold">
-                        <label>{{ __('Image') }}</label>
-                    </div>
-                    <div class="col-span-4 text-on-surface-600">
-                        <img class="object-cover h-28 w-28 rounded" src="{{ $product->display_image_url }}?w=150&h=150"
-                            alt="product image" />
-                    </div>
-                </div>
-
-                {{-- line attribute --}}
-                <div class="grid grid-cols-5 pb-6 pt-6 items-top border-b border-on-surface-900">
-                    <div class="col-span-1 text-on-surface-500 font-bold">
-                        <label>{{ __('Name') }}</label>
-                    </div>
-                    <div class="col-span-4 text-on-surface-600">
-                        <span>{{ $product->name }}</span>
-                    </div>
-                </div>
-
-                {{-- line attribute --}}
-                <div class="grid grid-cols-5 pb-6 pt-6 items-top border-b border-on-surface-900">
-                    <div class="col-span-1 text-on-surface-500 font-bold">
-                        <label>{{ __('Unit price incl. VAT') }}</label>
-                    </div>
-                    <div class="col-span-4 text-on-surface-600">
-                        <span>{{ $product->formatted_price }}</span>
-                    </div>
-                </div>
-
-                {{-- line attribute --}}
-                <div class="grid grid-cols-5 pb-6 pt-6 items-top border-b border-on-surface-900">
-                    <div class="col-span-1 text-on-surface-500 font-bold">
-                        <label>{{ __('Description') }}</label>
-                    </div>
-                    <div class="col-span-4 text-on-surface-600">
-                        <span>{{ $product->description }}</span>
-                    </div>
-                </div>
-            </div>
+            <livewire:products.product-form :data="$product" mode="view" />
 
             @can('delete', $product)
                 <form method="POST" action="{{ route('products.destroy', ['product' => $product->id]) }}" class="mt-5 -mr-5">

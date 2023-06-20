@@ -9,17 +9,19 @@
             @if ($form->isViewMode())
                 <span>{{ $field->getValue() }}</span>
             @else
-                <input
-                    class="{{ 'w-full border text-on-surface-600 border-on-surface-300 px-4 py-4 bg-surface ' . ($errors->has($field->getName()) ? ' border-red-500' : '') }}"
-                    type="{{ $field->getType() }}" placeholder="{{ $field->getPlaceholder() }}"
-                    @if ($field->hasModel()) wire:model="{{ $field->getModel() }}" @endif
-                    @if ($field->hasName()) name="{{ $field->getName() }}" @endif
-                    @if ($field->isReadonly()) readonly="true" @endif
-                    @if ($field->hasValue()) value="{{ old($field->getName(), $field->getValue()) }}" @endif />
+                <div class="flex flex-col w-full">
+                    <input
+                        class="{{ 'w-full border text-on-surface-600 border-on-surface-300 px-4 py-4 bg-surface ' . ($errors->has($field->getName()) ? ' border-red-500' : '') }}"
+                        type="{{ $field->getType() }}" placeholder="{{ $field->getPlaceholder() }}"
+                        @if ($field->hasModel()) wire:model="{{ $field->getModel() }}" @endif
+                        @if ($field->hasName()) name="{{ $field->getName() }}" @endif
+                        @if ($field->isReadonly()) readonly="true" @endif
+                        @if ($field->hasValue() || $form->isCreateMode()) value="{{ old($field->getName(), $field->getValue()) }}" @endif />
 
-                @error($field->getName() ?? '')
-                    <span class="text-sm block sm:inline text-red-500">{{ $message }}</span>
-                @enderror
+                    @error($field->getName() ?? '')
+                        <span class="text-sm block sm:inline text-red-500 mt-2">{{ $message }}</span>
+                    @enderror
+                </div>
             @endif
 
             @if ($field->hasSuffix())

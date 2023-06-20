@@ -15,7 +15,7 @@
                     @if ($field->hasModel()) wire:model="{{ $field->getModel() }}" @endif
                     @if ($field->hasName()) name="{{ $field->getName() }}" @endif
                     @if ($field->isReadonly()) readonly="true" @endif
-                    @if ($field->hasValue()) value="{{ old($field->getName(), $field->getValue()) }}" @endif>
+                    @if ($field->hasValue() || $form->isCreateMode()) value="{{ old($field->getName(), $field->getValue()) }}" @endif>
 
                     {{ $slot }}
                 </select>
