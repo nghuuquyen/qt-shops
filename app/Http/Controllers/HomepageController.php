@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\App;
 
 class HomepageController extends Controller
 {
-
     public function index() 
     {   
         $categories = Category::query()->with('products')->get();
