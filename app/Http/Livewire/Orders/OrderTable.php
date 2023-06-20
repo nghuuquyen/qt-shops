@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Orders;
 
 use App\Models\Order;
 use App\Models\Product;

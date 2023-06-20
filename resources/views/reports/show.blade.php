@@ -94,7 +94,7 @@
         </x-panel>
 
         <x-panel icon="cube" header="{{ __('Report Files') }}">
-            <livewire:report-file-table :report="$report" />
+            <livewire:reports.report-file-table :report="$report" />
         </x-panel>
     </section>
 @endsection
