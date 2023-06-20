@@ -6,7 +6,15 @@ use Livewire\Component;
 
 abstract class Form extends Component
 {
+    public const MODE_VIEW = 'view';
+
+    public const MODE_CREATE = 'create';
+
+    public const MODE_EDIT = 'edit';
+
     public mixed $data = null;
+
+    public string $mode = 'create';
 
     /**
      * Form method
@@ -21,14 +29,14 @@ abstract class Form extends Component
     /**
      * Get form action
      */
-    abstract public function getAction(mixed $data): string;
+    abstract public function getAction(mixed $data, string $mode): string;
 
     /**
      * Get form request method. This is request method for Laravel Router
      *
      * @return void
      */
-    abstract public function getMethod(mixed $data): string;
+    abstract public function getMethod(mixed $data, string $mode): string;
 
     /**
      * Get form method
@@ -37,7 +45,7 @@ abstract class Form extends Component
      */
     public function getFormMethod()
     {
-        return $this->getMethod($this->getData()) == 'GET' ? 'GET' : 'POST';
+        return $this->getMethod($this->getData(), $this->getMode()) == 'GET' ? 'GET' : 'POST';
     }
 
     /**
@@ -57,19 +65,34 @@ abstract class Form extends Component
     }
 
     /**
+     * Get mode
+     */
+    public function getMode(): string
+    {
+        return $this->mode;
+    }
+
+    /**
+     * Check is view mode or not
+     */
+    public function isViewMode(): bool
+    {
+        return $this->mode == 'view';
+    }
+
+    /**
      * Component mount
      *
      * @return void
      */
-    public function mount(mixed $data = null)
+    public function mount(mixed $data = null, $mode = 'create')
     {
         $this->data = $data;
+        $this->mode = $mode;
     }
 
     /**
      * Setup and return fields data
-     *
-     * @return array
      */
     public function setupFields(): array
     {

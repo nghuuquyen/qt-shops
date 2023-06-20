@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forms\Fields;
 
 use App\Http\Livewire\Forms\Form;
+use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 
@@ -25,6 +26,8 @@ abstract class Field
     public ?string $value = null;
 
     public ?Form $form = null;
+
+    public ?Closure $suffix = null;
 
     /**
      * Construct
@@ -74,6 +77,16 @@ abstract class Field
     }
 
     /**
+     * Set suffix
+     */
+    public function suffix(Closure $suffix): Field
+    {
+        $this->suffix = $suffix;
+
+        return $this;
+    }
+
+    /**
      * Set readonly
      */
     public function readonly(bool $readonly = false): Field
@@ -81,6 +94,26 @@ abstract class Field
         $this->readonly = $readonly;
 
         return $this;
+    }
+
+    /**
+     * Check has suffix or not
+     */
+    public function hasSuffix(): bool
+    {
+        return $this->suffix != null;
+    }
+
+    /**
+     * Get suffix
+     */
+    public function getSuffix(): string
+    {
+        if (! $this->suffix) {
+            return '';
+        }
+
+        return ($this->suffix)($this->getForm()->getData(), $this->getForm()->getMode());
     }
 
     /**

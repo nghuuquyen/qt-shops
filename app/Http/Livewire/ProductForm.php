@@ -7,15 +7,15 @@ use App\Http\Livewire\Forms\Form;
 
 class ProductForm extends Form
 {
-    public function getMethod(mixed $data): string
+    public function getMethod(mixed $product, string $mode): string
     {
-        return isset($data->id) ? 'PUT' : 'POST';
+        return $mode == Form::MODE_EDIT ? 'PUT' : 'POST';
     }
 
-    public function getAction(mixed $data): string
+    public function getAction(mixed $product, string $mode): string
     {
-        return isset($data->id)
-            ? route('products.update', ['product' => $data->id])
+        return $mode == Form::MODE_EDIT
+            ? route('products.update', ['product' => $product->id])
             : route('products.store');
     }
 
@@ -24,7 +24,9 @@ class ProductForm extends Form
         return [
             InputField::make('name', 'Name'),
 
-            InputField::make('price', 'Unit price incl. VAT')->type('number'),
+            InputField::make('price', 'Unit price incl. VAT')
+                ->type('number')
+                ->suffix(fn (mixed $product, string $mode) => $product->currency),
 
             InputField::make('description', 'Description'),
         ];
