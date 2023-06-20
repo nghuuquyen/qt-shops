@@ -5,9 +5,11 @@
 
     {{-- screen title --}}
     <div class="flex flex-row bg-surface border-t border-on-surface-500">
-        <div class="max-w-screen-xl m-auto flex flex-row  justify-between items-center lg:p-10 p-4 w-full ">
-            <h1 class="text-on-surface-600 font-bold text-3xl ml-2">@yield('page_title')</h1>
-            @yield('page_action')
+        <div class="max-w-screen-xl m-auto flex flex-col md:flex-row justify-between items-center lg:p-10 p-4 w-full ">
+            <h1 class="text-on-surface-600 font-bold text-3xl ml-2 w-full text-center md:text-left">@yield('page_title')</h1>
+            <div class="w-full justify-end mt-2 md:mt-0">
+                @yield('page_action')
+            </div>
         </div>
     </div>
 

@@ -33,14 +33,26 @@
                     </div>
 
                     {{-- line attribute --}}
-                    <div class="grid grid-cols-5 pb-6 pt-6 items-center border-b border-on-surface-900">
+                    <div class="grid grid-cols-5 pb-6 pt-6 border-b border-on-surface-900 items-base">
                         <div class="col-span-1 text-on-surface-500 font-bold">
                             <label>{{ __('Permissions') }}</label>
                         </div>
-                        <div class="col-span-4 text-on-surface-600 grid grid-cols-3 gap-4">
-                            @foreach ($permissions as $permission)
-                                <x-checkbox name="permissions[]" label="{{ Str::headline($permission->name) }}"
-                                    selected="{{ $permission->checked }}" value="{{ $permission->name }}"> </x-checkbox>
+
+                        <div class="col-span-4 text-on-surface-600">
+                            @foreach ($permissions->pluck('group')->unique() as $group)
+                                <div class="grid grid-cols-1 gap-4 md:mb-10">
+                                    <div class="mb-4 pb-2 border-b border-on-surface-500">
+                                        <span class="text-on-surface-500 text-sm uppercase">{{ Str::title($group) }}</span>
+                                    </div>
+
+                                    <div class="text-on-surface-600 grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                                        @foreach ($permissions->filter(fn($item) => $item->group == $group) as $permission)
+                                            <x-checkbox name="permissions[]" label="{{ Str::headline($permission->name) }}"
+                                                selected="{{ $permission->checked }}" value="{{ $permission->name }}">
+                                            </x-checkbox>
+                                        @endforeach
+                                    </div>
+                                </div>
                             @endforeach
                         </div>
                     </div>

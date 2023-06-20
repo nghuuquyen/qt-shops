@@ -40,14 +40,22 @@
                         <label>{{ __('Permissions') }}</label>
                     </div>
                     <div class="col-span-4 text-on-surface-600">
-                        <div class="col-span-4 text-on-surface-600 grid grid-cols-3 gap-4">
-                            @foreach ($role->permissions as $permission)
-                                <x-checkbox name="permission" label="{{ Str::headline($permission->name) }}"
-                                    selected="true"
-                                    readonly="true"
-                                    value="{{ $permission->name }}"> </x-checkbox>
-                            @endforeach
-                        </div>
+                        @foreach ($role->permissions->pluck('group')->unique() as $group)
+                            <div class="grid grid-cols-1 gap-4 md:mb-10">
+                                <div class="mb-4 pb-2 border-b border-on-surface-500">
+                                    <span class="text-on-surface-500 text-sm uppercase">{{ Str::title($group) }}</span>
+                                </div>
+
+                                <div class="text-on-surface-600 grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+                                    @foreach ($role->permissions->filter(fn($item) => $item->group == $group) as $permission)
+                                        <div class="flex flex-row items-center">
+                                            <x-icon class="mr-2 text-primary-600" icon="check-circle" />
+                                            <span>{{ Str::title($permission->name) }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

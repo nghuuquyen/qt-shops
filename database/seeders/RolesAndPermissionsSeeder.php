@@ -21,41 +21,41 @@ class RolesAndPermissionsSeeder extends Seeder
         /**
          * Create permissions
          */
-        Permission::create(['name' => 'viewAny products']);
-        Permission::create(['name' => 'view products']);
-        Permission::create(['name' => 'create products']);
-        Permission::create(['name' => 'update products']);
-        Permission::create(['name' => 'delete products']);
+        Permission::create(['name' => 'viewAny products', 'group' => 'Product Management']);
+        Permission::create(['name' => 'view products', 'group' => 'Product Management']);
+        Permission::create(['name' => 'create products', 'group' => 'Product Management']);
+        Permission::create(['name' => 'update products', 'group' => 'Product Management']);
+        Permission::create(['name' => 'delete products', 'group' => 'Product Management']);
 
-        Permission::create(['name' => 'viewAny orders']);
-        Permission::create(['name' => 'view orders']);
-        Permission::create(['name' => 'create orders']);
-        Permission::create(['name' => 'update orders']);
-        Permission::create(['name' => 'delete orders']);
+        Permission::create(['name' => 'viewAny orders', 'group' => 'Order Management']);
+        Permission::create(['name' => 'view orders', 'group' => 'Order Management']);
+        Permission::create(['name' => 'create orders', 'group' => 'Order Management']);
+        Permission::create(['name' => 'update orders', 'group' => 'Order Management']);
+        Permission::create(['name' => 'delete orders', 'group' => 'Order Management']);
 
-        Permission::create(['name' => 'viewAny customers']);
-        Permission::create(['name' => 'view customers']);
-        Permission::create(['name' => 'create customers']);
-        Permission::create(['name' => 'update customers']);
-        Permission::create(['name' => 'delete customers']);
+        Permission::create(['name' => 'viewAny customers', 'group' => 'Customer Management']);
+        Permission::create(['name' => 'view customers', 'group' => 'Customer Management']);
+        Permission::create(['name' => 'create customers', 'group' => 'Customer Management']);
+        Permission::create(['name' => 'update customers', 'group' => 'Customer Management']);
+        Permission::create(['name' => 'delete customers', 'group' => 'Customer Management']);
 
-        Permission::create(['name' => 'viewAny reports']);
-        Permission::create(['name' => 'view reports']);
-        Permission::create(['name' => 'create reports']);
-        Permission::create(['name' => 'update reports']);
-        Permission::create(['name' => 'delete reports']);
+        Permission::create(['name' => 'viewAny reports', 'group' => 'Report Management']);
+        Permission::create(['name' => 'view reports', 'group' => 'Report Management']);
+        Permission::create(['name' => 'create reports', 'group' => 'Report Management']);
+        Permission::create(['name' => 'update reports', 'group' => 'Report Management']);
+        Permission::create(['name' => 'delete reports', 'group' => 'Report Management']);
 
-        Permission::create(['name' => 'viewAny roles']);
-        Permission::create(['name' => 'view roles']);
-        Permission::create(['name' => 'create roles']);
-        Permission::create(['name' => 'update roles']);
-        Permission::create(['name' => 'delete roles']);
+        Permission::create(['name' => 'viewAny roles', 'group' => 'User Management']);
+        Permission::create(['name' => 'view roles', 'group' => 'User Management']);
+        Permission::create(['name' => 'create roles', 'group' => 'User Management']);
+        Permission::create(['name' => 'update roles', 'group' => 'User Management']);
+        Permission::create(['name' => 'delete roles', 'group' => 'User Management']);
 
-        Permission::create(['name' => 'viewAny users']);
-        Permission::create(['name' => 'view users']);
-        Permission::create(['name' => 'create users']);
-        Permission::create(['name' => 'update users']);
-        Permission::create(['name' => 'delete users']);
+        Permission::create(['name' => 'viewAny users', 'group' => 'User Management']);
+        Permission::create(['name' => 'view users', 'group' => 'User Management']);
+        Permission::create(['name' => 'create users', 'group' => 'User Management']);
+        Permission::create(['name' => 'update users', 'group' => 'User Management']);
+        Permission::create(['name' => 'delete users', 'group' => 'User Management']);
 
         /**
          *  Create roles and assign created permissions
