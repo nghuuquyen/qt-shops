@@ -37,7 +37,7 @@ class OrderControllerTest extends TestCase
     {
         $order = Order::factory()->create();
 
-        $this->get(route('orders.show', [ 'order' => $order->id ]))
+        $this->get(route('checkout.show', [ 'order' => $order->id ]))
             ->assertUnauthorized();
     }
 

@@ -1,16 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\ReportFileController;
 use App\Http\Controllers\OrderCompleteController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReportFileController;
+use App\Http\Controllers\RoleController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,22 +24,13 @@ use App\Http\Controllers\OrderCompleteController;
 */
 
 /**
- * General
+ * User
  */
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/order-complete/{order}', OrderCompleteController::class)->name('orders.complete');
-
-/**
- * Checkout
- */
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
-
-/**
- * Order
- */
-Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
-Route::get('/orders/{order}/download-pdf', [OrderController::class, 'downloadPdf'])->name('orders.downloadPdf');
+Route::get('/checkout/{order}', [CheckoutController::class, 'show'])->name('checkout.show');
 
 /**
  * Admin

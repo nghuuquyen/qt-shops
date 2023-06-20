@@ -14,7 +14,7 @@
                     <span class="font-bold text-on-background">{{ $order->email }}</span>
                 </p>
 
-                <x-button class="mt-5 uppercase" href="{{ $order->getPath() }}">
+                <x-button class="mt-5 uppercase" href="{{ $order->getCheckoutConfirmtionPath() }}">
                     {{ __('View order confirmtion') }}
                 </x-button>
             </div>

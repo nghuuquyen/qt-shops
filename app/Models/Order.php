@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\URL;
-use Spatie\Browsershot\Browsershot;
+
 class Order extends Model
 {
     use HasFactory;
@@ -15,13 +15,8 @@ class Order extends Model
         return $this->belongsTo(Cart::class);
     }
 
-    public function getPath(): string
+    public function getCheckoutConfirmtionPath(): string
     {
-        return URL::signedRoute('orders.show', [ 'order' => $this->id ]);
-    }
-
-    public function exportPdf()
-    {
-        return URL::signedRoute('orders.downloadPdf', [ 'order' => $this->id ]);
+        return URL::signedRoute('checkout.show', ['order' => $this->id]);
     }
 }

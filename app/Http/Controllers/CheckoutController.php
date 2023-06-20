@@ -39,4 +39,13 @@ class CheckoutController extends Controller
 
         return redirect(URL::signedRoute('orders.complete', [ 'order' => $order->id ]));
     }
+
+    public function show(Request $request, Order $order)
+    {
+        if (! $request->hasValidSignature()) {
+            abort(401);
+        }
+
+        return view('checkout.show', compact('order'));
+    }
 }

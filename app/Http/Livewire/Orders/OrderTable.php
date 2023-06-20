@@ -2,15 +2,11 @@
 
 namespace App\Http\Livewire\Orders;
 
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\Category;
-use App\Http\Livewire\Datatable\Table;
-use Illuminate\Database\Eloquent\Builder;
 use App\Http\Livewire\Datatable\Columns\LinkColumn;
 use App\Http\Livewire\Datatable\Columns\TextColumn;
-use App\Http\Livewire\Datatable\Columns\ImageColumn;
-use App\Http\Livewire\Datatable\Filters\SelectFilter;
+use App\Http\Livewire\Datatable\Table;
+use App\Models\Order;
+use Illuminate\Database\Eloquent\Builder;
 
 class OrderTable extends Table
 {
@@ -31,16 +27,9 @@ class OrderTable extends Table
                 ->value(fn ($order) => [
                     [
                         'title' => 'View',
-                        'value' => $order->getPath(),
+                        'value' => route('orders.show', ['order' => $order->id]),
                     ],
                 ]),
-        ];
-    }
-
-    protected function getFilters(): array
-    {
-        return [
-            //
         ];
     }
 

@@ -2,11 +2,10 @@
 
 namespace Tests\Unit\Models;
 
-use Tests\TestCase;
 use App\Models\Cart;
 use App\Models\Order;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class OrderModelTest extends TestCase
 {
@@ -23,10 +22,8 @@ class OrderModelTest extends TestCase
     {
         $order = Order::factory()->create();
 
-        $path = $order->getPath();
+        $path = $order->getCheckoutConfirmtionPath();
 
-        $this->loginAsAministrator();
-
-        $this->get($path)->assertOk()->assertViewIs('orders.show');
+        $this->get($path)->assertOk()->assertViewIs('checkout.show');
     }
 }
