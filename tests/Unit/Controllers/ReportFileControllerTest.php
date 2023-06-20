@@ -14,6 +14,16 @@ class ReportFileControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Call this template method before each test method is run.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->loginAsAministrator();
+    }
+
     public function test_able_to_generate_sale_report_file()
     {
         Storage::fake(Report::REPORT_FILE_DISK);

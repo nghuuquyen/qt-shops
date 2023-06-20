@@ -14,6 +14,16 @@ class OrderControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Call this template method before each test method is run.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->loginAsAministrator();
+    }
+
     public function test_can_render_order_detail_page()
     {
         $order = Order::factory()->create();

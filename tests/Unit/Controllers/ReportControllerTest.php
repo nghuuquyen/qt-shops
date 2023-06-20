@@ -10,6 +10,16 @@ class ReportControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    /**
+     * Call this template method before each test method is run.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->loginAsAministrator();
+    }
+
     public function test_can_render_index_page()
     {
         $reports = Report::factory()->count(5)->create();

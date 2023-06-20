@@ -25,6 +25,8 @@ class OrderModelTest extends TestCase
 
         $path = $order->getPath();
 
+        $this->loginAsAministrator();
+
         $this->get($path)->assertOk()->assertViewIs('orders.show');
     }
 }
