@@ -26,7 +26,8 @@ class ProfileForm extends Form
         return [
             TagsInputField::make('roles', 'Roles')
                 ->values(fn (mixed $user) => $user->roles->pluck('name'))
-                ->formatOptionLabel(fn ($text) => Str::title($text)),
+                ->formatOptionLabel(fn ($text) => Str::title($text))
+                ->hideOnEdit(),
 
             InputField::make('name', 'Name'),
 
@@ -39,7 +40,8 @@ class ProfileForm extends Form
                     ->toArray()
                 )
                 ->values(fn (mixed $user) => $user->getAllPermissions()->pluck('name'))
-                ->formatOptionLabel(fn ($text) => Str::title($text)),
+                ->formatOptionLabel(fn ($text) => Str::title($text))
+                ->hideOnEdit(),
         ];
     }
 }

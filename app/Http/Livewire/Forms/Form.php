@@ -6,15 +6,15 @@ use Livewire\Component;
 
 abstract class Form extends Component
 {
-    public const MODE_VIEW = 'view';
-
     public const MODE_CREATE = 'create';
+
+    public const MODE_VIEW = 'view';
 
     public const MODE_EDIT = 'edit';
 
     public mixed $data = null;
 
-    public string $mode = 'create';
+    public string $mode = self::MODE_CREATE;
 
     /**
      * Form method

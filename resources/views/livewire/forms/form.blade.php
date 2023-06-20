@@ -3,7 +3,9 @@
     <section>
         <div class="flex flex-col">
             @foreach ($fields as $field)
-                {{ $field->render($form) }}
+                @if ($field->isVisible())
+                    {{ $field->render($form) }}
+                @endif
             @endforeach
         </div>
     </section>
@@ -15,7 +17,9 @@
 
         <div class="flex flex-col">
             @foreach ($fields as $field)
-                {{ $field->render($form) }}
+                @if ($field->isVisible())
+                    {{ $field->render($form) }}
+                @endif
             @endforeach
         </div>
 

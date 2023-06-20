@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire\Forms\Fields;
 
-use App\Http\Livewire\Forms\Form;
 use Closure;
-use Illuminate\Support\Arr;
 use Illuminate\View\View;
+use Illuminate\Support\Arr;
+use App\Http\Livewire\Forms\Form;
+use App\Http\Livewire\Forms\Fields\Traits\WithColumnVisibility;
 
 abstract class Field
 {
+    use WithColumnVisibility;
+
     const DEFAULT_TYPE = 'text';
 
     public ?string $name = null;
