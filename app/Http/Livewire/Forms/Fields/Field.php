@@ -29,6 +29,8 @@ abstract class Field
 
     public ?Closure $suffix = null;
 
+    public bool $explode_as_tags = false;
+
     /**
      * Construct
      */
@@ -221,6 +223,24 @@ abstract class Field
     public function hasValue(): bool
     {
         return $this->form && $this->getFieldValue() != null;
+    }
+
+    /**
+     * On view mode display data as tags format
+     */
+    public function onViewExplodeAsTags(): Field
+    {
+        $this->explode_as_tags = true;
+
+        return $this;
+    }
+
+    /**
+     * Check is explode as tags on view or not
+     */
+    public function isExplodeAsTags(): bool
+    {
+        return $this->explode_as_tags;
     }
 
     /**

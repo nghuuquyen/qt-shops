@@ -7,7 +7,13 @@
     <div class="col-span-4 text-on-surface-600">
         <div class="flex flex-row w-full items-center">
             @if ($form->isViewMode())
-                <span>{{ $field->getValue() }}</span>
+                @if ($field->isExplodeAsTags())
+                    @foreach (explode(',', $field->getValue()) as $text)
+                        <span class="bg-surface-800 px-4 py-2 rounded-lg mr-2">{{ $text }}</span>
+                    @endforeach
+                @else
+                    <span>{{ $field->getValue() }}</span>
+                @endif
             @else
                 <div class="flex flex-col w-full">
                     <input

@@ -17,7 +17,17 @@
                     @if ($field->isReadonly()) readonly="true" @endif
                     @if ($field->hasValue() || $form->isCreateMode()) value="{{ old($field->getName(), $field->getValue()) }}" @endif>
 
-                    {{ $slot }}
+                    <option value="" disabled>{{ __('Please choose') }}</option>
+
+                    @php
+                        $selected = old($field->getName(), $field->getValue());
+                    @endphp
+
+                    @foreach ($options as $option)
+                        <option value="{{ $option['value'] }}" @if ($selected == $option['value']) selected @endif>
+                            {{ $option['text'] }}
+                        </option>
+                    @endforeach
                 </select>
                 @error($field->getName() ?? '')
                     <span class="text-sm block sm:inline text-red-500">{{ $message }}</span>

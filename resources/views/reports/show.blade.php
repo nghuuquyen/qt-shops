@@ -34,49 +34,8 @@
 @section('main')
     <section class="relative grid grid-cols-1 gap-6">
         <x-panel icon="cube" header="{{ __('Informations') }}">
-            <div class="flex flex-col">
-                {{-- line attribute --}}
-                <div class="grid grid-cols-5 pb-6 pt-6 items-top border-b border-on-surface-900">
-                    <div class="col-span-1 text-on-surface-500 font-bold">
-                        <label>{{ __('Title') }}</label>
-                    </div>
-                    <div class="col-span-4 text-on-surface-600">
-                        <span>{{ $report->title }}</span>
-                    </div>
-                </div>
 
-                {{-- line attribute --}}
-                <div class="grid grid-cols-5 pb-6 pt-6 items-top border-b border-on-surface-900">
-                    <div class="col-span-1 text-on-surface-500 font-bold">
-                        <label>{{ __('Type') }}</label>
-                    </div>
-                    <div class="col-span-4 text-on-surface-600">
-                        <span>{{ Str::headline($report->type) }}</span>
-                    </div>
-                </div>
-
-                {{-- line attribute --}}
-                <div class="grid grid-cols-5 pb-6 pt-6 items-top border-b border-on-surface-900">
-                    <div class="col-span-1 text-on-surface-500 font-bold">
-                        <label>{{ __('Schedule') }}</label>
-                    </div>
-                    <div class="col-span-4 text-on-surface-600">
-                        <span>{{ Str::ucfirst($report->schedule) }}</span>
-                    </div>
-                </div>
-
-                {{-- line attribute --}}
-                <div class="grid grid-cols-5 pb-6 pt-6 items-top border-b border-on-surface-900">
-                    <div class="col-span-1 text-on-surface-500 font-bold">
-                        <label>{{ __('Notify To') }}</label>
-                    </div>
-                    <div class="col-span-4 text-on-surface-600">
-                        @foreach (explode(',', $report->notify_to) as $to)
-                            <span class="bg-surface-800 px-4 py-2 rounded-lg">{{ $to }}</span>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
+            <livewire:reports.report-form :data="$report" mode="view" />
 
             @can('delete', $report)
                 <form method="POST" action="{{ route('reports.destroy', ['report' => $report->id]) }}" class="mt-5 -mr-5">
