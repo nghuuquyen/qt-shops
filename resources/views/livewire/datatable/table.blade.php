@@ -53,7 +53,7 @@
                 @endif
 
                 <div class="flex">
-                    <button x-ref="button" x-on:click="toggle()" :aria-expanded="open"
+                    <button x-ref="button" :aria-expanded="open"
                         wire:click="$refresh"
                         :aria-controls="$id('dropdown-button')" type="button"
                         class="text-on-surface-600 active:translate-y-1 flex flex-row justify-center items-center bg-surface-800 py-4 px-4 rounded ml2 md:ml-5">
