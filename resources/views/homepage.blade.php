@@ -13,8 +13,8 @@
     </x-slot>
 
     <x-slot name="components">
-        <livewire:cart-bar />
+        <livewire:checkout.cart-bar />
 
-        <livewire:add-cart-item-popup />
+        <livewire:checkout.add-cart-item-popup />
     </x-slot>
 </x-user-layout>

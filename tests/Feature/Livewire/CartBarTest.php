@@ -3,11 +3,9 @@
 namespace Tests\Feature\Livewire;
 
 use App\Events\LivewireEvent;
-use App\Http\Livewire\CartBar;
+use App\Http\Livewire\Checkout\CartBar;
 use App\Models\Cart;
 use App\Models\CartItem;
-use App\Models\Product;
-use App\Services\CartService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;

@@ -4,7 +4,7 @@ namespace Tests\Feature\Livewire;
 
 use App\Events\BrowserEvent;
 use App\Events\LivewireEvent;
-use App\Http\Livewire\AddCartItemPopup;
+use App\Http\Livewire\Checkout\AddCartItemPopup;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;

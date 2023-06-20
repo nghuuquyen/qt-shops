@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Checkout;
 
 use App\Models\Cart;
 use Livewire\Component;

@@ -19,7 +19,7 @@ class CheckoutControllerTest extends TestCase
     {
         $this->get(route('checkout.index'))
             ->assertOk()
-            ->assertViewIs('checkout');
+            ->assertViewIs('checkout.index');
     }
 
     public function test_display_correct_cart_data()

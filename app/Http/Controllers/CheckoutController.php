@@ -14,7 +14,7 @@ class CheckoutController extends Controller
 {
     public function index(CartService $cart)
     {
-        return view('checkout', [
+        return view('checkout.index', [
             'cart' => $cart->getCart(),
         ]);
     }
