@@ -5,9 +5,9 @@ namespace App\Http\Livewire;
 use App\Http\Livewire\Datatable\Columns\LinkColumn;
 use App\Http\Livewire\Datatable\Columns\TextColumn;
 use App\Http\Livewire\Datatable\Table;
+use App\Models\Role;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
-use Spatie\Permission\Models\Role;
 
 class RoleTable extends Table
 {

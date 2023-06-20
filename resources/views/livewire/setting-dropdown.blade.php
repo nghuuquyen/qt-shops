@@ -1,4 +1,4 @@
-<div class="flex justify-center absolute right-12 top-5 z-50 rounded-lg">
+<div class="flex justify-center absolute right-12 top-5 z-20 rounded-lg">
     <div x-data="{
         open: false,
         selectedTheme: @entangle('theme'),

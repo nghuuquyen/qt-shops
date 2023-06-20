@@ -1,4 +1,4 @@
-<div x-data="{ offcanvas: false }" class="z-10 fixed top-0 left-0 right-0 bottom-0" style="display: none;" x-show="offcanvas">
+<div x-data="{ offcanvas: false }" class="z-50 fixed top-0 left-0 right-0 bottom-0" style="display: none;" x-show="offcanvas">
     <div class="h-full" x-on:display-offcanvas.window="offcanvas = true" x-on:close-offcanvas.window="offcanvas = false">
         <div x-show="offcanvas" x-transition:enter="transition fade-in duration-500"
             x-transition:leave="transition fade-out duration-200" x-transition:enter-start="opacity-0"

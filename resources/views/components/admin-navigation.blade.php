@@ -71,7 +71,7 @@
             </a>
         @endcan
 
-        @can('viewAny', \Spatie\Permission\Models\Role::class)
+        @can('viewAny', \App\Models\Role::class)
             <a class="{{ Route::is(['roles.index', 'roles.show', 'roles.edit', 'roles.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
                 href="{{ route('roles.index') }}">
                 Roles

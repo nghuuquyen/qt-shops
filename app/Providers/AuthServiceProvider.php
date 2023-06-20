@@ -3,15 +3,15 @@
 namespace App\Providers;
 
 use App\Models\Order;
-use App\Models\Report;
 use App\Models\Product;
+use App\Models\Report;
 use App\Models\ReportFile;
-use App\Policies\RolePolicy;
+use App\Models\Role;
 use App\Policies\OrderPolicy;
-use App\Policies\ReportPolicy;
 use App\Policies\ProductPolicy;
 use App\Policies\ReportFilePolicy;
-use Spatie\Permission\Models\Role;
+use App\Policies\ReportPolicy;
+use App\Policies\RolePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

@@ -6,7 +6,7 @@
 
 @section('page_action')
     <div class="flex flex-row justify-end">
-        @can('create', \Spatie\Permission\Models\Role::class)
+        @can('create', \App\Models\Role::class)
             <x-button href="{{ route('roles.create') }}" target="_self" icon="plus" class="text-base font-normal">
                 {{ __('Create') }}
             </x-button>
