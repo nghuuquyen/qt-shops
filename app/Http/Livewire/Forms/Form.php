@@ -12,6 +12,12 @@ abstract class Form extends Component
 
     public const MODE_EDIT = 'edit';
 
+    public const METHOD_GET = 'GET';
+
+    public const METHOD_PUT = 'PUT';
+
+    public const METHOD_POST = 'POST';
+
     public mixed $data = null;
 
     public string $mode = self::MODE_CREATE;
@@ -19,7 +25,7 @@ abstract class Form extends Component
     /**
      * Form method
      */
-    protected string $method = 'POST';
+    protected string $method = self::METHOD_POST;
 
     /**
      * Get form fields
@@ -36,7 +42,10 @@ abstract class Form extends Component
      *
      * @return void
      */
-    abstract public function getMethod(mixed $data, string $mode): string;
+    public function getMethod(mixed $user, string $mode): string
+    {
+        return $mode == Form::MODE_EDIT ? Form::METHOD_PUT : Form::METHOD_POST;
+    }
 
     /**
      * Get form method
@@ -45,7 +54,9 @@ abstract class Form extends Component
      */
     public function getFormMethod()
     {
-        return $this->getMethod($this->getData(), $this->getMode()) == 'GET' ? 'GET' : 'POST';
+        return $this->getMethod($this->getData(), $this->getMode()) == self::METHOD_GET
+            ? self::METHOD_GET
+            : self::METHOD_POST;
     }
 
     /**
@@ -79,7 +90,7 @@ abstract class Form extends Component
     {
         return $this->mode == self::MODE_VIEW;
     }
-    
+
     /**
      * Check is edit mode or not
      */

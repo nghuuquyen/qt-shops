@@ -11,11 +11,6 @@ use Illuminate\Support\Str;
 
 class ProfileForm extends Form
 {
-    public function getMethod(mixed $user, string $mode): string
-    {
-        return 'PUT';
-    }
-
     public function getAction(mixed $user, string $mode): string
     {
         return route('profile.update');
@@ -24,16 +19,16 @@ class ProfileForm extends Form
     public function getFields(): array
     {
         return [
-            TagsInputField::make('roles', 'Roles')
+            TagsInputField::make('roles')
                 ->values(fn (mixed $user) => $user->roles->pluck('name'))
                 ->formatOptionLabel(fn ($text) => Str::title($text))
                 ->hideOnEdit(),
 
-            InputField::make('name', 'Name'),
+            InputField::make('name'),
 
-            InputField::make('email', 'Email'),
+            InputField::make('email'),
 
-            CheckboxListField::make('permissions', 'Permissions')
+            CheckboxListField::make('permissions')
                 ->options(fn () => Permission::all()
                     ->keyBy('name')
                     ->map(fn ($permission) => $permission->name)

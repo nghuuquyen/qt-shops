@@ -10,11 +10,6 @@ use Illuminate\Support\Str;
 
 class ReportForm extends Form
 {
-    public function getMethod(mixed $report, string $mode): string
-    {
-        return $mode == Form::MODE_EDIT ? 'PUT' : 'POST';
-    }
-
     public function getAction(mixed $report, string $mode): string
     {
         return $mode == Form::MODE_EDIT
@@ -25,9 +20,9 @@ class ReportForm extends Form
     public function getFields(): array
     {
         return [
-            InputField::make('title', 'Title'),
+            InputField::make('title'),
 
-            SelectField::make('type', 'Type')
+            SelectField::make('type')
                 ->options(fn () => [
                     [
                         'value' => Report::SALE_REPORT,
@@ -43,7 +38,7 @@ class ReportForm extends Form
                     ],
                 ]),
 
-            SelectField::make('schedule', 'Schedule')
+            SelectField::make('schedule')
                 ->options(fn () => [
                     [
                         'value' => Report::SCHEDULE_DAILY,
@@ -55,8 +50,7 @@ class ReportForm extends Form
                     ],
                 ]),
 
-            InputField::make('notify_to', 'Notify To')
-                ->onViewExplodeAsTags(),
+            InputField::make('notify_to')->onViewExplodeAsTags(),
         ];
     }
 }

@@ -2,17 +2,12 @@
 
 namespace App\Http\Livewire\Products;
 
-use App\Models\Product;
-use App\Http\Livewire\Forms\Form;
 use App\Http\Livewire\Forms\Fields\InputField;
+use App\Http\Livewire\Forms\Form;
+use App\Models\Product;
 
 class ProductForm extends Form
 {
-    public function getMethod(mixed $product, string $mode): string
-    {
-        return $mode == Form::MODE_EDIT ? 'PUT' : 'POST';
-    }
-
     public function getAction(mixed $product, string $mode): string
     {
         return $mode == Form::MODE_EDIT
@@ -23,13 +18,19 @@ class ProductForm extends Form
     public function getFields(): array
     {
         return [
-            InputField::make('name', 'Name'),
+            InputField::make('name'),
+
+            InputField::make('display_image_url', 'Display Image'),
+
+            InputField::make('formatted_price', 'Unit price incl. VAT')
+                ->hideOnEdit(),
 
             InputField::make('price', 'Unit price incl. VAT')
                 ->type('number')
-                ->suffix(fn () => Product::DEFAULT_CURRENCY),
+                ->suffix(fn () => Product::DEFAULT_CURRENCY)
+                ->hideOnView(),
 
-            InputField::make('description', 'Description'),
+            InputField::make('description'),
         ];
     }
 }

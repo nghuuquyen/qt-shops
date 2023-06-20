@@ -10,11 +10,6 @@ use Illuminate\Support\Str;
 
 class RoleForm extends Form
 {
-    public function getMethod(mixed $role, string $mode): string
-    {
-        return $mode == Form::MODE_EDIT ? 'PUT' : 'POST';
-    }
-
     public function getAction(mixed $role, string $mode): string
     {
         return $mode == Form::MODE_EDIT
@@ -25,9 +20,9 @@ class RoleForm extends Form
     public function getFields(): array
     {
         return [
-            InputField::make('name', 'Name'),
+            InputField::make('name'),
 
-            CheckboxListField::make('permissions', 'Permissions')
+            CheckboxListField::make('permissions')
                 ->options(fn () => Permission::all()
                     ->keyBy('name')
                     ->map(fn ($permission) => $permission->name)

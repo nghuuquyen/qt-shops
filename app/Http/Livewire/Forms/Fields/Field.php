@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Forms\Fields;
 
-use Closure;
-use Illuminate\View\View;
-use Illuminate\Support\Arr;
-use App\Http\Livewire\Forms\Form;
 use App\Http\Livewire\Forms\Fields\Traits\WithColumnVisibility;
+use App\Http\Livewire\Forms\Form;
+use Closure;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 abstract class Field
 {
@@ -37,16 +38,17 @@ abstract class Field
     /**
      * Construct
      */
-    public function __construct(?string $name, ?string $label)
+    public function __construct(string $name, string $label = null)
     {
         $this->name = $name;
-        $this->label = $label;
+
+        $this->label = $label ? $label : Str::title(str_replace('_', ' ', $name));
     }
 
     /**
      * Make column instance
      */
-    public static function make(?string $name, ?string $label): Field
+    public static function make(?string $name, string $label = null): Field
     {
         return new static($name, $label);
     }
