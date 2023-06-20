@@ -5,7 +5,7 @@
 @endsection
 
 @section('page_action')
-    @can('create reports')
+    @can('create', \App\Models\Report::class)
         <div class="flex flex-row justify-end">
             <x-button href="{{ route('reports.create') }}" target="_self" icon="plus" class="text-base font-normal">
                 {{ __('Create') }}

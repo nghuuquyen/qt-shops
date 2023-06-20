@@ -24,14 +24,14 @@ class RoleTable extends Table
                 ->value(function ($role) {
                     $links = [];
 
-                    if (auth()->user()->can('view roles')) {
+                    if (auth()->user()->can('view', $role)) {
                         $links[] = [
                             'title' => 'View',
                             'value' => route('roles.show', ['role' => $role->id]),
                         ];
                     }
 
-                    if (auth()->user()->can('update roles')) {
+                    if (auth()->user()->can('update', $role)) {
                         $links[] = [
                             'title' => 'Edit',
                             'value' => route('roles.edit', ['role' => $role->id]),

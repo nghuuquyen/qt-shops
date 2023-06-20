@@ -43,14 +43,14 @@
             Dashboard
         </a>
 
-        @can('viewAny products')
+        @can('viewAny', \App\Models\Product::class)
             <a class="{{ Route::is(['products.index', 'products.show', 'products.edit', 'products.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
                 href="{{ route('products.index') }}">
                 Products
             </a>
         @endcan
 
-        @can('viewAny orders')
+        @can('viewAny', \App\Models\Order::class)
             <a class="{{ Route::is(['orders.index', 'orders.show']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
                 href="{{ route('orders.index') }}">
                 Orders
@@ -64,14 +64,14 @@
             </a>
         @endcan
 
-        @can('viewAny reports')
+        @can('viewAny', \App\Models\Report::class)
             <a class="{{ Route::is(['reports.index', 'reports.show', 'reports.edit', 'reports.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
                 href="{{ route('reports.index') }}">
                 Reports
             </a>
         @endcan
 
-        @can('viewAny roles')
+        @can('viewAny', \Spatie\Permission\Models\Role::class)
             <a class="{{ Route::is(['roles.index', 'roles.show', 'roles.edit', 'roles.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
                 href="{{ route('roles.index') }}">
                 Roles

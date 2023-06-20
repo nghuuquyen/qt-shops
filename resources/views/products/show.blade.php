@@ -11,7 +11,7 @@
             {{ __('Back to list') }}
         </x-button>
 
-        @can('edit products')
+        @can('update', $product)
             <x-button href="{{ route('products.edit', ['product' => $product->id]) }}" target="_self" icon="edit"
                 class="text-base font-normal">
                 {{ __('Edit') }}
@@ -66,7 +66,7 @@
                 </div>
             </div>
 
-            @can('delete products')
+            @can('delete', $product)
                 <form method="POST" action="{{ route('products.destroy', ['product' => $product->id]) }}" class="mt-5 -mr-5">
                     @csrf
                     @method('DELETE')

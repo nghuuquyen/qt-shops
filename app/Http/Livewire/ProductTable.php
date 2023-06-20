@@ -34,14 +34,14 @@ class ProductTable extends Table
                 ->value(function ($product) {
                     $links = [];
 
-                    if (auth()->user()->can('view products')) {
+                    if (auth()->user()->can('view', $product)) {
                         $links[] = [
                             'title' => 'View',
                             'value' => route('products.show', ['product' => $product->id]),
                         ];
                     }
 
-                    if (auth()->user()->can('update products')) {
+                    if (auth()->user()->can('update', $product)) {
                         $links[] = [
                             'title' => 'Edit',
                             'value' => route('products.edit', ['product' => $product->id]),

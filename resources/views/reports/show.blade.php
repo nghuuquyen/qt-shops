@@ -11,18 +11,18 @@
             {{ __('Back to list') }}
         </x-button>
 
-        @can('create reports')
+        @can('create', \App\Models\Report::class)
             <form method="POST" action="{{ route('reports.report-files.store', ['report' => $report->id]) }}">
                 @csrf
 
                 <x-button type="submit" target="_self" icon="arrow-path"
-                    class="text-base font-normal bg-[#ea9240] hover:bg-[#ffa755]">
+                    class="text-base font-normal bg-[#ef933d] hover:bg-[#ffa755]">
                     {{ __('Generate Report File') }}
                 </x-button>
             </form>
         @endcan
 
-        @can('update reports')
+        @can('update', $report)
             <x-button href="{{ route('reports.edit', ['report' => $report->id]) }}" target="_self" icon="edit"
                 class="text-base font-normal ml-2">
                 {{ __('Edit') }}
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            @can('delete reports')
+            @can('delete', $report)
                 <form method="POST" action="{{ route('reports.destroy', ['report' => $report->id]) }}" class="mt-5 -mr-5">
                     @csrf
                     @method('DELETE')

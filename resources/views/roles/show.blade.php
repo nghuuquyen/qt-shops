@@ -11,7 +11,7 @@
             {{ __('Back to list') }}
         </x-button>
 
-        @can('update roles')
+        @can('update', $role)
             <x-button href="{{ route('roles.edit', ['role' => $role->id]) }}" target="_self" icon="edit"
                 class="text-base font-normal ml-2">
                 {{ __('Edit') }}
@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-            @can('delete roles')
+            @can('delete', $role)
                 <form method="POST" action="{{ route('roles.destroy', ['role' => $role->id]) }}" class="mt-5 -mr-5">
                     @csrf
                     @method('DELETE')

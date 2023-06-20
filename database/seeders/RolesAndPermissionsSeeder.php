@@ -3,10 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\PermissionRegistrar;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Role;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -23,7 +21,6 @@ class RolesAndPermissionsSeeder extends Seeder
         /**
          * Create permissions
          */
-
         Permission::create(['name' => 'viewAny products']);
         Permission::create(['name' => 'view products']);
         Permission::create(['name' => 'create products']);
@@ -63,7 +60,6 @@ class RolesAndPermissionsSeeder extends Seeder
         /**
          *  Create roles and assign created permissions
          */
-
         Role::create(['name' => 'aministrator'])
             ->givePermissionTo(Permission::all());
 

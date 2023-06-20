@@ -6,7 +6,7 @@
 
 @section('page_action')
 <div class="flex flex-row justify-end">
-    @can('create products')
+    @can('create', App\Models\Product::class)
         <x-button href="{{ route('products.create') }}" target="_self" icon="plus" class="text-base font-normal">
             {{ __('Create') }}
         </x-button>

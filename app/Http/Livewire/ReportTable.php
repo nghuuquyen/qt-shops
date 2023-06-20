@@ -38,14 +38,16 @@ class ReportTable extends Table
 
             LinkColumn::make('Action')
                 ->value(function ($report) {
-                    $links = [
-                        [
+                    $links = [];
+
+                    if (auth()->user()->can('view', $report)) {
+                        $links[] =                         [
                             'title' => 'View',
                             'value' => route('reports.show', ['report' => $report->id]),
-                        ],
-                    ];
+                        ];
+                    }
 
-                    if (auth()->user()->can('update reports')) {
+                    if (auth()->user()->can('update', $report)) {
                         $links[] = [
                             'title' => 'Edit',
                             'value' => route('reports.edit', ['report' => $report->id]),
