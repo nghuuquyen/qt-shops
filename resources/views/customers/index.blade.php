@@ -1,13 +1,13 @@
-@extends('layouts.admin')
+<x-admin-layout>
+    <x-slot name="page_title">
+        {{ __('Customers') }}
+    </x-slot>
 
-@section('page_title')
-{{ __('Customers') }}
-@endsection
-
-@section('main')
-<section>
-    <x-panel icon="cube">
-        <livewire:orders.customer-table />
-    </x-panel>
-</section>
-@endsection
+    <x-slot name="main">
+        <section>
+            <x-panel icon="cube">
+                <livewire:orders.customer-table />
+            </x-panel>
+        </section>
+    </x-slot>
+</x-admin-layout>
