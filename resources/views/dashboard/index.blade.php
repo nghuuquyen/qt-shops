@@ -30,20 +30,20 @@
                         <div class="grid grid-cols-2 gap-4 col-span-2 h-fit mb-5 md:mb-0">
                             <div class="p-4 bg-surface-800 flex flex-col rounded items-center justify-center h-24">
                                 <span class="font-normal text-base text-on-surface-500 mb-2 w-full">Orders</span>
-                                <span class="font-bold text-xl text-on-surface-50 w-full">150</span>
+                                <span class="font-bold text-xl text-on-surface-100 w-full">150</span>
                             </div>
                             <div class="p-4 bg-surface-800 flex flex-col rounded items-center justify-center h-24">
                                 <span class="font-normal text-base text-on-surface-500 mb-2 w-full">Revenues</span>
-                                <span class="font-bold text-xl text-on-surface-50 w-full">8,000,000 VNĐ</span>
+                                <span class="font-bold text-xl text-on-surface-100 w-full">8,000,000 VNĐ</span>
                             </div>
                             <div class="p-4 bg-surface-800 flex flex-col rounded items-center justify-center h-24">
                                 <span class="font-normal text-base text-on-surface-500 mb-2 w-full">Customers</span>
-                                <span class="font-bold text-xl text-on-surface-50 w-full">120</span>
+                                <span class="font-bold text-xl text-on-surface-100 w-full">120</span>
                             </div>
                             <div class="p-4 bg-surface-800 flex flex-col rounded items-center justify-center h-24">
                                 <span class="font-normal text-base text-on-surface-500 mb-2 w-full">Average
                                     Spend</span>
-                                <span class="font-bold text-xl text-on-surface-50 w-full">250,000 VNĐ</span>
+                                <span class="font-bold text-xl text-on-surface-100 w-full">250,000 VNĐ</span>
                             </div>
                         </div>
 

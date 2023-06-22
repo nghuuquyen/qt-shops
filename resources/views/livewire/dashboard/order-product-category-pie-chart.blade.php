@@ -14,7 +14,7 @@
                 labels: ["Cafe", "Food", "Chicken"],
                 theme: {
                     monochrome: {
-                        enabled: true
+                        enabled: false
                     }
                 },
                 plotOptions: {

@@ -14,7 +14,7 @@
                 labels: ["Old Users", "New Users"],
                 theme: {
                     monochrome: {
-                        enabled: true
+                        enabled: false
                     }
                 },
                 plotOptions: {
