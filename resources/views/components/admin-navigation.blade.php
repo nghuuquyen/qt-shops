@@ -8,9 +8,13 @@
     </div>
 
     <div class="grid grid-cols-3 gap-2 mt-6 lg:flex lg:mt-0">
-        <a class="text-on-surface-500 px-6 hover:text-on-surface-600" href="#">
-            Dashboard
-        </a>
+
+        @can('view dashboard')
+            <a class="{{ Route::is(['dashboard']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"
+                href="{{ route('dashboard') }}">
+                Dashboard
+            </a>
+        @endcan
 
         @can('viewAny', \App\Models\Product::class)
             <a class="{{ Route::is(['products.index', 'products.show', 'products.edit', 'products.create']) ? 'text-on-surface-600 font-bold' : 'text-on-surface-500' }} px-6 hover:text-on-surface-600"

@@ -44,6 +44,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'create reports', 'group' => 'Report Management']);
         Permission::create(['name' => 'update reports', 'group' => 'Report Management']);
         Permission::create(['name' => 'delete reports', 'group' => 'Report Management']);
+        Permission::create(['name' => 'view dashboard', 'group' => 'Report Management']);
 
         Permission::create(['name' => 'viewAny roles', 'group' => 'User Management']);
         Permission::create(['name' => 'view roles', 'group' => 'User Management']);

@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.12.1",
+        "apexcharts": "^3.41.0",
         "flag-icons": "^6.7.0"
     }
 }

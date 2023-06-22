@@ -1,16 +1,18 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomepageController;
-use App\Http\Controllers\OrderCompleteController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportFileController;
-use App\Http\Controllers\RoleController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderCompleteController;
+use App\Http\Controllers\SaleDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +38,9 @@ Route::get('/checkout/{order}', [CheckoutController::class, 'show'])->name('chec
  * Admin
  */
 Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function () {
+
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
     Route::singleton('profile', ProfileController::class);
 
     Route::resource('products', ProductController::class);
