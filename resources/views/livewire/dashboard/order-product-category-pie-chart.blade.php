@@ -1,17 +1,16 @@
-<div>
-    <div id="order_product_category_pie_chart"></div>
-</div>
-
-@push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var options = {
-                series: [25, 15, 60],
+<div
+    id="{{ $uuid }}"
+    x-data="{ 
+        series: @entangle('series'),
+        labels: @entangle('labels'),
+        setupChart() {
+            options = {
+                series: this.series,
                 chart: {
                     width: '100%',
                     type: 'pie',
                 },
-                labels: ["Cafe", "Food", "Chicken"],
+                labels: this.labels,
                 theme: {
                     monochrome: {
                         enabled: false
@@ -34,9 +33,15 @@
                     show: false
                 }
             };
+            
+            console.log('Render ' + '{{ $uuid }}');
 
-            var chart = new ApexCharts(document.querySelector("#order_product_category_pie_chart"), options);
+            chart = new ApexCharts($refs.order_product_category_chart, options);
+    
             chart.render();
-        }, false);
-    </script>
-@endpush
+        }
+    }"
+    x-on:refresh-chart-category.window="setupChart()">
+
+    <div x-ref="order_product_category_chart"></div>
+</div>

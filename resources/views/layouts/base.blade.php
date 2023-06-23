@@ -30,6 +30,7 @@
 
     @livewireStyles
     @vite('resources/css/app.css')
+    @stack('styles')
     <script>
         window.theme = '{{ $theme }}';
     </script>
