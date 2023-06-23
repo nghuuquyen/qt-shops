@@ -1,5 +1,4 @@
 <div
-    id="{{ $uuid }}"
     x-data="{ 
         series: @entangle('series'),
         labels: @entangle('labels'),
@@ -33,15 +32,17 @@
                     show: false
                 }
             };
-            
-            console.log('Render ' + '{{ $uuid }}');
 
             chart = new ApexCharts($refs.order_product_category_chart, options);
     
             chart.render();
         }
     }"
-    x-on:refresh-chart-category.window="setupChart()">
+    x-init="
+        $wire.on('refresh-chart', () => {
+            setupChart()
+        });
+    ">
 
     <div x-ref="order_product_category_chart"></div>
 </div>

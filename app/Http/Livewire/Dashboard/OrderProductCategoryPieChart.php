@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use Illuminate\Support\Str;
 
 class OrderProductCategoryPieChart extends Component
 {
@@ -15,16 +16,26 @@ class OrderProductCategoryPieChart extends Component
 
     public function loadData($range_dates)
     {
-        $this->series = [25, 15, 90];
-        $this->labels = ['Cafe', 'Food', 'Chicken'];
+        $data = Order::query()
+            ->addSelect(DB::raw('categories.name as category_name'))
+            ->addSelect(DB::raw('COUNT(DISTINCT orders.id) as total_orders'))
+            ->leftJoin('carts', 'orders.cart_id', '=', 'carts.id')
+            ->leftJoin('cart_items', 'carts.id', '=', 'cart_items.cart_id')
+            ->leftJoin('products', 'products.id', '=', 'cart_items.product_id')
+            ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
+            ->whereBetween('orders.created_at', [$range_dates['start_date'], $range_dates['end_date']])
+            ->groupBy('category_name')
+            ->get();
 
-        $this->dispatchBrowserEvent('refresh-chart-category');
+        $this->series = $data->pluck('total_orders')->toArray();
+
+        $this->labels = $data->pluck('category_name')->toArray();
+
+        $this->emitSelf('refresh-chart');
     }
 
     public function render()
     {
-        $uuid = Str::uuid();
-
-        return view('livewire.dashboard.order-product-category-pie-chart', compact('uuid'));
+        return view('livewire.dashboard.order-product-category-pie-chart');
     }
 }

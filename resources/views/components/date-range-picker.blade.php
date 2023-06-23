@@ -1,14 +1,39 @@
 <div wire:ignore>
     <div
-        x-data="{ range_date: @entangle($attributes->wire('model')) }"
+        x-data="{ 
+            rangeDate: @entangle($attributes->wire('model')),
+
+            getDefautStartDate() {
+                if (this.rangeDate) {
+                    dates = this.rangeDate.split('~');
+                    if (dates[0]) {
+                        return moment(dates[0], 'YYYY-MM-DD');
+                    }
+                }
+
+                return false;
+            },
+
+            getDefautEndDate() {
+                if (this.rangeDate) {
+                    dates = this.rangeDate.split('~');
+                    if (dates[1]) {
+                        return moment(dates[1], 'YYYY-MM-DD');
+                    }
+                }
+
+                return false;
+            }
+        }"
         x-ref="date_range_picker"
         x-init="
-            start = moment().subtract(29, 'days');
-            end = moment();
+            start = getDefautStartDate() || moment().subtract(29, 'days');
+
+            end = getDefautEndDate() || moment();
 
             function cb(start, end) {
                 $($refs.date_range_picker_output).html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                range_date = start.format('YYYY-MM-DD') + '~' + end.format('YYYY-MM-DD');
+                rangeDate = start.format('YYYY-MM-DD') + '~' + end.format('YYYY-MM-DD');
             }
 
             $($refs.date_range_picker).daterangepicker({

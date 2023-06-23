@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use App\Models\Cart;
-use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Factories\Sequence;
+use App\Models\CartItem;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class OrderSeeder extends Seeder
 {
@@ -58,8 +59,12 @@ class OrderSeeder extends Seeder
     {
         $num_items = random_int(1, 5);
 
+        // random order date between 03 months
+        $order_date = Carbon::today()->subDays(rand(0, 90));
+
         return Order::factory()
             ->state([
+                'created_at' => $order_date,
                 'cart_id' => Cart::factory()
                     ->has(
                         CartItem::factory()->count($num_items)
@@ -78,10 +83,10 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = $this->getDummyUsers(20);
+        $users = $this->getDummyUsers(100);
 
         foreach ($users as $user) {
-            $num_order = random_int(1, 10);
+            $num_order = random_int(1, 20);
 
             for ($j = 1; $j <= $num_order; $j++) {
                 $this->createDummyOrder($user);

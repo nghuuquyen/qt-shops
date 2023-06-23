@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Dashboard;
 
 use Livewire\Component;
-use Illuminate\Support\Str;
 
 class OrderCustomerPieChart extends Component
 {
@@ -16,15 +15,14 @@ class OrderCustomerPieChart extends Component
     public function loadData($range_dates)
     {
         $this->series = [25, 75];
+
         $this->labels = ['Old Customer', 'New Customer'];
 
-        $this->dispatchBrowserEvent('refresh-chart-customer');
+        $this->emitSelf('refresh-chart');
     }
 
     public function render()
     {
-        $uuid = Str::uuid();
-
-        return view('livewire.dashboard.order-customer-pie-chart', compact('uuid'));
+        return view('livewire.dashboard.order-customer-pie-chart');
     }
 }

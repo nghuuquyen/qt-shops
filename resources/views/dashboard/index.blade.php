@@ -34,7 +34,7 @@
             </x-panel>
 
             <x-panel>
-                <livewire:orders.order-table />
+                <livewire:dashboard.recent-order-table />
             </x-panel>
         </section>
     </x-slot>

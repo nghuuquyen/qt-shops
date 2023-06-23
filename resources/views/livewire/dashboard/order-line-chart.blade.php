@@ -1,11 +1,9 @@
-<div class="w-full">
-    <div id="order_line_chart"></div>
-</div>
-
-@push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var options = {
+<div
+    x-data="{ 
+        data: @entangle('data'),
+        categories: @entangle('categories'),
+        setupChart() {
+            options = {
                 chart: {
                     type: 'area',
                     height: 160,
@@ -18,16 +16,23 @@
                 },
                 series: [{
                     name: 'sales',
-                    data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+                    data: this.data,
                 }],
                 xaxis: {
-                    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+                    categories: this.categories
                 }
             }
 
-            var chart = new ApexCharts(document.querySelector("#order_line_chart"), options);
+            chart = new ApexCharts($refs.order_line_chart, options);
 
             chart.render();
-        }, false);
-    </script>
-@endpush
+        }
+    }"
+    x-init="
+        $wire.on('refresh-chart', () => {
+            setupChart()
+        });
+    ">
+
+    <div x-ref="order_line_chart"></div>
+</div>
