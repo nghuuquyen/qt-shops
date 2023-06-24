@@ -29,6 +29,9 @@
                         return [name, val.toFixed(1) + '%']
                     }
                 },
+                tooltip: {
+                    enabled: false
+                },
                 legend: {
                     show: false
                 },

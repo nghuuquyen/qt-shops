@@ -32,6 +32,9 @@
                 legend: {
                     show: false
                 },
+                tooltip: {
+                    enabled: false
+                },
                 noData: {
                     text: '{{ __('No data to display') }}'
                 }

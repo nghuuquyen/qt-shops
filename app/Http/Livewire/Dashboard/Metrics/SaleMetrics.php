@@ -13,13 +13,13 @@ class SaleMetrics extends Component
 
     public $range_date;
 
-    public int $total_orders = 0;
+    public string $total_orders = '...';
 
-    public int $total_customers = 0;
+    public string $total_customers = '...';
 
-    public string $total_revenues = '0 '.Product::DEFAULT_CURRENCY;
+    public string $total_revenues = '...';
 
-    public string $average_spend = '0 '.Product::DEFAULT_CURRENCY;
+    public string $average_spend = '...';
 
     public function loadData($range_date)
     {
