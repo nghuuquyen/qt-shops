@@ -39,7 +39,7 @@
     @stack('scripts')
 </head>
 
-<body class="{{ $bg_backgroud }}">
+<body class="{{ $bg_backgroud }} relative">
 
     @yield('content')
 

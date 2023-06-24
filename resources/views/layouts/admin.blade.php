@@ -28,7 +28,7 @@
     @endif
 
     {{-- flash message --}}
-    <div class="z-10 left-5 bottom-5 sticky w-max">
+    <div class="z-20 left-5 bottom-5 fixed w-max">
         @if (session()->has('message'))
             <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)" x-transtion
                 class="bg-primary-500 text-on-primary-50 p-4 mb-2 rounded-lg">
