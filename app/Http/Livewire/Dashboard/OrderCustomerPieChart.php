@@ -6,10 +6,6 @@ use Livewire\Component;
 
 class OrderCustomerPieChart extends Component
 {
-    protected $queryString = [
-        'range_date' => ['except' => []],
-    ];
-
     public $range_date;
 
     protected $listeners = ['DashboardRangeDateChanged' => 'loadData'];
@@ -32,6 +28,11 @@ class OrderCustomerPieChart extends Component
         if ($this->range_date) {
             $this->loadData($this->range_date);
         }
+    }
+
+    public function mount()
+    {
+        $this->range_date = request()->get('range_date');
     }
 
     public function render()

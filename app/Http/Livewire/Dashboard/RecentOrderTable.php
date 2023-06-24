@@ -10,19 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class RecentOrderTable extends Table
 {
-    /**
-     * Override quer string of base table
-     *
-     * @var array
-     */
-    protected $queryString = [
-        'search' => ['except' => ''],
-        'per_page' => ['except' => 10],
-        'datatable' => ['except' => []],
-        'range_date' => ['except' => []],
-    ];
-
-    protected $listeners = ['DashboardRangeDateChanged' => 'handleRangeDateChanged'];
+    protected $listeners = ['DashboardRangeDateChanged' => 'updateRangeDate'];
 
     public $range_date;
 
@@ -49,16 +37,23 @@ class RecentOrderTable extends Table
         ];
     }
 
-    public function handleRangeDateChanged()
+    public function updateRangeDate($range_date)
     {
-        $this->emit('refreshComponent');
+        $this->range_date = $range_date;
+    }
+
+    public function mount()
+    {
+        parent::mount();
+
+        $this->range_date = request()->get('range_date');
     }
 
     protected function getQuery(): Builder
     {
         return Order::query()
             ->when($this->range_date, function (Builder $query, $range_dates) {
-                $query->whereBetween('orders.created_at', [$this->range_date['start'], $this->range_date['end']]);
+                $query->whereBetween('orders.created_at', [$range_dates['start'], $range_dates['end']]);
             })
             ->latest();
     }

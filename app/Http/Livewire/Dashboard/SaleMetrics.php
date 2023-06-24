@@ -9,13 +9,9 @@ use Livewire\Component;
 
 class SaleMetrics extends Component
 {
-    protected $queryString = [
-        'range_date' => ['except' => []],
-    ];
+    protected $listeners = ['DashboardRangeDateChanged' => 'loadData'];
 
     public $range_date;
-
-    protected $listeners = ['DashboardRangeDateChanged' => 'loadData'];
 
     public int $total_orders = 0;
 
@@ -62,6 +58,11 @@ class SaleMetrics extends Component
         if ($this->range_date) {
             $this->loadData($this->range_date);
         }
+    }
+
+    public function mount()
+    {
+        $this->range_date = request()->get('range_date');
     }
 
     public function render()
