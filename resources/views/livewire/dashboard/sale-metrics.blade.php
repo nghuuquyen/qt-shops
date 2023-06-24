@@ -3,7 +3,7 @@
         <span class="font-normal text-base text-on-surface-500 mb-2 w-full">
             Orders
         </span>
-        <span wire:loading.remove class="font-bold text-xl text-on-surface-100 w-full">
+        <span class="font-bold text-xl text-on-surface-100 w-full">
             {{ $total_orders }}
         </span>
     </div>

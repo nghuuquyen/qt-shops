@@ -1,5 +1,5 @@
 <div
-    class="h-[200px]"
+    class="h-[250px] flex justify-center items-center"
     x-data="{ 
         series: @entangle('series'),
         labels: @entangle('labels'),
@@ -49,5 +49,7 @@
         });
     ">
 
-    <div x-ref="order_product_category_chart"></div>
+    <div wire:loading.remove x-ref="order_product_category_chart"></div>
+    
+    <x-loading wire:loading.delay />
 </div>

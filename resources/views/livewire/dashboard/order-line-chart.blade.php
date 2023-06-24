@@ -1,5 +1,5 @@
 <div
-    class="min-h-[250px]"
+    class="min-h-[250px] grid grid-cols-1 items-center"
     x-data="{ 
         data: @entangle('data'),
         categories: @entangle('categories'),
@@ -39,5 +39,9 @@
         });
     ">
 
-    <div x-ref="order_line_chart"></div>
+    <div wire:loading.remove x-ref="order_line_chart"></div>
+
+    <div class="w-full text-center">
+        <x-loading wire:loading.delay />
+    </div>
 </div>
