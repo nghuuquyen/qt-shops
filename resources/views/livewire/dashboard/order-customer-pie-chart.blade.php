@@ -31,6 +31,9 @@
                 },
                 legend: {
                     show: false
+                },
+                noData: {
+                    text: '{{ __('No data to display') }}'
                 }
             };
 

@@ -21,6 +21,9 @@
                 }],
                 xaxis: {
                     categories: this.categories
+                },
+                noData: {
+                    text: '{{ __('No data to display') }}'
                 }
             }
 
