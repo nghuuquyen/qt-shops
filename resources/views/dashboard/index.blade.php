@@ -17,24 +17,24 @@
                     <div class="grid grid-cols-1 md:grid-cols-5">
                         {{-- column metrics --}}
                         <div class="col-span-2 mb-5 md:mb-0">
-                            <livewire:dashboard.sale-metrics />
+                            <livewire:dashboard.metrics.sale-metrics />
                         </div>
 
                         {{-- columns pie charts --}}
                         <div class="grid grid-cols-2 col-span-3">
-                            <livewire:dashboard.order-product-category-pie-chart />
+                            <livewire:dashboard.charts.order-product-category-pie-chart />
 
-                            <livewire:dashboard.order-customer-pie-chart />
+                            <livewire:dashboard.charts.order-customer-pie-chart />
                         </div>
                     </div>
 
                     {{-- row --}}
-                    <livewire:dashboard.order-line-chart />
+                    <livewire:dashboard.charts.order-line-chart />
                 </div>
             </x-panel>
 
             <x-panel>
-                <livewire:dashboard.recent-order-table />
+                <livewire:dashboard.tables.recent-order-table />
             </x-panel>
         </section>
     </x-slot>

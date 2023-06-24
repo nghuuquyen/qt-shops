@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard;
+namespace App\Http\Livewire\Dashboard\Metrics;
 
 use App\Models\Order;
 use App\Models\Product;

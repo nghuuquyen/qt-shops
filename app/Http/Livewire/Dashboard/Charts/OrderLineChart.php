@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Dashboard;
+namespace App\Http\Livewire\Dashboard\Charts;
 
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
