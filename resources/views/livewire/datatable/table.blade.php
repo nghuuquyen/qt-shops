@@ -53,9 +53,7 @@
                 @endif
 
                 <div class="flex">
-                    <button x-ref="button" :aria-expanded="open"
-                        wire:click="$refresh"
-                        :aria-controls="$id('dropdown-button')" type="button"
+                    <button wire:click="$refresh"
                         class="text-on-surface-600 active:translate-y-1 flex flex-row justify-center items-center bg-surface-800 py-4 px-4 rounded ml2 md:ml-5">
                         <span class="mr-2 text-on-surface-100">{{ __('Reload') }}</span>
                         <span wire:loading.class="animate-spin" x-transition.duration.500ms>
@@ -67,7 +65,8 @@
         </div>
 
         {{-- right-side --}}
-        <div class="flex flex-row justify-between md:justify-start lg:justify-between w-full lg:w-max md:gap-4 md:mt-4 lg:mt-0">
+        <div
+            class="flex flex-row justify-between md:justify-start lg:justify-between w-full lg:w-max md:gap-4 md:mt-4 lg:mt-0">
             <x-dropdown title="{{ __('Actions') }}" icon="chevron-down">
                 <ul class="w-full min-w-full text-on-surface-600">
                     <li
@@ -79,7 +78,6 @@
 
             <x-dropdown title="{{ __('Columns') }}" icon="chevron-down">
                 <ul class="w-full min-w-full text-on-surface-600">
-
                     @foreach ($table->getDisplayColumns() as $index => $column)
                         <li
                             class="px-4 py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
