@@ -2,12 +2,24 @@
 
 namespace App\Http\Livewire\Dashboard;
 
+use App\Http\Livewire\Datatable\Traits\WithSearch;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class OrderProductCategoryPieChart extends Component
 {
+    use WithSearch;
+
+    /**
+     * @var array
+     */
+    protected $queryString = [
+        'range_dates' => ['except' => []],
+    ];
+
+    public $range_dates;
+
     protected $listeners = ['DashboardRangeDateChanged' => 'loadData'];
 
     public array $series = [];
@@ -32,6 +44,13 @@ class OrderProductCategoryPieChart extends Component
         $this->labels = $data->pluck('category_name')->toArray();
 
         $this->emitSelf('refresh-chart');
+    }
+
+    public function initChart()
+    {
+        if ($this->range_dates) {
+            $this->loadData($this->range_dates);
+        }
     }
 
     public function render()

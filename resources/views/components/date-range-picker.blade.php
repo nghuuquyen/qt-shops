@@ -1,4 +1,4 @@
-<div wire:ignore>
+<div wire:ignore class="cursor-pointer">
     <div
         x-data="{ 
             rangeDate: @entangle($attributes->wire('model')),

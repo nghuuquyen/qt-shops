@@ -12,7 +12,7 @@
     <x-slot name="main">
         <section class="relative grid grid-cols-1 gap-6">
             <x-panel>
-                <div class="grid grid-cols-1 gap-6">
+                <div class="grid grid-cols-1">
                     {{-- row --}}
                     <div class="grid grid-cols-1 md:grid-cols-5">
                         {{-- column metrics --}}

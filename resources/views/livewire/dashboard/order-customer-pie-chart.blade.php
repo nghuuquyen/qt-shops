@@ -1,4 +1,5 @@
 <div
+    class="h-[250px]"
     x-data="{ 
         series: @entangle('series'),
         labels: @entangle('labels'),
@@ -38,6 +39,7 @@
             chart.render();
         }
     }"
+    wire:init="initChart()"
     x-init="
         $wire.on('refresh-chart', () => {
             setupChart()

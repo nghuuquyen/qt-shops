@@ -4,11 +4,23 @@ namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Order;
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
+use App\Http\Livewire\Datatable\Traits\WithSearch;
 
 class SaleMetrics extends Component
 {
+    use WithSearch;
+
+    /**
+     * @var array
+     */
+    protected $queryString = [
+        'range_dates' => ['except' => []],
+    ];
+
+    public $range_dates;
+
     protected $listeners = ['DashboardRangeDateChanged' => 'loadData'];
 
     public int $total_orders = 0;
@@ -49,6 +61,13 @@ class SaleMetrics extends Component
     private function formatCurrency(float $number = 0): string
     {
         return number_format($number).' '.Product::DEFAULT_CURRENCY;
+    }
+
+    public function initChart()
+    {
+        if ($this->range_dates) {
+            $this->loadData($this->range_dates);
+        }
     }
 
     public function render()

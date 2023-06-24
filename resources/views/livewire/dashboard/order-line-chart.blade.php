@@ -1,4 +1,5 @@
 <div
+    class="min-h-[250px]"
     x-data="{ 
         data: @entangle('data'),
         categories: @entangle('categories'),
@@ -6,7 +7,7 @@
             options = {
                 chart: {
                     type: 'area',
-                    height: 160,
+                    height: '100%',
                 },
                 grid: {
                     show: false,
@@ -28,6 +29,7 @@
             chart.render();
         }
     }"
+    wire:init="initChart()"
     x-init="
         $wire.on('refresh-chart', () => {
             setupChart()

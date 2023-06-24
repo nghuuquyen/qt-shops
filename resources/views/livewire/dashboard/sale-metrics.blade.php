@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 gap-4 col-span-2 h-fit">
+<div wire:init="initChart()" class="grid grid-cols-2 gap-4 col-span-2 h-fit">
     <div class="p-4 bg-surface-800 flex flex-col rounded items-center justify-center h-24">
         <span class="font-normal text-base text-on-surface-500 mb-2 w-full">
             Orders
