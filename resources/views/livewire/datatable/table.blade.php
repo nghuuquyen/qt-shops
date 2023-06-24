@@ -70,7 +70,6 @@
         <div class="flex flex-row justify-between md:justify-start lg:justify-between w-full lg:w-max md:gap-4 md:mt-4 lg:mt-0">
             <x-dropdown title="{{ __('Actions') }}" icon="chevron-down">
                 <ul class="w-full min-w-full text-on-surface-600">
-
                     <li
                         class="px-4 py-2 flex flex-row items-center justify-start cursor-pointer hover:bg-surface-800 rounded-lg">
                         <span>{{ __('Export as CSV') }}</span>
