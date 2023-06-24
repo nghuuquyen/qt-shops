@@ -1,3 +1,3 @@
-<div wire:key="{{ $picker_id }}">
-    <x-date-range-picker wire:model="range_date" />
+<div>
+    <x-date-range-picker wire:model="selected_range_date" />
 </div>

@@ -2,23 +2,17 @@
 
 namespace App\Http\Livewire\Dashboard;
 
-use App\Http\Livewire\Datatable\Traits\WithSearch;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class OrderProductCategoryPieChart extends Component
 {
-    use WithSearch;
-
-    /**
-     * @var array
-     */
     protected $queryString = [
-        'range_dates' => ['except' => []],
+        'range_date' => ['except' => []],
     ];
 
-    public $range_dates;
+    public $range_date;
 
     protected $listeners = ['DashboardRangeDateChanged' => 'loadData'];
 
@@ -26,7 +20,7 @@ class OrderProductCategoryPieChart extends Component
 
     public array $labels = [];
 
-    public function loadData($range_dates)
+    public function loadData($range_date)
     {
         $data = Order::query()
             ->addSelect(DB::raw('categories.name as category_name'))
@@ -35,7 +29,7 @@ class OrderProductCategoryPieChart extends Component
             ->leftJoin('cart_items', 'carts.id', '=', 'cart_items.cart_id')
             ->leftJoin('products', 'products.id', '=', 'cart_items.product_id')
             ->leftJoin('categories', 'products.category_id', '=', 'categories.id')
-            ->whereBetween('orders.created_at', [$range_dates['start_date'], $range_dates['end_date']])
+            ->whereBetween('orders.created_at', [$range_date['start'], $range_date['end']])
             ->groupBy('category_name')
             ->get();
 
@@ -48,8 +42,8 @@ class OrderProductCategoryPieChart extends Component
 
     public function initChart()
     {
-        if ($this->range_dates) {
-            $this->loadData($this->range_dates);
+        if ($this->range_date) {
+            $this->loadData($this->range_date);
         }
     }
 

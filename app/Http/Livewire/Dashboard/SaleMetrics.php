@@ -4,22 +4,16 @@ namespace App\Http\Livewire\Dashboard;
 
 use App\Models\Order;
 use App\Models\Product;
-use Livewire\Component;
 use Illuminate\Support\Facades\DB;
-use App\Http\Livewire\Datatable\Traits\WithSearch;
+use Livewire\Component;
 
 class SaleMetrics extends Component
 {
-    use WithSearch;
-
-    /**
-     * @var array
-     */
     protected $queryString = [
-        'range_dates' => ['except' => []],
+        'range_date' => ['except' => []],
     ];
 
-    public $range_dates;
+    public $range_date;
 
     protected $listeners = ['DashboardRangeDateChanged' => 'loadData'];
 
@@ -31,7 +25,7 @@ class SaleMetrics extends Component
 
     public string $average_spend = '0 '.Product::DEFAULT_CURRENCY;
 
-    public function loadData($range_dates)
+    public function loadData($range_date)
     {
         $data = Order::query()
             ->addSelect(DB::raw('COUNT(DISTINCT orders.id) as total_orders'))
@@ -41,7 +35,7 @@ class SaleMetrics extends Component
             ->leftJoin('carts', 'orders.cart_id', '=', 'carts.id')
             ->leftJoin('cart_items', 'carts.id', '=', 'cart_items.cart_id')
             ->leftJoin('products', 'products.id', '=', 'cart_items.product_id')
-            ->whereBetween('orders.created_at', [$range_dates['start_date'], $range_dates['end_date']])
+            ->whereBetween('orders.created_at', [$range_date['start'], $range_date['end']])
             ->first();
 
         $this->total_orders = $data->total_orders;
@@ -65,8 +59,8 @@ class SaleMetrics extends Component
 
     public function initChart()
     {
-        if ($this->range_dates) {
-            $this->loadData($this->range_dates);
+        if ($this->range_date) {
+            $this->loadData($this->range_date);
         }
     }
 

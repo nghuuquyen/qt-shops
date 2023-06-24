@@ -2,57 +2,52 @@
 
 namespace App\Http\Livewire\Dashboard;
 
-use Carbon\Carbon;
-use Livewire\Component;
 use Illuminate\Support\Str;
-use App\Http\Livewire\Datatable\Traits\WithSearch;
+use Livewire\Component;
 
 class DateRangePicker extends Component
 {
-    use WithSearch;
-
-    /**
-     * @var array
-     */
     protected $queryString = [
-        'range_dates' => ['except' => []],
+        'range_date' => ['except' => []],
     ];
 
-    public $range_dates;
+    public $range_date;
 
-    public string $range_date;
-
-    public function updatedRangeDate()
-    {
-        $this->emit('DashboardRangeDateChanged', $this->parseRangeDates());
-    }
+    public string $selected_range_date = '';
 
     /**
-     * Get parsed range dates
+     * Hook handle when updated selected_range_date properties
      *
-     * @return array
+     * @return void
      */
-    private function parseRangeDates(): array
+    public function updatedSelectedRangeDate()
     {
-        $range = explode('~', $this->range_date);
+        $range = explode('~', $this->selected_range_date);
+
+        $this->range_date = $this->parseRangeDate();
+
+        $this->emit('DashboardRangeDateChanged', $this->range_date);
+    }
+
+    private function parseRangeDate(): array
+    {
+        $range = explode('~', $this->selected_range_date);
 
         return [
-            'start_date' => $range[0],
-            'end_date' => $range[1],
+            'start' => $range[0],
+            'end' => $range[1],
         ];
     }
 
     public function mount()
     {
-        if ($this->range_dates) {
-            $this->range_date = $this->range_dates['start_date'] . '~' . $this->range_dates['end_date'];
+        if ($this->range_date) {
+            $this->selected_range_date = $this->range_date['start'].'~'.$this->range_date['end'];
         }
     }
 
     public function render()
     {
-        $picker_id = Str::uuid();
-
-        return view('livewire.dashboard.date-range-picker', compact('picker_id'));
+        return view('livewire.dashboard.date-range-picker');
     }
 }

@@ -19,12 +19,12 @@ class RecentOrderTable extends Table
         'search' => ['except' => ''],
         'per_page' => ['except' => 10],
         'datatable' => ['except' => []],
-        'range_dates' => ['except' => []],
+        'range_date' => ['except' => []],
     ];
 
-    protected $listeners = ['DashboardRangeDateChanged' => 'setRangeDates'];
+    protected $listeners = ['DashboardRangeDateChanged' => 'handleRangeDateChanged'];
 
-    public $range_dates;
+    public $range_date;
 
     protected function getColumns(): array
     {
@@ -49,16 +49,16 @@ class RecentOrderTable extends Table
         ];
     }
 
-    public function setRangeDates($range_dates)
+    public function handleRangeDateChanged()
     {
-        $this->range_dates = $range_dates;
+        $this->emit('refreshComponent');
     }
 
     protected function getQuery(): Builder
     {
         return Order::query()
-            ->when($this->range_dates, function (Builder $query, $range_dates) {
-                $query->whereBetween('orders.created_at', [$range_dates['start_date'], $range_dates['end_date']]);
+            ->when($this->range_date, function (Builder $query, $range_dates) {
+                $query->whereBetween('orders.created_at', [$this->range_date['start'], $this->range_date['end']]);
             })
             ->latest();
     }

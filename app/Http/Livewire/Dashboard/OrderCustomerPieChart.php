@@ -3,20 +3,14 @@
 namespace App\Http\Livewire\Dashboard;
 
 use Livewire\Component;
-use App\Http\Livewire\Datatable\Traits\WithSearch;
 
 class OrderCustomerPieChart extends Component
 {
-    use WithSearch;
-
-    /**
-     * @var array
-     */
     protected $queryString = [
-        'range_dates' => ['except' => []],
+        'range_date' => ['except' => []],
     ];
 
-    public $range_dates;
+    public $range_date;
 
     protected $listeners = ['DashboardRangeDateChanged' => 'loadData'];
 
@@ -35,8 +29,8 @@ class OrderCustomerPieChart extends Component
 
     public function initChart()
     {
-        if ($this->range_dates) {
-            $this->loadData($this->range_dates);
+        if ($this->range_date) {
+            $this->loadData($this->range_date);
         }
     }
 
