@@ -83,7 +83,7 @@ class OrderSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = $this->getDummyUsers(100);
+        $users = $this->getDummyUsers(50);
 
         foreach ($users as $user) {
             $num_order = random_int(1, 20);

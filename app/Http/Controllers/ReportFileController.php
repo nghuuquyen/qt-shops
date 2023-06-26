@@ -24,6 +24,8 @@ class ReportFileController extends Controller
 
         ExportReportFile::dispatch($report_file)->afterCommit();
 
+        session()->flash('message', __('Successfully created'));
+    
         return redirect()->route('reports.show', ['report' => $report->id]);
     }
 

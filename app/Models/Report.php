@@ -20,6 +20,8 @@ class Report extends Model
 
     const DEFAULT_REPORT_TO = 'nghuuquyen@gmail.com';
 
+    const MAXIMUM_EXPORT_FILES_PER_HOUR = 10;
+
     public function reportFiles()
     {
         return $this->hasMany(ReportFile::class);

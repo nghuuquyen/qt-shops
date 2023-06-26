@@ -14,13 +14,14 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\Middleware\RateLimited;
 use App\Exports\ProductPerformanceReportExport;
 
 class ExportReportFile implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected ReportFile $report_file;
+    public ReportFile $report_file;
 
     /**
      * The number of times the job may be attempted.
@@ -41,7 +42,17 @@ class ExportReportFile implements ShouldQueue
      */
     public function retryUntil(): DateTime
     {
-        return now()->addMinutes(5);
+        return now()->addMinutes(15);
+    }
+
+    /**
+     * Get the middleware the job should pass through.
+     *
+     * @return array<int, object>
+     */
+    public function middleware(): array
+    {
+        return [new RateLimited('export-report-files')];
     }
 
     /**
