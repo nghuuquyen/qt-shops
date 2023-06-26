@@ -28,11 +28,18 @@ use App\Http\Controllers\SaleDashboardController;
 /**
  * User
  */
-Route::get('/', [HomepageController::class, 'index'])->name('homepage');
-Route::get('/order-complete/{order}', OrderCompleteController::class)->name('orders.complete');
-Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
-Route::get('/checkout/{order}', [CheckoutController::class, 'show'])->name('checkout.show');
+Route::group(['middleware' => 'throttle:1000,1'], function () {
+
+    Route::get('/', [HomepageController::class, 'index'])->name('homepage');
+
+    Route::get('/order-complete/{order}', OrderCompleteController::class)->name('orders.complete');
+
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+    Route::get('/checkout/{order}', [CheckoutController::class, 'show'])->name('checkout.show');
+});
 
 /**
  * Admin
