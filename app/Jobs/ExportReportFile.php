@@ -2,20 +2,20 @@
 
 namespace App\Jobs;
 
-use DateTime;
-use Exception;
+use App\Exports\CustomerReportExport;
+use App\Exports\ProductPerformanceReportExport;
+use App\Exports\SaleReportExport;
 use App\Models\Report;
 use App\Models\ReportFile;
+use DateTime;
+use Exception;
 use Illuminate\Bus\Queueable;
-use App\Exports\SaleReportExport;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\CustomerReportExport;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\RateLimited;
-use App\Exports\ProductPerformanceReportExport;
+use Illuminate\Queue\SerializesModels;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExportReportFile implements ShouldQueue
 {
@@ -38,6 +38,13 @@ class ExportReportFile implements ShouldQueue
     public $maxExceptions = 3;
 
     /**
+     * Delete the job if its models no longer exist.
+     *
+     * @var bool
+     */
+    public $deleteWhenMissingModels = true;
+
+    /**
      * Determine the time at which the job should timeout.
      */
     public function retryUntil(): DateTime
@@ -52,7 +59,7 @@ class ExportReportFile implements ShouldQueue
      */
     public function middleware(): array
     {
-        return [new RateLimited('export-report-files')];
+        return [(new RateLimited('export-report-files'))->dontRelease()];
     }
 
     /**
