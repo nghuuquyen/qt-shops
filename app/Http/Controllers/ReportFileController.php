@@ -20,6 +20,7 @@ class ReportFileController extends Controller
         $report_file = ReportFile::factory()
             ->create([
                 'report_id' => $report->id,
+                'creator_id' => auth()->user()->id,
             ]);
 
         ExportReportFile::dispatch($report_file)->afterCommit();

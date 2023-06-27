@@ -2,20 +2,21 @@
 
 namespace App\Jobs;
 
-use App\Exports\CustomerReportExport;
-use App\Exports\ProductPerformanceReportExport;
-use App\Exports\SaleReportExport;
-use App\Models\Report;
-use App\Models\ReportFile;
 use DateTime;
 use Exception;
+use App\Models\Report;
+use App\Models\ReportFile;
 use Illuminate\Bus\Queueable;
+use App\Exports\SaleReportExport;
+use App\Events\ReportFileCompleted;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CustomerReportExport;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\RateLimited;
-use Illuminate\Queue\SerializesModels;
-use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductPerformanceReportExport;
 
 class ExportReportFile implements ShouldQueue
 {
@@ -105,6 +106,9 @@ class ExportReportFile implements ShouldQueue
             }
 
             $this->report_file->setStatus(ReportFile::STATUS_PROCESSED);
+
+            ReportFileCompleted::dispatch($this->report_file);
+
         } catch (Exception $e) {
             $this->report_file->setStatus(ReportFile::STATUS_FAILED);
         }

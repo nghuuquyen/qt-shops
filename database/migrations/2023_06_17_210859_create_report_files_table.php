@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('filename')->nullable();
             $table->string('disk')->nullable();
             $table->foreignId('report_id');
+            $table->foreignId('creator_id');
             $table->timestamps();
 
             $table->foreign('report_id')

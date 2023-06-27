@@ -22,6 +22,11 @@ class ReportFile extends Model
         return $this->belongsTo(Report::class);
     }
 
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'creator_id', 'id');
+    }
+
     /**
      * Set status
      *

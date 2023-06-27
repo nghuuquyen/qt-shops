@@ -20,6 +20,8 @@ class ReportFileTable extends Table
 
             TextColumn::make('Updated At', 'updated_at'),
 
+            TextColumn::make('Creator', 'creator.name'),
+
             TextColumn::make('Status', 'display_status'),
 
             LinkColumn::make('Action')

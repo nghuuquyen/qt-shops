@@ -3,6 +3,8 @@
 @section('content')
     <x-admin-navigation :hasSetting="true" />
 
+    <livewire:users.user-notification />
+
     {{-- screen title --}}
     <div class="flex flex-row bg-surface border-t border-on-surface-500">
         <div class="max-w-screen-xl m-auto flex flex-col md:flex-row justify-between items-center lg:p-10 p-4 w-full ">
