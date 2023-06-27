@@ -65,6 +65,21 @@ return [
             'replace_placeholders' => true,
         ],
 
+        'user_actions' => [
+            'driver' => 'monolog',
+            'handler' => Monolog\Handler\FilterHandler::class,
+            'with' => [
+                'handler' => new Monolog\Handler\RotatingFileHandler(storage_path('logs/user_actions.log'), 15),
+                'minLevelOrList' => [Monolog\Logger::INFO],
+            ],
+            'processors' => [
+                [
+                    'processor' => Monolog\Processor\WebProcessor::class,
+                    'with' => ['extraFields' => ['ip', 'user_agent']],
+                ],
+            ],
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
@@ -125,6 +140,11 @@ return [
 
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
+        ],
+
+        'deprecations' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/php-deprecation-warnings.log'),
         ],
     ],
 

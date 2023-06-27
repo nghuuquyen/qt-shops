@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Checkout;
 
-use App\Models\Product;
-use Livewire\Component;
 use App\Events\BrowserEvent;
 use App\Events\LivewireEvent;
+use App\Models\Product;
 use App\Services\CartService;
+use Illuminate\Support\Facades\Log;
+use Livewire\Component;
 
 class AddCartItemPopup extends Component
 {
@@ -36,6 +37,8 @@ class AddCartItemPopup extends Component
         }
 
         $this->dispatchBrowserEvent(BrowserEvent::DISPLAY_OFFCANVAS);
+
+        Log::channel('user_actions')->info('User clicked on product', ['product_id' => $product_id]);
     }
 
     public function increment()
@@ -59,6 +62,8 @@ class AddCartItemPopup extends Component
         $this->emit(LivewireEvent::CART_UPDATED_EVENT, $cart_item);
 
         $this->dispatchBrowserEvent(BrowserEvent::CLOSE_OFFCANVAS);
+
+        Log::channel('user_actions')->info('User add product to card', ['cart_item' => $cart_item]);
     }
 
     private function resetFormData()

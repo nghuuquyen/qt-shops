@@ -6,6 +6,7 @@ use App\Models\Cart;
 use Livewire\Component;
 use App\Events\LivewireEvent;
 use App\Services\CartService;
+use Illuminate\Support\Facades\Log;
 
 class CartBar extends Component
 {
@@ -38,6 +39,8 @@ class CartBar extends Component
         $cart->removeCartItem($product_id);
 
         $this->loadingCartData();
+
+        Log::channel('user_actions')->info('User remove product out of cart', ['product_id' => $product_id]);
     }
 
     public function checkout()
