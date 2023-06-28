@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Users;
 
 use Livewire\Component;
-use Illuminate\Support\Str;
 
 class UserNotification extends Component
 {
@@ -13,6 +12,10 @@ class UserNotification extends Component
 
     public function getListeners()
     {
+        if (! auth()->check()) {
+            return [];
+        }
+
         return [
             'echo-private:App.Models.User.'.auth()->user()->id.',ReportFileCompleted' => 'notify',
         ];
