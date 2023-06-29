@@ -67,14 +67,14 @@ return [
 
         'user_actions' => [
             'driver' => 'monolog',
-            'handler' => Monolog\Handler\FilterHandler::class,
+            'handler' => \Monolog\Handler\FilterHandler::class,
             'with' => [
-                'handler' => new Monolog\Handler\RotatingFileHandler(storage_path('logs/user_actions.log'), 15),
-                'minLevelOrList' => [Monolog\Logger::INFO],
+                'handler' => new \Monolog\Handler\RotatingFileHandler(storage_path('logs/user_actions.log'), 15),
+                'minLevelOrList' => [\Monolog\Logger::INFO],
             ],
             'processors' => [
                 [
-                    'processor' => Monolog\Processor\WebProcessor::class,
+                    'processor' => \Monolog\Processor\WebProcessor::class,
                     'with' => ['extraFields' => ['ip', 'user_agent']],
                 ],
             ],
