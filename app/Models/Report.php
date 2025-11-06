@@ -9,6 +9,18 @@ class Report extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'type',
+        'schedule',
+        'notify_to',
+        'last_run_at',
+    ];
+
+    protected $casts = [
+        'last_run_at' => 'datetime',
+    ];
+
     const SCHEDULE_DAILY = 'daily';
     const SCHEDULE_WEEKLY = 'weekly';
 
